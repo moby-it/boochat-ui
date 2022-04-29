@@ -1,4 +1,4 @@
-package com.example.boochat_ui
+package com.moby_it.boochat_ui
 
 import io.flutter.embedding.android.FlutterActivity
 

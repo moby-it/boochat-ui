@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.boochat_ui">
+    package="com.moby_it.boochat_ui">
    <application
         android:label="boochat_ui"
         android:name="${applicationName}"

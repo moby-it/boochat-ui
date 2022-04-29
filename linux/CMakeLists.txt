@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(runner LANGUAGES CXX)
 
 set(BINARY_NAME "boochat_ui")
-set(APPLICATION_ID "com.example.boochat_ui")
+set(APPLICATION_ID "com.moby_it.boochat_ui")
 
 cmake_policy(SET CMP0063 NEW)
 
