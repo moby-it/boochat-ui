@@ -1,3 +1,5 @@
+import 'package:boochat_ui/auth.dart';
+import 'package:boochat_ui/room-list/room_list.dart';
 import 'package:boochat_ui/shared/user.dart';
 import 'package:boochat_ui/shared/user_model.dart';
 import 'package:boochat_ui/theme.dart';
@@ -26,55 +28,9 @@ class BoochatApp extends StatelessWidget {
         title: 'Boochat UI',
         color: Theme.of(context).primaryColor,
         builder: (context, navigator) {
-          return FutureBuilder(
-            future: _handleSignIn(),
-            builder: (context, loginResponse) {
-              if (!loginResponse.hasData) {
-                return const Text('waiting to login..');
-              } else {
-                return Consumer<UserModel>(
-                    builder: (context, userModel, child) {
-                  final user = loginResponse.data as User;
-                  if (!userModel.isLoggedIn) {
-                    return FutureBuilder(
-                      future: userModel.login(user),
-                      builder: (context, userModel) {
-                        if (userModel.connectionState == ConnectionState.done &&
-                            userModel.hasData) {
-                          return const Text('logged in succesfull');
-                        } else if (userModel.hasError) {
-                          return Text(userModel.error.toString());
-                        } else {
-                          return const Text('loading...');
-                        }
-                      },
-                    );
-                  } else {
-                    return const Text('loggedIn');
-                  }
-                });
-              }
-            },
-          );
+          return Auth(child: const RoomList());
         },
       ),
     );
-  }
-
-  final _googleSignIn = GoogleSignIn(scopes: [
-    'profile',
-  ], clientId: dotenv.env['CLIENT_ID']);
-
-  Future<User?> _handleSignIn() async {
-    try {
-      final account = await _googleSignIn.signIn();
-      if (account == null) throw Exception('account not found');
-      return User(
-          id: account.id,
-          imageUrl: account.photoUrl,
-          name: account.displayName);
-    } catch (error) {
-      print(error);
-    }
   }
 }

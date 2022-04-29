@@ -11,13 +11,15 @@
             "args": [
                 "--web-port",
                 "4200"
-            ]
+            ],
+            "flutterMode": "debug"
         },
         {
             "name": "Android",
             "request": "launch",
             "type": "dart",
-            "deviceId": "Redmi Note 8 Pro"
+            "deviceId": "Redmi Note 8 Pro",
+            "flutterMode": "debug"
         },
         {
             "name": "boochat_ui (profile mode)",
