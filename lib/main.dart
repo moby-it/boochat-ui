@@ -1,10 +1,17 @@
-import 'package:boochat_ui/room-list/room_list.dart';
+import 'package:boochat_ui/shared/user.dart';
+import 'package:boochat_ui/shared/user_model.dart';
 import 'package:boochat_ui/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(BoochatApp());
+Future main() async {
+  await dotenv.load(fileName: ".env");
+  runApp(ChangeNotifierProvider(
+    create: (context) => UserModel(),
+    child: BoochatApp(),
+  ));
 }
 
 class BoochatApp extends StatelessWidget {
@@ -21,11 +28,29 @@ class BoochatApp extends StatelessWidget {
         builder: (context, navigator) {
           return FutureBuilder(
             future: _handleSignIn(),
-            builder: (context, data) {
-              return Container(
-                  decoration:
-                      BoxDecoration(color: Theme.of(context).backgroundColor),
-                  child: const RoomList());
+            builder: (context, loginResponse) {
+              if (!loginResponse.hasData) {
+                return const Text('waiting to login..');
+              } else {
+                return Consumer<UserModel>(
+                    builder: (context, userModel, child) {
+                  final user = loginResponse.data as User;
+                  if (!userModel.isLoggedIn) {
+                    return FutureBuilder(
+                      future: userModel.login(user),
+                      builder: (context, userModel) {
+                        if (userModel.hasData) {
+                          return const Text('logged in succesfull');
+                        } else {
+                          return Text(userModel.error.toString());
+                        }
+                      },
+                    );
+                  } else {
+                    return const Text('loggedIn');
+                  }
+                });
+              }
             },
           );
         },
@@ -35,13 +60,18 @@ class BoochatApp extends StatelessWidget {
 
   final _googleSignIn = GoogleSignIn(scopes: [
     'profile',
-  ]);
-  Future<void> _handleSignIn() async {
+  ], clientId: dotenv.env['CLIENT_ID']);
+  Future<User?> _handleSignIn() async {
     try {
-      var account = await _googleSignIn.signIn();
-      print(account?.id);
+      final account = await _googleSignIn.signIn();
+      if (account == null) throw Exception('account not found');
+      return User(
+          id: account.id,
+          imageUrl: account.photoUrl,
+          name: account.displayName);
     } catch (error) {
       print(error);
     }
+    return null;
   }
 }

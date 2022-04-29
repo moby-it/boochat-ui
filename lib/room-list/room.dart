@@ -1,6 +1,6 @@
 import 'package:boochat_ui/room-list/room_item.dart';
 
-import '../shared/user.dart';
+import '../shared/user_model.dart';
 
 class Room {
   late String id;
