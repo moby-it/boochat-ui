@@ -39,10 +39,13 @@ class BoochatApp extends StatelessWidget {
                     return FutureBuilder(
                       future: userModel.login(user),
                       builder: (context, userModel) {
-                        if (userModel.hasData) {
+                        if (userModel.connectionState == ConnectionState.done &&
+                            userModel.hasData) {
                           return const Text('logged in succesfull');
-                        } else {
+                        } else if (userModel.hasError) {
                           return Text(userModel.error.toString());
+                        } else {
+                          return const Text('loading...');
                         }
                       },
                     );
@@ -61,6 +64,7 @@ class BoochatApp extends StatelessWidget {
   final _googleSignIn = GoogleSignIn(scopes: [
     'profile',
   ], clientId: dotenv.env['CLIENT_ID']);
+
   Future<User?> _handleSignIn() async {
     try {
       final account = await _googleSignIn.signIn();
@@ -72,6 +76,5 @@ class BoochatApp extends StatelessWidget {
     } catch (error) {
       print(error);
     }
-    return null;
   }
 }

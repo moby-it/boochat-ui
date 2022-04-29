@@ -6,7 +6,7 @@ import 'dart:convert' show json;
 
 class UserModel extends ChangeNotifier {
   final commandUri = dotenv.env['COMMAND_URI'];
-  late User? _currentUser;
+  User? _currentUser;
   late String? _token;
   bool get isLoggedIn => _currentUser != null;
   void _setCurrentUser(User user) {
@@ -23,7 +23,6 @@ class UserModel extends ChangeNotifier {
       final authResponse = AuthResponse.fromJson(json.decode(response.body));
       _token = authResponse.token;
       _setCurrentUser(authResponse.user);
-      notifyListeners();
     } else {
       throw Exception('failed to login');
     }
