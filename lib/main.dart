@@ -38,7 +38,8 @@ class BoochatApp extends StatelessWidget {
   ]);
   Future<void> _handleSignIn() async {
     try {
-      await _googleSignIn.signIn();
+      var account = await _googleSignIn.signIn();
+      print(account?.id);
     } catch (error) {
       print(error);
     }
