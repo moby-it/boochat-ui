@@ -21,7 +21,7 @@ class GoogleAuth extends StatelessWidget {
           return const Text('waiting to login..');
         } else {
           return Consumer<GoogleUserModel>(builder: (context, userModel, _) {
-            final user = loginResponse.data as User;
+            final user = loginResponse.data as UserModel;
             if (!userModel.isLoggedIn) {
               return FutureBuilder(
                 future: userModel.login(user),
@@ -44,11 +44,11 @@ class GoogleAuth extends StatelessWidget {
     );
   }
 
-  Future<User?> _handleSignIn() async {
+  Future<UserModel?> _handleSignIn() async {
     try {
       final account = await _googleSignIn.signInSilently();
       if (account == null) throw Exception('account not found');
-      return User(
+      return UserModel(
           id: account.id,
           imageUrl: account.photoUrl,
           name: account.displayName);

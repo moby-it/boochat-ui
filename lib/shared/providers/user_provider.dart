@@ -6,16 +6,16 @@ import 'dart:convert' show json;
 
 class GoogleUserModel extends ChangeNotifier {
   final commandUri = dotenv.env['COMMAND_URI'];
-  User? _currentUser;
+  UserModel? _currentUser;
   late String? _token;
   bool get isLoggedIn => _currentUser != null;
   get token => _token;
-  void _setCurrentUser(User user) {
+  void _setCurrentUser(UserModel user) {
     _currentUser = user;
     notifyListeners();
   }
 
-  Future<void> login(User user) async {
+  Future<void> login(UserModel user) async {
     final commandUri = this.commandUri;
     if (commandUri == null) throw NullThrownError();
     final response =
@@ -38,8 +38,8 @@ class GoogleUserModel extends ChangeNotifier {
 
 class AuthResponse {
   late String token;
-  late User user;
+  late UserModel user;
   AuthResponse.fromJson(Map<String, dynamic> json)
       : token = json['token'],
-        user = User.fromJson(json['user']);
+        user = UserModel.fromJson(json['user']);
 }

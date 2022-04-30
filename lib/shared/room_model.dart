@@ -1,30 +1,30 @@
-import 'package:boochat_ui/room-list/room_item.dart';
+import 'package:boochat_ui/active-room/room_item_model.dart';
 
-import '../shared/user_model.dart';
+import 'user_model.dart';
 
-class Room {
+class RoomModel {
   late String id;
   late String name;
-  late List<RoomItem> items;
-  late List<User> participants;
+  late List<RoomItemModel> items;
+  late List<UserModel> participants;
   late String imageUrl;
   late bool hasUnreadMessage;
-  Room(
+  RoomModel(
       {required this.id,
       required this.name,
       required this.items,
       required this.participants,
       required this.imageUrl,
       required this.hasUnreadMessage});
-  Room.fromJson(Map<String, dynamic> json)
+  RoomModel.fromJson(dynamic json)
       : id = json['id'],
         imageUrl = json['imageUrl'],
         name = json['name'],
-        participants = (json['participants'] as List<Map<String, dynamic>>)
-            .map((e) => User.fromJson(e))
+        participants = (json['participants'] as List<dynamic>)
+            .map((e) => UserModel.fromJson(e))
             .toList(),
-        items = (json['items'] as List<Map<String, dynamic>>)
-            .map((e) => RoomItem.fromJson(e))
+        items = (json['items'] as List<dynamic>)
+            .map((e) => RoomItemModel.fromJson(e))
             .toList(),
         hasUnreadMessage = json['hasUnreadMessage'];
 }

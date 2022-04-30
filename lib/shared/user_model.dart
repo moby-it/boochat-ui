@@ -1,9 +1,9 @@
-class User {
+class UserModel {
   late String id;
   late String? name;
   late String? imageUrl;
-  User({required this.id, required this.name, required this.imageUrl});
-  User.fromJson(Map<String, dynamic> json)
+  UserModel({required this.id, required this.name, required this.imageUrl});
+  UserModel.fromJson(dynamic json)
       : id = json['id'],
         imageUrl = json['imageUrl'],
         name = json['name'];
