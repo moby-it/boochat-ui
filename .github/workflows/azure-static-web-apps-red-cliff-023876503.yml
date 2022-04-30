@@ -18,9 +18,12 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-      - run: flutter --version
+      - name: Install packages
+        run: |
+          flutter pub get
+          flutter build web --release
       - name: Build And Deploy
-        id: builddeploy
+        id: build and deploy
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_RED_CLIFF_023876503 }}
@@ -28,8 +31,7 @@ jobs:
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "/" # App source code path
+          app_location: "build/web" # App source code path
           api_location: "" # Api source code path - optional
-          output_location: "/build/web" # Built app content directory - optional
-          app_build_command: "flutter build web --release"
+          app_artifact_location: "build/web" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
