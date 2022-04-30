@@ -10,7 +10,9 @@
             "type": "dart",
             "args": [
                 "--web-port",
-                "4200"
+                "4200",
+                "--web-renderer",
+                "html"
             ],
             "flutterMode": "debug"
         },
