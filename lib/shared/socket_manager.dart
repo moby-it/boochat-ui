@@ -19,7 +19,8 @@ class SocketManager extends ChangeNotifier {
   var _commandSocketReady = false;
   var _querySocketReady = false;
   get initialized => _commandSocketReady && _querySocketReady;
-  Stream<SocketEvent> get queryStream => _querySocketData.stream;
+  Stream<SocketEvent> get queryStream =>
+      _querySocketData.stream.asBroadcastStream();
 
   SocketManager(String token) {
     _token = token;
