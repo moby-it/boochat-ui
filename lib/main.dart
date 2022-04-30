@@ -1,15 +1,16 @@
-import 'package:boochat_ui/auth.dart';
-import 'package:boochat_ui/room-list/room_list.dart';
-import 'package:boochat_ui/shared/user.dart';
+import 'package:boochat_ui/shared/providers/google_auth_provider.dart';
+import 'package:boochat_ui/shared/providers/user_provider.dart';
+import 'package:boochat_ui/shared/socket_manager.dart';
 import 'package:boochat_ui/theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
 Future main() async {
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: kDebugMode ? ".env" : "release.env");
   runApp(ChangeNotifierProvider(
-    create: (context) => UserModel(),
+    create: (context) => GoogleUserModel(),
     child: BoochatApp(),
   ));
 }
@@ -26,7 +27,21 @@ class BoochatApp extends StatelessWidget {
         title: 'Boochat UI',
         color: Theme.of(context).primaryColor,
         builder: (context, navigator) {
-          return Auth(child: const RoomList());
+          return GoogleAuth(child: Consumer<GoogleUserModel>(
+            builder: (context, userModel, child) {
+              return ChangeNotifierProvider(
+                create: (context) => SocketManager(userModel.token),
+                child: Consumer<SocketManager>(
+                    builder: (context, socketManager, child) {
+                  if (socketManager.initialized) {
+                    return const Text('sockets initialized');
+                  } else {
+                    return const Text('...socket manager initialing');
+                  }
+                }),
+              );
+            },
+          ));
         },
       ),
     );

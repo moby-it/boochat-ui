@@ -1,12 +1,12 @@
-import 'package:boochat_ui/shared/user.dart';
+import 'package:boochat_ui/shared/providers/user_provider.dart';
 import 'package:boochat_ui/shared/user_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
-class Auth extends StatelessWidget {
-  Auth({required this.child, Key? key}) : super(key: key);
+class GoogleAuth extends StatelessWidget {
+  GoogleAuth({required this.child, Key? key}) : super(key: key);
   final Widget child;
   final _googleSignIn = GoogleSignIn(scopes: [
     'profile',
@@ -20,18 +20,13 @@ class Auth extends StatelessWidget {
         if (!loginResponse.hasData) {
           return const Text('waiting to login..');
         } else {
-          return Consumer<UserModel>(builder: (context, userModel, child) {
+          return Consumer<GoogleUserModel>(builder: (context, userModel, _) {
             final user = loginResponse.data as User;
             if (!userModel.isLoggedIn) {
               return FutureBuilder(
                 future: userModel.login(user),
                 builder: (context, userModel) {
-                  if (userModel.connectionState == ConnectionState.done &&
-                      userModel.hasData) {
-                    return Container(
-                      child: child,
-                    );
-                  } else if (userModel.hasError) {
+                  if (userModel.hasError) {
                     return Text(userModel.error.toString());
                   } else {
                     return const Text('loading...');
@@ -39,7 +34,9 @@ class Auth extends StatelessWidget {
                 },
               );
             } else {
-              return const Text('loggedIn');
+              return Container(
+                child: child,
+              );
             }
           });
         }
@@ -49,7 +46,7 @@ class Auth extends StatelessWidget {
 
   Future<User?> _handleSignIn() async {
     try {
-      final account = await _googleSignIn.signIn();
+      final account = await _googleSignIn.signInSilently();
       if (account == null) throw Exception('account not found');
       return User(
           id: account.id,
@@ -57,6 +54,7 @@ class Auth extends StatelessWidget {
           name: account.displayName);
     } catch (error) {
       print(error);
+      return null;
     }
   }
 }

@@ -11,11 +11,3 @@ class User {
   Map<String, dynamic> toJson() =>
       {'id': id, 'name': name, 'imageUrl': imageUrl};
 }
-
-class AuthResponse {
-  late String token;
-  late User user;
-  AuthResponse.fromJson(Map<String, dynamic> json)
-      : token = json['token'],
-        user = User.fromJson(json['user']);
-}

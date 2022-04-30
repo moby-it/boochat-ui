@@ -4,11 +4,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' show json;
 
-class UserModel extends ChangeNotifier {
+class GoogleUserModel extends ChangeNotifier {
   final commandUri = dotenv.env['COMMAND_URI'];
   User? _currentUser;
   late String? _token;
   bool get isLoggedIn => _currentUser != null;
+  get token => _token;
   void _setCurrentUser(User user) {
     _currentUser = user;
     notifyListeners();
@@ -33,4 +34,12 @@ class UserModel extends ChangeNotifier {
     _token = null;
     notifyListeners();
   }
+}
+
+class AuthResponse {
+  late String token;
+  late User user;
+  AuthResponse.fromJson(Map<String, dynamic> json)
+      : token = json['token'],
+        user = User.fromJson(json['user']);
 }
