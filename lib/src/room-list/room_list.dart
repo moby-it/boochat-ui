@@ -1,9 +1,7 @@
-import 'package:boochat_ui/shared/room_model.dart';
-import 'package:boochat_ui/room-list/room_slot.dart';
+import 'package:boochat_ui/src/shared.dart';
+import 'package:boochat_ui/src/room-list/room_slot.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-
-import '../shared/socket_manager.dart';
 
 class RoomListWrapper extends StatelessWidget {
   const RoomListWrapper({Key? key}) : super(key: key);

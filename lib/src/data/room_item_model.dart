@@ -1,5 +1,5 @@
-import '../shared/room_model.dart';
-import '../shared/user_model.dart';
+import 'room_model.dart';
+import 'user_model.dart';
 
 class RoomItemModel {
   late String id;

@@ -1,5 +1,4 @@
-import 'package:boochat_ui/shared/providers/user_provider.dart';
-import 'package:boochat_ui/shared/user_model.dart';
+import 'package:boochat_ui/src/shared.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';

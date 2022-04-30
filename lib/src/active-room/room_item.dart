@@ -1,4 +1,4 @@
-import 'package:boochat_ui/active-room/room_item_model.dart';
+import 'package:boochat_ui/src/data/room_item_model.dart';
 import 'package:flutter/widgets.dart';
 
 class RoomItem extends StatelessWidget {

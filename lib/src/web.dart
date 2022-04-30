@@ -1,4 +1,4 @@
-import 'package:boochat_ui/theme.dart';
+import 'package:boochat_ui/src/theme.dart';
 import 'package:flutter/material.dart';
 
 class WebApp extends StatelessWidget {

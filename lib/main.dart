@@ -1,11 +1,12 @@
 import 'dart:io';
 
-import 'package:boochat_ui/mobile.dart';
-import 'package:boochat_ui/shared/providers/user_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
+
+import 'src/shared.dart';
+import 'src/mobile.dart';
 
 Future main() async {
   await dotenv.load(fileName: getEnvFilename());

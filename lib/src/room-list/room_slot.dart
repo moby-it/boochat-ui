@@ -1,4 +1,4 @@
-import 'package:boochat_ui/shared/room_model.dart';
+import 'package:boochat_ui/src/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 

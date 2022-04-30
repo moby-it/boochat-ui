@@ -1,4 +1,4 @@
-import 'package:boochat_ui/shared/user_model.dart';
+import 'package:boochat_ui/src/shared.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;

@@ -1,5 +1,4 @@
-import 'package:boochat_ui/active-room/room_item_model.dart';
-
+import 'room_item_model.dart';
 import 'user_model.dart';
 
 class RoomModel {
