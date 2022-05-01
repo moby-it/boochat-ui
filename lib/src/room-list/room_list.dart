@@ -1,6 +1,6 @@
 import 'package:boochat_ui/src/shared.dart';
 import 'package:boochat_ui/src/room-list/room_slot.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class RoomListWrapper extends StatelessWidget {
