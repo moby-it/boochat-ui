@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
-import 'src/shared.dart';
+import 'src/shared/shared.dart';
 import 'src/mobile.dart';
 
 Future main() async {
   await dotenv.load(fileName: getEnvFilename());
   runApp(ChangeNotifierProvider(
-    create: (context) => GoogleUserModel(),
+    create: (context) => AppUserModel(),
     // child: Platform.isAndroid?  const BoochatMobileApp(): const WebApp(),
     child: const BoochatMobileApp(),
   ));

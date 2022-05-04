@@ -1,11 +1,11 @@
-import 'package:boochat_ui/src/shared.dart';
+import 'package:boochat_ui/src/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
-class GoogleAuth extends StatelessWidget {
-  GoogleAuth({required this.child, Key? key}) : super(key: key);
+class GoogleAuthProvider extends StatelessWidget {
+  GoogleAuthProvider({required this.child, Key? key}) : super(key: key);
   final Widget child;
   final _googleSignIn = GoogleSignIn(scopes: [
     'profile',
@@ -13,33 +13,35 @@ class GoogleAuth extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _handleSignIn(),
-      builder: (context, loginResponse) {
-        if (!loginResponse.hasData) {
-          return const Text('waiting to login..');
-        } else {
-          return Consumer<GoogleUserModel>(builder: (context, userModel, _) {
-            final user = loginResponse.data as UserModel;
-            if (!userModel.isLoggedIn) {
-              return FutureBuilder(
-                future: userModel.login(user),
-                builder: (context, userModel) {
-                  if (userModel.hasError) {
-                    return Text(userModel.error.toString());
-                  } else {
-                    return const Text('loading...');
-                  }
-                },
-              );
-            } else {
-              return Container(
-                child: child,
-              );
-            }
-          });
-        }
-      },
+    return Scaffold(
+      body: FutureBuilder(
+        future: _handleSignIn(),
+        builder: (context, loginResponse) {
+          if (!loginResponse.hasData) {
+            return const Text('waiting to login..');
+          } else {
+            return Consumer<AppUserModel>(builder: (context, userModel, _) {
+              final user = loginResponse.data as UserModel;
+              if (!userModel.isLoggedIn) {
+                return FutureBuilder(
+                  future: userModel.login(user),
+                  builder: (context, userModel) {
+                    if (userModel.hasError) {
+                      return Text(userModel.error.toString());
+                    } else {
+                      return const Text('loading...');
+                    }
+                  },
+                );
+              } else {
+                return Container(
+                  child: child,
+                );
+              }
+            });
+          }
+        },
+      ),
     );
   }
 

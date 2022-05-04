@@ -1,10 +1,10 @@
-import 'package:boochat_ui/src/shared.dart';
+import 'package:boochat_ui/src/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' show json;
 
-class GoogleUserModel extends ChangeNotifier {
+class AppUserModel extends ChangeNotifier {
   final commandUri = dotenv.env['COMMAND_URI'];
   UserModel? _currentUser;
   late String? _token;
