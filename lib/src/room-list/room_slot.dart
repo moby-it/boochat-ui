@@ -1,11 +1,11 @@
 import 'package:boochat_ui/src/active-room/active_room.dart';
-import 'package:boochat_ui/src/shared/shared.dart';
+import 'package:boochat_ui/src/data/room.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class RoomSlot extends StatelessWidget {
   const RoomSlot({required this.room, Key? key}) : super(key: key);
-  final RoomModel room;
+  final Room room;
   @override
   Widget build(BuildContext context) {
     return InkWell(

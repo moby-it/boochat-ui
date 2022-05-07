@@ -1,3 +1,4 @@
-export 'package:boochat_ui/src/data/room_item_model.dart';
-export 'package:boochat_ui/src/data/room_model.dart';
-export 'package:boochat_ui/src/data/user_model.dart';
+export 'package:boochat_ui/src/data/room_item.dart';
+export 'package:boochat_ui/src/data/room.dart';
+export 'package:boochat_ui/src/data/user.dart';
+export './sockets/sockets.dart';
