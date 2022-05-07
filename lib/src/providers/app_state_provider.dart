@@ -17,7 +17,8 @@ class AppStateProvider {
   late Socket _querySocket;
   var _commandSocketReady = false;
   var _querySocketReady = false;
-  AppStateProvider(BuildContext context) {
+  AppStateProvider();
+  AppStateProvider.initialize(BuildContext context) {
     final token = context.read<AuthProvider>().token;
     if (token == null) throw Exception("App State Init: failed to get token");
     appReady$.sink.add(false);

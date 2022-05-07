@@ -13,7 +13,7 @@ Future main() async {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => AuthProvider()),
-      Provider(create: (context) => AppStateProvider(context))
+      Provider(create: (context) => AppStateProvider())
     ],
     // child: Platform.isAndroid?  const BoochatMobileApp(): const WebApp(),
     child: const BoochatMobileApp(),

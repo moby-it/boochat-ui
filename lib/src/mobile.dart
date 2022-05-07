@@ -27,9 +27,7 @@ class BoochatMobileApp extends StatelessWidget {
             future: context.read<AuthProvider>().login(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                return Provider(
-                    create: (context) => AppStateProvider(context),
-                    child: navigator);
+                return Container(child: navigator);
               } else if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Text("loading");
               } else {
