@@ -1,11 +1,10 @@
 import 'dart:io';
 
-import 'package:boochat_ui/src/providers/providers.dart';
+import 'package:boochat_ui/src/shared/auth_bloc/auth_repository.dart';
+import 'package:boochat_ui/src/shared/websocket_bloc/websocket_manager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:provider/provider.dart';
 
 import 'src/mobile_app.dart';
 
@@ -13,6 +12,7 @@ Future main() async {
   await dotenv.load(fileName: getEnvFilename());
   runApp(MobileApp(
     authRepository: AuthRepository(),
+    websocketManager: WebsocketManager(),
   ));
 }
 

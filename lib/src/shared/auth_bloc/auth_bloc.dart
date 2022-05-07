@@ -8,7 +8,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   AuthBloc(this._authRepository) : super(const AuthState()) {
     on<Login>(_onLogin);
-    add(Login());
   }
 
   void _onLogin(Login event, Emitter<AuthState> emit) async {
