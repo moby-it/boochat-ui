@@ -3,20 +3,16 @@ import 'dart:io';
 import 'package:boochat_ui/src/providers/providers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
-import 'src/mobile.dart';
+import 'src/mobile_app.dart';
 
 Future main() async {
   await dotenv.load(fileName: getEnvFilename());
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (context) => AuthProvider()),
-      Provider(create: (context) => AppStateProvider())
-    ],
-    // child: Platform.isAndroid?  const BoochatMobileApp(): const WebApp(),
-    child: const BoochatMobileApp(),
+  runApp(MobileApp(
+    authRepository: AuthRepository(),
   ));
 }
 

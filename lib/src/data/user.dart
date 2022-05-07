@@ -1,8 +1,12 @@
 class User {
-  late String id;
-  late String? name;
-  late String? imageUrl;
-  User({required this.id, required this.name, required this.imageUrl});
+  final String id;
+  final String? name;
+  final String? imageUrl;
+  const User({required this.id, this.name, this.imageUrl});
+  const User.empty()
+      : id = '',
+        imageUrl = '',
+        name = '';
   User.fromJson(dynamic json)
       : id = json['id'],
         imageUrl = json['imageUrl'],

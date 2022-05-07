@@ -6,12 +6,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
-import 'auth_provider.dart';
+import '../shared/auth_bloc/auth_repository.dart';
 
 class AppStateProvider {
   final appReady$ = StreamController<bool>.broadcast();
-  late QuerySocketManager _query;
-  late CommandSocketManager _command;
   late String _token;
   late Socket _commandSocket;
   late Socket _querySocket;
@@ -19,7 +17,6 @@ class AppStateProvider {
   var _querySocketReady = false;
   AppStateProvider();
   AppStateProvider.initialize(BuildContext context) {
-    final token = context.read<AuthProvider>().token;
     if (token == null) throw Exception("App State Init: failed to get token");
     appReady$.sink.add(false);
     _token = token;

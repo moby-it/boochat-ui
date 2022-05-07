@@ -1,29 +1,19 @@
-import 'package:flutter/material.dart';
+import 'dart:convert' show json;
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert' show json;
 
-import '../data/data.dart';
+import '../../data/data.dart';
 
-class AuthProvider extends ChangeNotifier {
-  bool get isLoggedIn => _currentUser != null;
-  get token => _token;
-  get currentUser => _currentUser;
-
+class AuthRepository {
   final _googleSignIn = GoogleSignIn(scopes: [
     'profile',
   ], clientId: dotenv.env['CLIENT_ID']);
 
   final _commandUri = dotenv.env['COMMAND_URI'];
-  User? _currentUser;
-  late String? _token;
-  void _setCurrentUser(User user) {
-    _currentUser = user;
-    notifyListeners();
-  }
 
-  Future<void> login() async {
+  Future<AuthResponse> login() async {
     final user = await _signInWithGoogle();
     if (user == null) throw Exception("failed to log in to Google");
     final commandUri = _commandUri;
@@ -32,17 +22,10 @@ class AuthProvider extends ChangeNotifier {
         await http.post(Uri.parse('$commandUri/auth'), body: user.toJson());
     if (response.statusCode == 201) {
       final authResponse = AuthResponse.fromJson(json.decode(response.body));
-      _token = authResponse.token;
-      _setCurrentUser(authResponse.user);
+      return authResponse;
     } else {
       throw Exception('failed to login');
     }
-  }
-
-  void logout() {
-    _currentUser = null;
-    _token = null;
-    notifyListeners();
   }
 
   Future<User?> _signInWithGoogle() async {

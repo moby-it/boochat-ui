@@ -1,11 +1,13 @@
 import 'package:boochat_ui/src/active-room/active_room.dart';
 import 'package:boochat_ui/src/providers/providers.dart';
 import 'package:boochat_ui/src/room-list/room_list.dart';
+import 'package:boochat_ui/src/shared/auth_bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BoochatMobileApp extends StatelessWidget {
-  const BoochatMobileApp({Key? key}) : super(key: key);
+class MobileApp extends StatelessWidget {
+  final AuthRepository authRepository;
+  const MobileApp({required this.authRepository, Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -23,18 +25,15 @@ class BoochatMobileApp extends StatelessWidget {
         builder: (context, navigator) {
           return Scaffold(
               body: SafeArea(
-                  child: FutureBuilder(
-            future: context.read<AuthProvider>().login(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                return Container(child: navigator);
-              } else if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Text("loading");
-              } else {
-                return const Text("Failed to login");
-              }
-            },
-          )));
+            child: RepositoryProvider.value(
+                value: authRepository,
+                child: BlocProvider(
+                  create: (_) => AuthBloc(authRepository),
+                  child: Container(
+                    child: navigator,
+                  ),
+                )),
+          ));
         });
   }
 }
