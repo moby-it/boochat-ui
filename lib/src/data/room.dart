@@ -1,14 +1,16 @@
+import 'package:equatable/equatable.dart';
+
 import 'room_item.dart';
 import 'user.dart';
 
-class Room {
-  late String id;
-  late String name;
-  late List<RoomItem> items;
-  late List<User> participants;
-  late String imageUrl;
-  late bool hasUnreadMessage;
-  Room(
+class Room extends Equatable {
+  final String id;
+  final String name;
+  final List<RoomItem> items;
+  final List<User> participants;
+  final String imageUrl;
+  final bool hasUnreadMessage;
+  const Room(
       {required this.id,
       required this.name,
       required this.items,
@@ -26,4 +28,7 @@ class Room {
             .map((e) => RoomItem.fromJson(e))
             .toList(),
         hasUnreadMessage = json['hasUnreadMessage'];
+  @override
+  List<Object?> get props =>
+      [id, name, participants, imageUrl, hasUnreadMessage, items];
 }

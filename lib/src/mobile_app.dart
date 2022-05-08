@@ -5,6 +5,7 @@ import 'package:boochat_ui/src/shared/auth_bloc/auth_events.dart';
 import 'package:boochat_ui/src/shared/auth_bloc/auth_repository.dart';
 import 'package:boochat_ui/src/shared/websocket_bloc/websocket_bloc.dart';
 import 'package:boochat_ui/src/shared/websocket_bloc/websocket_manager.dart';
+import 'package:boochat_ui/src/shared/websocket_bloc/websocket_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -46,9 +47,16 @@ class MobileApp extends StatelessWidget {
                 BlocProvider(
                     lazy: false,
                     create: (context) => WebsocketBloc(
-                        websocketManager, context.read<AuthBloc>()))
+                        websocketManager, context.read<AuthBloc>())),
               ],
-              child: const Text("I rendered and supposedely loggeg in"),
+              child: BlocBuilder<WebsocketBloc, WebsocketState>(
+                  builder: (context, state) {
+                if (state is WebSocketConnectedState) {
+                  return Container(child: navigator);
+                } else {
+                  return const Text("connecting...");
+                }
+              }),
             ),
           )));
         });

@@ -28,7 +28,8 @@
 	},
 	"extensions": {
 		"recommendations": [
-			"Dart-Code.flutter"
+			"dart-code.flutter",
+			"FelixAngelov.bloc"
 		]
 	}
 }

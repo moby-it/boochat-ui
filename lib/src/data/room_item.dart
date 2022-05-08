@@ -1,16 +1,24 @@
+import 'package:equatable/equatable.dart';
+
 import 'user.dart';
 
-class RoomItem {
-  late String id;
-  late String content;
-  late DateTime dateSent;
-  late String roomId;
-  late DateTime timestamp;
-  RoomItem({required this.id, required this.content, required this.roomId});
+class RoomItem extends Equatable {
+  final String id;
+  final String content;
+  final DateTime dateSent;
+  final String roomId;
+  const RoomItem(
+      {required this.id,
+      required this.content,
+      required this.roomId,
+      required this.dateSent});
   RoomItem.fromJson(dynamic json)
       : content = json['content'],
         id = json['id'],
-        roomId = json['roomId'];
+        roomId = json['roomId'],
+        dateSent = DateTime.parse(json['timestamp']);
+  @override
+  List<Object?> get props => [id, content, dateSent, roomId];
 }
 
 mixin MessageModel on RoomItem {
