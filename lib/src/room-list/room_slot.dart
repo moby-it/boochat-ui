@@ -38,7 +38,9 @@ class RoomSlot extends StatelessWidget {
                     Text(room.name,
                         style: const TextStyle(
                             fontWeight: FontWeight.w700, color: Colors.white)),
-                    Text(room.items.last.content)
+                    Text(room.items.isNotEmpty
+                        ? room.items.last.content
+                        : "Room Just Created!")
                   ],
                 )
               ],

@@ -22,8 +22,10 @@ class Room {
         participants = (json['participants'] as List<dynamic>)
             .map((e) => User.fromJson(e))
             .toList(),
-        items = (json['items'] as List<dynamic>)
-            .map((e) => RoomItem.fromJson(e))
-            .toList(),
+        items = json['items'] != null
+            ? (json['items'] as List<dynamic>)
+                .map((e) => RoomItem.fromJson(e))
+                .toList()
+            : List.empty(),
         hasUnreadMessage = json['hasUnreadMessage'];
 }
