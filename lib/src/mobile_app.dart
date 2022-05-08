@@ -6,6 +6,7 @@ import 'package:boochat_ui/src/shared/auth_bloc/auth_repository.dart';
 import 'package:boochat_ui/src/shared/websocket_bloc/websocket_bloc.dart';
 import 'package:boochat_ui/src/shared/websocket_bloc/websocket_manager.dart';
 import 'package:boochat_ui/src/shared/websocket_bloc/websocket_state.dart';
+import 'package:boochat_ui/src/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,7 +21,7 @@ class MobileApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData.dark(),
+        theme: BoochatTheme.darkTheme,
         // theme: BoochatTheme.darkTheme,
         title: 'Boochat UI',
         initialRoute: '/',

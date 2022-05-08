@@ -8,44 +8,43 @@ class RoomSlot extends StatelessWidget {
   final Room room;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      child: GestureDetector(
+    return Padding(
+      padding: const EdgeInsets.all(12),
+      child: InkWell(
         onTap: () => Navigator.pushNamed(
             context, ActiveRoomArgumentsScreen.routeName,
             arguments: room),
-        child: Padding(
+        customBorder:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        child: GestureDetector(
+            child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: Padding(
             padding: const EdgeInsets.all(12),
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: Theme.of(context).hoverColor),
-              child: Padding(
-                padding: const EdgeInsets.all(12),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    CachedNetworkImage(
-                      imageUrl: room.imageUrl,
-                      height: 50,
-                      width: 50,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(room.name,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white)),
-                        Text(room.items.last.content)
-                      ],
-                    )
-                  ],
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                CachedNetworkImage(
+                  imageUrl: room.imageUrl,
+                  height: 50,
+                  width: 50,
                 ),
-              ),
-            )),
+                const SizedBox(
+                  width: 10,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(room.name,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w700, color: Colors.white)),
+                    Text(room.items.last.content)
+                  ],
+                )
+              ],
+            ),
+          ),
+        )),
       ),
     );
   }

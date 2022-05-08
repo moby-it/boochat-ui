@@ -29,6 +29,7 @@ class RoomListBloc extends Bloc<RoomListEvent, RoomListState> {
       final roomItem = RoomItem.fromJson(data);
       final rooms = List.of(state.rooms);
       final room = rooms.firstWhere((room) => room.id == roomItem.roomId);
+      room.hasUnreadMessage = true;
       room.items.add(roomItem);
       rooms.remove(room);
       rooms.insert(0, room);
