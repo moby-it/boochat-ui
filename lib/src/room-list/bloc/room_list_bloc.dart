@@ -1,9 +1,8 @@
+import 'package:boochat_ui/src/common/common.dart';
 import 'package:boochat_ui/src/data/room.dart';
 import 'package:boochat_ui/src/data/room_item.dart';
 import 'package:boochat_ui/src/room-list/bloc/room_list_events.dart';
 import 'package:boochat_ui/src/room-list/bloc/room_list_state.dart';
-import 'package:boochat_ui/src/shared/websocket_bloc/websocket_events.dart';
-import 'package:boochat_ui/src/shared/websocket_bloc/websocket_manager.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RoomListBloc extends Bloc<RoomListEvent, RoomListState> {

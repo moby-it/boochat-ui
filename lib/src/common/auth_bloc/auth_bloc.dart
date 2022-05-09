@@ -1,6 +1,6 @@
-import 'package:boochat_ui/src/shared/auth_bloc/auth_events.dart';
-import 'package:boochat_ui/src/shared/auth_bloc/auth_repository.dart';
-import 'package:boochat_ui/src/shared/auth_bloc/auth_state.dart';
+import 'package:boochat_ui/src/common/auth_bloc/auth_events.dart';
+import 'package:boochat_ui/src/common/auth_bloc/auth_repository.dart';
+import 'package:boochat_ui/src/common/auth_bloc/auth_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {

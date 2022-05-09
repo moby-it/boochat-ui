@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:boochat_ui/src/active-room/room_item_bubble.dart';
-import 'package:boochat_ui/src/shared/auth_bloc/auth_bloc.dart';
+import 'package:boochat_ui/src/common/auth_bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -10,8 +10,8 @@ import 'package:provider/provider.dart';
 
 import '../data/data.dart';
 
-class ActiveRoomArgumentsScreen extends StatelessWidget {
-  ActiveRoomArgumentsScreen({Key? key}) : super(key: key);
+class ActiveRoom extends StatelessWidget {
+  ActiveRoom({Key? key}) : super(key: key);
   final queryUri = dotenv.env["QUERY_URI"];
   static const routeName = '/rooms';
 

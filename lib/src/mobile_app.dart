@@ -1,14 +1,10 @@
 import 'package:boochat_ui/src/active-room/active_room.dart';
 import 'package:boochat_ui/src/room-list/room_list.dart';
-import 'package:boochat_ui/src/shared/auth_bloc/auth_bloc.dart';
-import 'package:boochat_ui/src/shared/auth_bloc/auth_events.dart';
-import 'package:boochat_ui/src/shared/auth_bloc/auth_repository.dart';
-import 'package:boochat_ui/src/shared/websocket_bloc/websocket_bloc.dart';
-import 'package:boochat_ui/src/shared/websocket_bloc/websocket_manager.dart';
-import 'package:boochat_ui/src/shared/websocket_bloc/websocket_state.dart';
 import 'package:boochat_ui/src/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'common/common.dart';
 
 class MobileApp extends StatelessWidget {
   final AuthRepository authRepository;
@@ -27,8 +23,7 @@ class MobileApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => const RoomListWrapper(),
-          ActiveRoomArgumentsScreen.routeName: (context) =>
-              ActiveRoomArgumentsScreen()
+          ActiveRoom.routeName: (context) => ActiveRoom()
         },
         builder: (context, navigator) {
           return Scaffold(

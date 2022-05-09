@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:boochat_ui/src/shared/auth_bloc/auth_state.dart';
-import 'package:boochat_ui/src/shared/websocket_bloc/websocket_events.dart';
-import 'package:boochat_ui/src/shared/websocket_bloc/websocket_manager.dart';
-import 'package:boochat_ui/src/shared/websocket_bloc/websocket_state.dart';
+import 'package:boochat_ui/src/common/auth_bloc/auth_state.dart';
+import 'package:boochat_ui/src/common/websocket_bloc/websocket_events.dart';
+import 'package:boochat_ui/src/common/websocket_bloc/websocket_manager.dart';
+import 'package:boochat_ui/src/common/websocket_bloc/websocket_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../auth_bloc/auth_bloc.dart';

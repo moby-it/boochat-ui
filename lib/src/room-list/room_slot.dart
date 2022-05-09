@@ -11,9 +11,8 @@ class RoomSlot extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(12),
       child: InkWell(
-        onTap: () => Navigator.pushNamed(
-            context, ActiveRoomArgumentsScreen.routeName,
-            arguments: room),
+        onTap: () =>
+            Navigator.pushNamed(context, ActiveRoom.routeName, arguments: room),
         customBorder:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: GestureDetector(

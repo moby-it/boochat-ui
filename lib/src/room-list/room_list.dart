@@ -2,10 +2,10 @@ import 'package:boochat_ui/src/data/room.dart';
 import 'package:boochat_ui/src/room-list/bloc/room_list_bloc.dart';
 import 'package:boochat_ui/src/room-list/bloc/room_list_state.dart';
 import 'package:boochat_ui/src/room-list/room_slot.dart';
-import 'package:boochat_ui/src/shared/websocket_bloc/websocket_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../common/common.dart';
 import '../data/data.dart';
 
 class RoomListWrapper extends StatelessWidget {

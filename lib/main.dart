@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:boochat_ui/src/shared/auth_bloc/auth_repository.dart';
-import 'package:boochat_ui/src/shared/websocket_bloc/websocket_manager.dart';
+import 'package:boochat_ui/src/common/common.dart';
+import 'package:boochat_ui/src/web_app.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -10,10 +10,14 @@ import 'src/mobile_app.dart';
 
 Future main() async {
   await dotenv.load(fileName: getEnvFilename());
-  runApp(MobileApp(
-    authRepository: AuthRepository(),
-    websocketManager: WebsocketManager(),
-  ));
+  final app = kIsWeb
+      ? WebApp(
+          authRepository: AuthRepository(),
+          websocketManager: WebsocketManager())
+      : MobileApp(
+          authRepository: AuthRepository(),
+          websocketManager: WebsocketManager());
+  runApp(app);
 }
 
 String getEnvFilename() {
