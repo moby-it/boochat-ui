@@ -16,7 +16,7 @@ class RoomItem extends Equatable {
       : content = json['content'],
         id = json['id'],
         roomId = json['roomId'],
-        dateSent = DateTime.parse(json['timestamp']);
+        dateSent = DateTime.now();
   @override
   List<Object?> get props => [id, content, dateSent, roomId];
 }
