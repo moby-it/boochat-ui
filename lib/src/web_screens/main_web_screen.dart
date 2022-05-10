@@ -14,9 +14,10 @@ class MainWebScreen extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         const SizedBox(
-            width: 100, height: double.infinity, child: WebSidebar()),
-        const Expanded(child: RoomListWrapper()),
-        Expanded(child: ActiveRoom())
+            width: 110, height: double.infinity, child: WebSidebar()),
+        const Expanded(flex: 2, child: RoomListWrapper()),
+        Expanded(flex: 3, child: ActiveRoom()),
+        Expanded(flex: 3, child: ActiveRoom())
         // ActiveRoom()
       ],
     );

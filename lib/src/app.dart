@@ -1,3 +1,4 @@
+import 'package:boochat_ui/src/active-room/bloc/active_room_bloc.dart';
 import 'package:boochat_ui/src/room-list/bloc/room_list_bloc.dart';
 import 'package:boochat_ui/src/routes/mobile_routes.dart';
 import 'package:flutter/foundation.dart';
@@ -47,7 +48,8 @@ class App extends StatelessWidget {
                     create: (context) => UsersBloc(websocketManager)),
                 BlocProvider(
                     lazy: false,
-                    create: ((context) => RoomListBloc(websocketManager)))
+                    create: ((context) => RoomListBloc(websocketManager))),
+                BlocProvider(create: (context) => ActiveRoomBloc())
               ],
               child: BlocBuilder<WebsocketBloc, WebsocketState>(
                   builder: (context, state) {

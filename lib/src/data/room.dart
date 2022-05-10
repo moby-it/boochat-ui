@@ -24,8 +24,24 @@ class Room {
             .toList(),
         items = json['items'] != null
             ? (json['items'] as List<dynamic>)
-                .map((e) => RoomItem.fromJson(e))
+                .map((e) => e['sender'] != null
+                    ? Message.fromJson(e)
+                    : Announcement.fromJson(e))
                 .toList()
             : List.empty(),
         hasUnreadMessage = json['hasUnreadMessage'];
+  static String configureRoomImageUrl(
+      User user, List<User> allUsers, Room room) {
+    if (room.participants.length > 2) return room.imageUrl;
+    final otherUserId = room.participants.firstWhere((u) => u.id != user.id).id;
+    final otherUser = allUsers.firstWhere((user) => user.id == otherUserId);
+    return otherUser.imageUrl ?? room.imageUrl;
+  }
+
+  static String configureRoomName(User user, List<User> allUsers, Room room) {
+    if (room.participants.length > 2) return room.imageUrl;
+    final otherUserId = room.participants.firstWhere((u) => u.id != user.id).id;
+    final otherUser = allUsers.firstWhere((user) => user.id == otherUserId);
+    return otherUser.name ?? room.name;
+  }
 }
