@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:boochat_ui/src/active-room/bloc/active_room_bloc.dart';
 import 'package:boochat_ui/src/active-room/bloc/active_room_state.dart';
+import 'package:boochat_ui/src/active-room/message_input.dart';
 import 'package:boochat_ui/src/active-room/room_item_bubble.dart';
 import 'package:boochat_ui/src/common/auth_bloc/auth_bloc.dart';
 import 'package:flutter/foundation.dart';
@@ -34,6 +35,7 @@ class ActiveRoom extends StatelessWidget {
         } else {
           final room = (state as ActiveRoomSelectedState).room;
           return Scaffold(
+            backgroundColor: Theme.of(context).hoverColor,
             appBar: kIsWeb
                 ? null
                 : AppBar(
@@ -46,13 +48,21 @@ class ActiveRoom extends StatelessWidget {
                   final Room room = snapshot.data as Room;
                   return Padding(
                     padding: const EdgeInsets.fromLTRB(32, 0, 32, 24),
-                    child: ListView.separated(
-                        separatorBuilder: (context, index) => const SizedBox(
-                              height: 20,
-                            ),
-                        itemCount: room.items.length,
-                        itemBuilder: (context, index) =>
-                            RoomItemBubble(roomItem: room.items[index])),
+                    child: Column(
+                      children: <Widget>[
+                        Expanded(
+                          child: ListView.separated(
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                              itemCount: room.items.length,
+                              itemBuilder: (context, index) =>
+                                  RoomItemBubble(roomItem: room.items[index])),
+                        ),
+                        const MessageInput()
+                      ],
+                    ),
                   );
                 } else {
                   return const Text("loading room data");
