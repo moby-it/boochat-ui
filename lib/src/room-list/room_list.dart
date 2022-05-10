@@ -6,26 +6,21 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../common/common.dart';
 import '../data/data.dart';
 
 class RoomListWrapper extends StatelessWidget {
   const RoomListWrapper({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => RoomListBloc(context.read<WebsocketManager>()),
-      child: Scaffold(
-        appBar: !kIsWeb ? AppBar(title: const Text("Boochat")) : null,
-        body:
-            BlocBuilder<RoomListBloc, RoomListState>(builder: (context, state) {
-          if (state.hasData) {
-            return RoomList(rooms: state.rooms);
-          } else {
-            return const Text('rooms loading');
-          }
-        }),
-      ),
+    return Scaffold(
+      appBar: !kIsWeb ? AppBar(title: const Text("Boochat")) : null,
+      body: BlocBuilder<RoomListBloc, RoomListState>(builder: (context, state) {
+        if (state.hasData) {
+          return RoomList(rooms: state.rooms);
+        } else {
+          return const Text('rooms loading');
+        }
+      }),
     );
   }
 }

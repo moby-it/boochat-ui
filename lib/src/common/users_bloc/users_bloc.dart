@@ -8,7 +8,11 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
       : super(UsersState(allUsers: List.empty(), activeUserIds: List.empty())) {
     on<UpdateActiveUsersEvent>(_updateActiveUsersHandler);
     on<UpdateAllUsersEvent>(_updateAllUsersHandler);
-    _websocketManager.querySocket.onAny(_handleQuerySocketEvent);
+    _websocketManager.socketsConnected$.stream.listen((connected) {
+      if (connected) {
+        _websocketManager.querySocket.onAny(_handleQuerySocketEvent);
+      }
+    });
   }
   _updateAllUsersHandler(UpdateAllUsersEvent event, Emitter<UsersState> emit) {
     emit(UsersState(

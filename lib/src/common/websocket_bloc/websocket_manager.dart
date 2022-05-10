@@ -22,17 +22,11 @@ class WebsocketManager {
     querySocket = _connectTo("${dotenv.env['QUERY_URI']}", token);
     querySocket.onConnect((data) {
       _querySocketConnected = true;
-      if (_commandSocketConnected) {
-        socketsConnected$.sink.add(true);
-        _status = WebsocketStatus.connected;
-      }
+      _checkIfSocketsReady();
     });
     commandSocket.onConnect((data) {
       _commandSocketConnected = true;
-      if (_querySocketConnected) {
-        socketsConnected$.sink.add(true);
-        _status = WebsocketStatus.connected;
-      }
+      _checkIfSocketsReady();
     });
   }
 
@@ -40,4 +34,10 @@ class WebsocketManager {
       uri,
       OptionBuilder()
           .setQuery({'token': token}).setTransports(['websocket']).build());
+  _checkIfSocketsReady() {
+    if (_commandSocketConnected && _querySocketConnected) {
+      socketsConnected$.sink.add(true);
+      _status = WebsocketStatus.connected;
+    }
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:boochat_ui/src/room-list/bloc/room_list_bloc.dart';
 import 'package:boochat_ui/src/routes/mobile_routes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -43,12 +44,18 @@ class App extends StatelessWidget {
                         websocketManager, context.read<AuthBloc>())),
                 BlocProvider(
                     lazy: false,
-                    create: (context) => UsersBloc(websocketManager))
+                    create: (context) => UsersBloc(websocketManager)),
+                BlocProvider(
+                    lazy: false,
+                    create: ((context) => RoomListBloc(websocketManager)))
               ],
               child: BlocBuilder<WebsocketBloc, WebsocketState>(
                   builder: (context, state) {
                 if (state is WebSocketConnectedState) {
-                  return Container(child: navigator);
+                  return BlocBuilder<UsersBloc, UsersState>(
+                      builder: (context, state) => state.allUsers.isEmpty
+                          ? const Text("fetching users")
+                          : Container(child: navigator));
                 } else {
                   return const Text("connecting...");
                 }
