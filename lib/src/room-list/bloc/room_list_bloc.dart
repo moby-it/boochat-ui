@@ -9,13 +9,13 @@ class RoomListBloc extends Bloc<RoomListEvent, RoomListState> {
   final WebsocketManager _websocketManager;
   RoomListBloc(this._websocketManager) : super(const RoomListState()) {
     on<UpdateRoomListEvent>(_updateRoomList);
-    _websocketManager.querySocket.onAny(_handleQueryEvent);
+    _websocketManager.querySocket.onAny(_handleQuerySocketEvent);
   }
   _updateRoomList(UpdateRoomListEvent event, Emitter<RoomListState> emit) {
     emit(RoomListState.update(event.rooms));
   }
 
-  _handleQueryEvent(String event, dynamic data) {
+  _handleQuerySocketEvent(String event, dynamic data) {
     if (event == WebsocketEvent.roomList) {
       final List<Room> rooms =
           List.from(data).map((json) => Room.fromJson(json)).toList();

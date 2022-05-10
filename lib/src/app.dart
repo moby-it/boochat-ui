@@ -41,6 +41,9 @@ class App extends StatelessWidget {
                     lazy: false,
                     create: (context) => WebsocketBloc(
                         websocketManager, context.read<AuthBloc>())),
+                BlocProvider(
+                    lazy: false,
+                    create: (context) => UsersBloc(websocketManager))
               ],
               child: BlocBuilder<WebsocketBloc, WebsocketState>(
                   builder: (context, state) {
