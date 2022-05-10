@@ -30,7 +30,7 @@ class AuthRepository {
 
   Future<User?> _signInWithGoogle() async {
     try {
-      final account = await _googleSignIn.signIn();
+      final account = await _googleSignIn.signInSilently();
       if (account == null) throw Exception('account not found');
       return User(
           id: account.id,

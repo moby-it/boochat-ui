@@ -2,6 +2,7 @@ import 'package:boochat_ui/src/data/room.dart';
 import 'package:boochat_ui/src/room-list/bloc/room_list_bloc.dart';
 import 'package:boochat_ui/src/room-list/bloc/room_list_state.dart';
 import 'package:boochat_ui/src/room-list/room_slot.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,7 +16,7 @@ class RoomListWrapper extends StatelessWidget {
     return BlocProvider(
       create: (context) => RoomListBloc(context.read<WebsocketManager>()),
       child: Scaffold(
-        appBar: AppBar(title: const Text("Boochat")),
+        appBar: !kIsWeb ? AppBar(title: const Text("Boochat")) : null,
         body:
             BlocBuilder<RoomListBloc, RoomListState>(builder: (context, state) {
           if (state.hasData) {

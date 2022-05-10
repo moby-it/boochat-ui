@@ -1,7 +1,11 @@
 import 'package:boochat_ui/src/active-room/active_room.dart';
+import 'package:boochat_ui/src/common/auth_bloc/auth_bloc.dart';
+import 'package:boochat_ui/src/common/auth_bloc/auth_state.dart';
 import 'package:boochat_ui/src/data/room.dart';
-import 'package:flutter/material.dart';
+import 'package:boochat_ui/src/data/user.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RoomSlot extends StatelessWidget {
   const RoomSlot({required this.room, Key? key}) : super(key: key);
@@ -23,10 +27,13 @@ class RoomSlot extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                CachedNetworkImage(
-                  imageUrl: room.imageUrl,
-                  height: 50,
-                  width: 50,
+                BlocSelector<AuthBloc, AuthState, User>(
+                  selector: (state) => state.user,
+                  builder: (context, user) => CachedNetworkImage(
+                    imageUrl: room.imageUrl,
+                    height: 50,
+                    width: 50,
+                  ),
                 ),
                 const SizedBox(
                   width: 10,
@@ -48,5 +55,14 @@ class RoomSlot extends StatelessWidget {
         )),
       ),
     );
+  }
+
+  String _configureRoomImage(User user) {
+    throw Exception("Not implemented");
+    // if (room.participants.length > 2) return room.imageUrl;
+    // final otherUser =
+    //     room.participants.firstWhere((user) => user.id != user.id);
+
+    // return otherUserImage;
   }
 }

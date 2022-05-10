@@ -1,19 +1,19 @@
-import 'package:boochat_ui/src/active-room/active_room.dart';
-import 'package:boochat_ui/src/room-list/room_list.dart';
-import 'package:boochat_ui/src/theme.dart';
+import 'package:boochat_ui/src/routes/mobile_routes.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'common/common.dart';
+import 'routes/web_routes.dart';
+import 'theme.dart';
 
-class MobileApp extends StatelessWidget {
+class App extends StatelessWidget {
   final AuthRepository authRepository;
   final WebsocketManager websocketManager;
-  const MobileApp(
+  const App(
       {required this.authRepository, required this.websocketManager, Key? key})
       : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,10 +21,7 @@ class MobileApp extends StatelessWidget {
         // theme: BoochatTheme.darkTheme,
         title: 'Boochat UI',
         initialRoute: '/',
-        routes: {
-          '/': (context) => const RoomListWrapper(),
-          ActiveRoom.routeName: (context) => ActiveRoom()
-        },
+        routes: kIsWeb ? webRoutes() : mobileRoutes(),
         builder: (context, navigator) {
           return Scaffold(
               body: SafeArea(
