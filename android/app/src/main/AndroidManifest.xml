@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.moby_it.boochat_ui">
    <application
-        android:label="boochat_ui"
+        android:label="Boochat"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
