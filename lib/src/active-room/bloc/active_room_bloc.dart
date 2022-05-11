@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:boochat_ui/src/active-room/bloc/active_room_events.dart';
 import 'package:boochat_ui/src/active-room/bloc/active_room_state.dart';
 import 'package:boochat_ui/src/data/room_item.dart';

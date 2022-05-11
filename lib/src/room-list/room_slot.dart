@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:boochat_ui/src/active-room/active_room.dart';
 import 'package:boochat_ui/src/active-room/bloc/active_room_bloc.dart';
 import 'package:boochat_ui/src/active-room/bloc/active_room_events.dart';

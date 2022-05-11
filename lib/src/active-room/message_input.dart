@@ -23,7 +23,6 @@ class _MessageInputState extends State<MessageInput> {
                 controller: controller,
                 textInputAction: TextInputAction.go,
                 onFieldSubmitted: (String value) {
-                  print(value);
                   context.read<ActiveRoomBloc>().add(SendMessageEvent(value));
                   controller.clear();
                 },
