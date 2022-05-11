@@ -32,7 +32,10 @@ class AuthRepository {
     try {
       var account = await _googleSignIn.signInSilently();
       account ??= await _googleSignIn.signIn();
-      if (account == null) throw Exception('account not found');
+      if (account != null) {
+      } else {
+        throw Exception('account not found');
+      }
       return User(
           id: account.id,
           imageUrl: account.photoUrl,
