@@ -7,6 +7,7 @@ abstract class WebsocketEvent extends Equatable {
   static const roomList = 'ROOM_LIST';
   static const allUsers = 'ALL_USERS';
   static const activeUserList = 'ACTIVE_USER_LIST';
+  static const sendMessage = 'SEND_MESSAGE';
   const WebsocketEvent();
   @override
   List<Object> get props => [];

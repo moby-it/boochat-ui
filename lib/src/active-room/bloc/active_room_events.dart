@@ -12,11 +12,23 @@ class SelectActiveRoomEvent extends ActiveRoomEvent {
   final Room room;
   const SelectActiveRoomEvent(this.room);
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [room];
 }
 
 class ClearActiveRoomEvent extends ActiveRoomEvent {
   const ClearActiveRoomEvent();
   @override
   List<Object?> get props => [];
+}
+
+class AppendRoomItemEvent extends ActiveRoomEvent {
+  final RoomItem roomItem;
+  const AppendRoomItemEvent(this.roomItem);
+  @override
+  List<Object?> get props => [roomItem];
+}
+
+class SendMessageEvent extends ActiveRoomEvent {
+  final String content;
+  const SendMessageEvent(this.content);
 }

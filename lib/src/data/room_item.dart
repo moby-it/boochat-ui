@@ -41,7 +41,7 @@ class Message extends RoomItem {
         super(
             content: json['content'],
             id: json['id'],
-            dateSent: DateTime.parse(json['timestamp']),
+            dateSent: DateTime.parse(json['timestamp']).toLocal(),
             roomId: json['roomId']);
 }
 
@@ -56,6 +56,6 @@ class Announcement extends RoomItem {
       : super(
             content: json['content'],
             id: json['id'],
-            dateSent: DateTime.parse(json['timestamp']),
+            dateSent: DateTime.parse(json['timestamp']).toLocal(),
             roomId: json['roomId']);
 }

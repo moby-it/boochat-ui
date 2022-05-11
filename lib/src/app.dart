@@ -49,7 +49,8 @@ class App extends StatelessWidget {
                 BlocProvider(
                     lazy: false,
                     create: ((context) => RoomListBloc(websocketManager))),
-                BlocProvider(create: (context) => ActiveRoomBloc())
+                BlocProvider(
+                    create: (context) => ActiveRoomBloc(websocketManager))
               ],
               child: BlocBuilder<WebsocketBloc, WebsocketState>(
                   builder: (context, state) {

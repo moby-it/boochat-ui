@@ -5,7 +5,6 @@ import 'package:boochat_ui/src/active-room/bloc/active_room_bloc.dart';
 import 'package:boochat_ui/src/active-room/bloc/active_room_state.dart';
 import 'package:boochat_ui/src/active-room/message_input.dart';
 import 'package:boochat_ui/src/active-room/room_item_bubble.dart';
-import 'package:boochat_ui/src/common/auth_bloc/auth_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,20 +45,23 @@ class ActiveRoom extends StatelessWidget {
               builder: (context, AsyncSnapshot<Room> snapshot) {
                 if (snapshot.hasData) {
                   final Room room = snapshot.data as Room;
+                  final items = room.items.reversed.toList();
                   return Padding(
                     padding: const EdgeInsets.fromLTRB(32, 0, 32, 24),
                     child: Column(
                       children: <Widget>[
                         Expanded(
                           child: ListView.separated(
+                              reverse: true,
                               separatorBuilder: (context, index) =>
                                   const SizedBox(
                                     height: 20,
                                   ),
-                              itemCount: room.items.length,
+                              itemCount: items.length,
                               itemBuilder: (context, index) =>
-                                  RoomItemBubble(roomItem: room.items[index])),
+                                  RoomItemBubble(roomItem: items[index])),
                         ),
+                        const SizedBox(height: 20),
                         const MessageInput()
                       ],
                     ),
