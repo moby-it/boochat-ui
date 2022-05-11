@@ -30,6 +30,7 @@ dependencies:
   rxdart: ^0.27.3
   flutter_bloc: ^8.0.0
   equatable: ^2.0.3
+  flutter_native_splash: ^2.1.6
 dev_dependencies:
   icons_launcher: ^1.1.7
   flutter_test:
@@ -43,4 +44,7 @@ flutter:
     - android.env
 flutter_icons:
   android: true
+  ios: false
   image_path: "assets/icons/icon.png"
+flutter_native_splash:
+  background_image: "assets/icons/icon.png"
