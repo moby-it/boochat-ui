@@ -17,7 +17,6 @@ class MainWebScreen extends StatelessWidget {
             width: 110, height: double.infinity, child: WebSidebar()),
         const Expanded(flex: 2, child: RoomListWrapper()),
         Expanded(flex: 3, child: ActiveRoom()),
-        Expanded(flex: 3, child: ActiveRoom())
         // ActiveRoom()
       ],
     );

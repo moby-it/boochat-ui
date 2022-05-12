@@ -20,8 +20,10 @@
             "name": "Android",
             "request": "launch",
             "type": "dart",
-            "deviceId": "Redmi Note 8 Pro",
             "flutterMode": "debug",
+            "args": [
+                "--enable-software-rendering"
+            ]
         },
         {
             "name": "boochat_ui (profile mode)",
