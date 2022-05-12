@@ -31,6 +31,7 @@ dependencies:
   flutter_bloc: ^8.0.0
   equatable: ^2.0.3
   flutter_native_splash: ^2.1.6
+  flutter_local_notifications: ^9.5.2
 dev_dependencies:
   icons_launcher: ^1.1.7
   flutter_test:

@@ -34,6 +34,7 @@ class WebsocketManager {
       uri,
       OptionBuilder()
           .setQuery({'token': token}).setTransports(['websocket']).build());
+
   _checkIfSocketsReady() {
     if (_commandSocketConnected && _querySocketConnected) {
       socketsConnected$.sink.add(true);
