@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:boochat_ui/src/app.dart';
 import 'package:boochat_ui/src/common/common.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -13,10 +14,8 @@ Future main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FlutterError.onError = (FlutterErrorDetails details) {
-    FlutterError.presentError(details);
-    if (kReleaseMode) exit(1);
-  };
+  // Pass all uncaught errors from the framework to Crashlytics.
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   runApp(App(
       authRepository: AuthRepository(), websocketManager: WebsocketManager()));
 }

@@ -5,6 +5,7 @@ import 'package:boochat_ui/src/common/common.dart';
 import 'package:boochat_ui/src/common/notifications_bloc/notifications_events.dart';
 import 'package:boochat_ui/src/common/notifications_bloc/notifications_state.dart';
 import 'package:boochat_ui/src/data/data.dart' as models;
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -53,6 +54,8 @@ class NotificationsBloc extends Bloc<NotificationEvent, NotificationsState> {
           InitializationSettings(android: initializationSettingsAndroid);
       await _flutterLocalNotificationsPlugin.initialize(initializationSettings,
           onSelectNotification: (payload) => print("Notification Selected"));
+      final fcmToken = FirebaseMessaging.instance.getToken();
+      print(await fcmToken);
       return true;
     } catch (error) {
       print(error);
