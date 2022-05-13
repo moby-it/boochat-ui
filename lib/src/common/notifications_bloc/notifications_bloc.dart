@@ -5,16 +5,16 @@ import 'package:boochat_ui/src/common/common.dart';
 import 'package:boochat_ui/src/common/notifications_bloc/notifications_events.dart';
 import 'package:boochat_ui/src/common/notifications_bloc/notifications_state.dart';
 import 'package:boochat_ui/src/data/data.dart' as models;
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationsBloc extends Bloc<NotificationEvent, NotificationsState> {
   final WebsocketManager _websocketManager;
+  final AuthBloc _authBloc;
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   final onNewNotification$ = StreamController<AndroidNotificationDetails>();
-  NotificationsBloc(this._websocketManager)
+  NotificationsBloc(this._websocketManager, this._authBloc)
       : super(const NotificationsState()) {
     _websocketManager.socketsConnected$.stream.listen((connected) {
       if (connected) {
@@ -25,6 +25,11 @@ class NotificationsBloc extends Bloc<NotificationEvent, NotificationsState> {
             roomItem = models.Message.fromJson(data);
           } else {
             roomItem = models.Announcement.fromJson(data);
+          }
+          if (roomItem is models.Message) {
+            if (roomItem.sender.id == _authBloc.state.user.id) {
+              return;
+            }
           }
           final notification = models.Notification(
               content: roomItem.content,
@@ -54,8 +59,6 @@ class NotificationsBloc extends Bloc<NotificationEvent, NotificationsState> {
           InitializationSettings(android: initializationSettingsAndroid);
       await _flutterLocalNotificationsPlugin.initialize(initializationSettings,
           onSelectNotification: (payload) => print("Notification Selected"));
-      final fcmToken = FirebaseMessaging.instance.getToken();
-      print(await fcmToken);
       return true;
     } catch (error) {
       print(error);
