@@ -7,7 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1069407691503:android:9fc05ae8f7d2175389b11a",
+        "mobilesdk_app_id": "1:1069407691503:android:fb26ac8b817b42c589b11a",
         "android_client_info": {
           "package_name": "com.moby_it.boochat_ui"
         }
@@ -20,7 +20,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDeMFQY_QHIk8nFGnhkYpkyaaLQDIY4AaM"
+          "current_key": "AIzaSyA_sUpqnfhdpuSBmV7dZ-uJLi4GsRqm9HA"
         }
       ],
       "services": {

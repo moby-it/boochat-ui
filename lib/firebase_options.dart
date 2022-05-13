@@ -50,18 +50,18 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCIGFRjC-W-b6EW9shKlexiIERi3lQCo_k',
-    appId: '1:1069407691503:web:6446ccc0c8b7043f89b11a',
+    apiKey: 'AIzaSyDPCb47AW8Du1jG3vEgpe3YbeeN93fK6bE',
+    appId: '1:1069407691503:web:21eaa829442a614189b11a',
     messagingSenderId: '1069407691503',
     projectId: 'boochat-345922',
     authDomain: 'boochat-345922.firebaseapp.com',
     storageBucket: 'boochat-345922.appspot.com',
-    measurementId: 'G-TQ32E3ENQ8',
+    measurementId: 'G-S836S66J2Y',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDeMFQY_QHIk8nFGnhkYpkyaaLQDIY4AaM',
-    appId: '1:1069407691503:android:9fc05ae8f7d2175389b11a',
+    apiKey: 'AIzaSyA_sUpqnfhdpuSBmV7dZ-uJLi4GsRqm9HA',
+    appId: '1:1069407691503:android:fb26ac8b817b42c589b11a',
     messagingSenderId: '1069407691503',
     projectId: 'boochat-345922',
     storageBucket: 'boochat-345922.appspot.com',
