@@ -26,11 +26,11 @@ class NotificationsBloc extends Bloc<NotificationEvent, NotificationsState> {
           } else {
             roomItem = models.Announcement.fromJson(data);
           }
-          if (roomItem is models.Message) {
-            if (roomItem.sender.id == _authBloc.state.user.id) {
-              return;
-            }
-          }
+          // if (roomItem is models.Message) {
+          //   if (roomItem.sender.id == _authBloc.state.user.id) {
+          //     return;
+          //   }
+          // }
           final notification = models.Notification(
               content: roomItem.content,
               title: "New Message",
@@ -54,7 +54,7 @@ class NotificationsBloc extends Bloc<NotificationEvent, NotificationsState> {
   Future<bool> initializeNotificationSettings() async {
     try {
       const AndroidInitializationSettings initializationSettingsAndroid =
-          AndroidInitializationSettings("app_icon");
+          AndroidInitializationSettings("ic_notification");
       const initializationSettings =
           InitializationSettings(android: initializationSettingsAndroid);
       await _flutterLocalNotificationsPlugin.initialize(initializationSettings,
