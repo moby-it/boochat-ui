@@ -3,6 +3,7 @@ import 'package:boochat_ui/src/active-room/bloc/active_room_bloc.dart';
 import 'package:boochat_ui/src/active-room/bloc/active_room_events.dart';
 import 'package:boochat_ui/src/common/common.dart';
 import 'package:boochat_ui/src/data/room.dart';
+import 'package:boochat_ui/src/data/room_repository.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -15,15 +16,18 @@ class RoomSlot extends StatelessWidget {
   Widget build(BuildContext context) {
     final activeRoomBloc = context.read<ActiveRoomBloc>();
     final user = context.read<AuthBloc>().state.user;
+    final token = context.read<AuthBloc>().state.token;
     final allUsers = context.read<UsersBloc>().state.allUsers;
     return Padding(
       padding: const EdgeInsets.all(12),
       child: InkWell(
-        onTap: () {
+        onTap: () async {
           if (!kIsWeb) {
             Navigator.pushNamed(context, ActiveRoom.routeName);
           }
-          activeRoomBloc.add(SelectActiveRoomEvent(room));
+          final populatedRoom =
+              await context.read<RoomRepository>().fetchRoom(room.id, token);
+          activeRoomBloc.add(SelectActiveRoomEvent(populatedRoom));
         },
         customBorder:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

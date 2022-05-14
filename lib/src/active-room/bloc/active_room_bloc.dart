@@ -9,12 +9,8 @@ class ActiveRoomBloc extends Bloc<ActiveRoomEvent, ActiveRoomState> {
   ActiveRoomBloc(this._websocketManager)
       : super(const NoActiveRoomSelectedState()) {
     on(_mapBlocEvents);
-    _websocketManager.socketsConnected$.listen((connected) {
-      if (connected) {
-        _websocketManager.querySocket
-            .on(WebsocketEvents.newRoomItem, _handleNewRoomItem);
-      }
-    });
+    _websocketManager.querySocket
+        .on(WebsocketEvents.newRoomItem, _handleNewRoomItem);
   }
   _mapBlocEvents(ActiveRoomEvent event, Emitter<ActiveRoomState> emit) {
     if (event is SelectActiveRoomEvent) {

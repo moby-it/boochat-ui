@@ -1,4 +1,5 @@
 import 'package:boochat_ui/src/active-room/bloc/active_room_bloc.dart';
+import 'package:boochat_ui/src/data/room_repository.dart';
 import 'package:boochat_ui/src/room-list/bloc/room_list_bloc.dart';
 import 'package:boochat_ui/src/routes/mobile_routes.dart';
 import 'package:flutter/foundation.dart';
@@ -12,8 +13,12 @@ import 'theme.dart';
 class App extends StatelessWidget {
   final AuthRepository authRepository;
   final WebsocketManager websocketManager;
+  final RoomRepository roomRepository;
   const App(
-      {required this.authRepository, required this.websocketManager, Key? key})
+      {required this.authRepository,
+      required this.websocketManager,
+      required this.roomRepository,
+      Key? key})
       : super(key: key);
 
   @override
@@ -31,7 +36,8 @@ class App extends StatelessWidget {
             providers: [
               RepositoryProvider<AuthRepository>.value(value: authRepository),
               RepositoryProvider<WebsocketManager>.value(
-                  value: websocketManager)
+                  value: websocketManager),
+              RepositoryProvider<RoomRepository>.value(value: roomRepository)
             ],
             child: MultiBlocProvider(
               providers: [

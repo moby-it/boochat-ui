@@ -35,11 +35,20 @@
 		"version": "0.2.0",
 		"configurations": [
 			{
-				"name": "Flutter",
-				"type": "dart",
+				"name": "Web",
 				"request": "launch",
-				"program": "lib/main.dart"
+				"type": "dart",
+				"args": [
+					"--web-port",
+					"4200"
+				]
 			},
+			{
+				"name": "My Redmi",
+				"request": "launch",
+				"type": "dart",
+				"deviceId": "rkwgu4byvc4hbaqk"
+			}
 		]
 	}
 }

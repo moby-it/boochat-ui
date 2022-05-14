@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:boochat_ui/src/app.dart';
 import 'package:boochat_ui/src/common/common.dart';
+import 'package:boochat_ui/src/data/room_repository.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,10 +18,15 @@ Future main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   // Pass all uncaught errors from the framework to Crashlytics.
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  if (kReleaseMode) {
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  }
   setPathUrlStrategy();
   runApp(App(
-      authRepository: AuthRepository(), websocketManager: WebsocketManager()));
+    authRepository: AuthRepository(),
+    websocketManager: WebsocketManager(),
+    roomRepository: RoomRepository(),
+  ));
 }
 
 String getEnvFilename() {
