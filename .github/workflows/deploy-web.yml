@@ -1,7 +1,9 @@
-name: Build And Deploy
+name: Build And Deploy Web
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - "main"
     
 
 jobs:
