@@ -16,10 +16,10 @@ class WebsocketBloc extends Bloc<WebsocketEvent, WebsocketState> {
   WebsocketBloc(this._websocketManager, this._authBloc)
       : super(const WebSocketConnectingState()) {
     on<WebsocketsConnectedEvent>(_onWebsocketsConnected);
-    authBlocSubscription = _authBloc.stream.listen((state) {
+    authBlocSubscription = _authBloc.stream.listen((state) async {
       if (state.status == AuthStatus.authenticated &&
           _websocketManager.isDisconnected) {
-        _websocketManager.connect(state.token);
+        await _websocketManager.connect(state.token);
       }
     });
     socketsConnectedSubscription =
