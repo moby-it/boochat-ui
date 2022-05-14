@@ -35,6 +35,7 @@ dependencies:
   firebase_core: ^1.16.0
   firebase_crashlytics: ^2.7.2
   firebase_messaging: ^11.3.0
+  url_strategy: ^0.2.0
 dev_dependencies:
   icons_launcher: ^1.1.7
   flutter_test:

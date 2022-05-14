@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:url_strategy/url_strategy.dart';
 import 'firebase_options.dart';
 
 Future main() async {
@@ -16,6 +17,7 @@ Future main() async {
   );
   // Pass all uncaught errors from the framework to Crashlytics.
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  setPathUrlStrategy();
   runApp(App(
       authRepository: AuthRepository(), websocketManager: WebsocketManager()));
 }
