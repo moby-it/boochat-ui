@@ -31,7 +31,6 @@ dependencies:
   flutter_bloc: ^8.0.0
   equatable: ^2.0.3
   flutter_native_splash: ^2.1.6
-  flutter_local_notifications: ^9.5.2
   firebase_core: ^1.16.0
   firebase_crashlytics: ^2.7.2
   firebase_messaging: ^11.3.0

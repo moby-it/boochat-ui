@@ -23,7 +23,7 @@ class WebsocketBloc extends Bloc<WebsocketEvent, WebsocketState> {
       }
     });
     socketsConnectedSubscription =
-        _websocketManager.socketsConnected$.stream.listen((connected) {
+        _websocketManager.socketsConnected$.listen((connected) {
       if (connected) {
         add(WebsocketsConnectedEvent(
             commandSocket: _websocketManager.commandSocket,

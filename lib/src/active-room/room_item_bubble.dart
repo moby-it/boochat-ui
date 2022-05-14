@@ -1,4 +1,3 @@
-import 'package:boochat_ui/src/common/auth_bloc/auth_bloc.dart';
 import 'package:boochat_ui/src/common/common.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -36,36 +35,41 @@ class SentMessageBubble extends StatelessWidget {
   const SentMessageBubble({required this.message, Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            DateFormat('hh:mm').format(message.dateSent),
-            style: Theme.of(context).textTheme.caption,
-          ),
-          const SizedBox(width: 15),
-          Flexible(
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Theme.of(context).backgroundColor,
-                  borderRadius: BorderRadius.circular(10)),
-              child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-                  child: Text(
-                    message.content,
-                  )),
+    return FractionallySizedBox(
+      widthFactor: 0.7,
+      alignment: Alignment.centerRight,
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              DateFormat('hh:mm').format(message.dateSent),
+              style: Theme.of(context).textTheme.caption,
             ),
-          ),
-        ]);
+            const SizedBox(width: 15),
+            Flexible(
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Theme.of(context).backgroundColor,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 14),
+                    child: Text(
+                      message.content,
+                    )),
+              ),
+            ),
+          ]),
+    );
   }
 }
 
 class ReceivedMessageBubble extends StatelessWidget {
   final Message message;
-  ReceivedMessageBubble({required this.message, Key? key}) : super(key: key);
+  const ReceivedMessageBubble({required this.message, Key? key})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     final users = context.read<UsersBloc>().state.allUsers;
@@ -75,34 +79,39 @@ class ReceivedMessageBubble extends StatelessWidget {
     if (messageSender.imageUrl == null) {
       throw Exception("did not find user image");
     }
-    return Row(children: [
-      Container(
-        width: 50,
-        height: 50,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            image: DecorationImage(
-              image:
-                  CachedNetworkImageProvider(messageSender.imageUrl as String),
-            )),
-      ),
-      const SizedBox(width: 10),
-      Flexible(
-        child: Container(
+    return FractionallySizedBox(
+      widthFactor: 0.9,
+      alignment: Alignment.centerLeft,
+      child: Row(children: [
+        Container(
+          width: 50,
+          height: 50,
           decoration: BoxDecoration(
-              color: Theme.of(context).backgroundColor,
-              borderRadius: BorderRadius.circular(10)),
-          child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-              child: Text(message.content)),
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(
+                image: CachedNetworkImageProvider(
+                    messageSender.imageUrl as String),
+              )),
         ),
-      ),
-      const SizedBox(width: 15),
-      Text(
-        DateFormat('hh:mm').format(message.dateSent),
-        style: Theme.of(context).textTheme.caption,
-      ),
-    ]);
+        const SizedBox(width: 10),
+        Flexible(
+          child: Container(
+            decoration: BoxDecoration(
+                color: Theme.of(context).backgroundColor,
+                borderRadius: BorderRadius.circular(10)),
+            child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                child: Text(message.content)),
+          ),
+        ),
+        const SizedBox(width: 15),
+        Text(
+          DateFormat('hh:mm').format(message.dateSent),
+          style: Theme.of(context).textTheme.caption,
+        ),
+      ]),
+    );
   }
 }
 

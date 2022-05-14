@@ -9,7 +9,7 @@ class RoomListBloc extends Bloc<RoomListEvent, RoomListState> {
   final WebsocketManager _websocketManager;
   RoomListBloc(this._websocketManager) : super(const RoomListState()) {
     on<UpdateRoomListEvent>(_updateRoomList);
-    _websocketManager.socketsConnected$.stream.listen((connected) {
+    _websocketManager.socketsConnected$.listen((connected) {
       if (connected) {
         _websocketManager.querySocket.onAny(_handleQuerySocketEvent);
       }

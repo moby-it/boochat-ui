@@ -16,7 +16,9 @@ class WebsocketManager {
   get isConnecting => _status == WebsocketStatus.connecting;
   get isDisconnected => _status == WebsocketStatus.disconnected;
   get isConnected => _status == WebsocketStatus.connected;
-  StreamController<bool> socketsConnected$ = StreamController<bool>.broadcast();
+  final StreamController<bool> _socketsConnected$ =
+      StreamController<bool>.broadcast();
+  get socketsConnected$ => _socketsConnected$.stream;
   WebsocketManager();
   Future<void> connect(String token) async {
     _status = WebsocketStatus.connecting;
@@ -56,7 +58,7 @@ class WebsocketManager {
 
   _checkIfSocketsReady() {
     if (_commandSocketConnected && _querySocketConnected) {
-      socketsConnected$.sink.add(true);
+      _socketsConnected$.sink.add(true);
       _status = WebsocketStatus.connected;
     }
   }

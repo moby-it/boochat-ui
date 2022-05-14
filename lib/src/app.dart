@@ -1,5 +1,4 @@
 import 'package:boochat_ui/src/active-room/bloc/active_room_bloc.dart';
-import 'package:boochat_ui/src/common/notifications_bloc/notifications_bloc.dart';
 import 'package:boochat_ui/src/room-list/bloc/room_list_bloc.dart';
 import 'package:boochat_ui/src/routes/mobile_routes.dart';
 import 'package:flutter/foundation.dart';
@@ -51,11 +50,8 @@ class App extends StatelessWidget {
                     lazy: false,
                     create: ((context) => RoomListBloc(websocketManager))),
                 BlocProvider(
-                    create: (context) => ActiveRoomBloc(websocketManager)),
-                BlocProvider(
                     lazy: false,
-                    create: (context) => NotificationsBloc(
-                        websocketManager, context.read<AuthBloc>()))
+                    create: (context) => ActiveRoomBloc(websocketManager)),
               ],
               child: BlocBuilder<WebsocketBloc, WebsocketState>(
                   builder: (context, state) {
@@ -63,16 +59,7 @@ class App extends StatelessWidget {
                   return BlocBuilder<UsersBloc, UsersState>(
                       builder: (context, state) => state.allUsers.isEmpty
                           ? const Text("fetching users")
-                          : FutureBuilder(
-                              future: context
-                                  .read<NotificationsBloc>()
-                                  .initializeNotificationSettings(),
-                              builder:
-                                  (context, AsyncSnapshot<bool> snapshot) =>
-                                      snapshot.hasData
-                                          ? Container(child: navigator)
-                                          : const Text(
-                                              "initializing notifications")));
+                          : Container(child: navigator));
                 } else {
                   return const Text("connecting...");
                 }
