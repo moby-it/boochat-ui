@@ -1,4 +1,6 @@
-export 'package:boochat_ui/src/data/room_item.dart';
-export 'package:boochat_ui/src/data/room.dart';
-export 'package:boochat_ui/src/data/user.dart';
-export 'package:boochat_ui/src/data/notification.dart';
+export './room_item.dart';
+export './room.dart';
+export './user.dart';
+export './notification.dart';
+export './websocket_manager.dart';
+export './websocket_events.dart';

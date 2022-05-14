@@ -1,9 +1,8 @@
 import 'package:boochat_ui/src/active-room/bloc/active_room_events.dart';
 import 'package:boochat_ui/src/active-room/bloc/active_room_state.dart';
-import 'package:boochat_ui/src/data/room_item.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../common/common.dart';
+import '../../data/data.dart';
 
 class ActiveRoomBloc extends Bloc<ActiveRoomEvent, ActiveRoomState> {
   final WebsocketManager _websocketManager;
@@ -13,7 +12,7 @@ class ActiveRoomBloc extends Bloc<ActiveRoomEvent, ActiveRoomState> {
     _websocketManager.socketsConnected$.listen((connected) {
       if (connected) {
         _websocketManager.querySocket
-            .on(WebsocketEvent.newRoomItem, _handleNewRoomItem);
+            .on(WebsocketEvents.newRoomItem, _handleNewRoomItem);
       }
     });
   }
@@ -28,7 +27,7 @@ class ActiveRoomBloc extends Bloc<ActiveRoomEvent, ActiveRoomState> {
       room.items.add(event.roomItem);
       emit(ActiveRoomSelectedState(room));
     } else if (event is SendMessageEvent) {
-      _websocketManager.commandSocket.emit(WebsocketEvent.sendMessage, {
+      _websocketManager.commandSocket.emit(WebsocketEvents.sendMessage, {
         'content': event.content,
         'roomId': (state as ActiveRoomSelectedState).room.id
       });

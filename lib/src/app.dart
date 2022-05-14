@@ -37,33 +37,45 @@ class App extends StatelessWidget {
               providers: [
                 BlocProvider(
                   lazy: false,
-                  create: (_) => AuthBloc(authRepository)..add(Login()),
+                  create: (_) => AuthBloc(authRepository)
+                    ..add(
+                      Login(),
+                    ),
                 ),
                 BlocProvider(
-                    lazy: false,
-                    create: (context) => WebsocketBloc(
-                        websocketManager, context.read<AuthBloc>())),
+                  create: (_) => UsersBloc(websocketManager),
+                  lazy: false,
+                ),
                 BlocProvider(
-                    lazy: false,
-                    create: (context) => UsersBloc(websocketManager)),
+                  create: ((_) => RoomListBloc(websocketManager)),
+                  lazy: false,
+                ),
                 BlocProvider(
-                    lazy: false,
-                    create: ((context) => RoomListBloc(websocketManager))),
-                BlocProvider(
-                    lazy: false,
-                    create: (context) => ActiveRoomBloc(websocketManager)),
+                  create: (_) => ActiveRoomBloc(websocketManager),
+                ),
               ],
-              child: BlocBuilder<WebsocketBloc, WebsocketState>(
-                  builder: (context, state) {
-                if (state is WebSocketConnectedState) {
-                  return BlocBuilder<UsersBloc, UsersState>(
-                      builder: (context, state) => state.allUsers.isEmpty
-                          ? const Text("fetching users")
-                          : Container(child: navigator));
-                } else {
-                  return const Text("connecting...");
-                }
-              }),
+              child: MultiBlocListener(
+                listeners: [
+                  BlocListener<AuthBloc, AuthState>(
+                      listener: (context, state) async {
+                    if (state.status == AuthStatus.authenticated) {
+                      await websocketManager.connect(state.token);
+                    }
+                  })
+                ],
+                child: StreamBuilder(
+                    stream: websocketManager.socketsConnected$,
+                    builder: (context, AsyncSnapshot<bool> snapshot) {
+                      if (snapshot.hasData) {
+                        return BlocBuilder<UsersBloc, UsersState>(
+                            builder: (context, state) => state.allUsers.isEmpty
+                                ? const Text("fetching users")
+                                : Container(child: navigator));
+                      } else {
+                        return const Text("connecting...");
+                      }
+                    }),
+              ),
             ),
           )));
         });

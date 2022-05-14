@@ -1,9 +1,8 @@
-import 'package:boochat_ui/src/common/common.dart';
-import 'package:boochat_ui/src/data/room.dart';
-import 'package:boochat_ui/src/data/room_item.dart';
 import 'package:boochat_ui/src/room-list/bloc/room_list_events.dart';
 import 'package:boochat_ui/src/room-list/bloc/room_list_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../data/data.dart';
 
 class RoomListBloc extends Bloc<RoomListEvent, RoomListState> {
   final WebsocketManager _websocketManager;
@@ -20,15 +19,15 @@ class RoomListBloc extends Bloc<RoomListEvent, RoomListState> {
   }
 
   _handleQuerySocketEvent(String event, dynamic data) {
-    if (event == WebsocketEvent.roomList) {
+    if (event == WebsocketEvents.roomList) {
       final List<Room> rooms =
           List.from(data).map((json) => Room.fromJson(json)).toList();
       add(UpdateRoomListEvent(rooms));
-    } else if (event == WebsocketEvent.roomCreated) {
+    } else if (event == WebsocketEvents.roomCreated) {
       final room = Room.fromJson(data);
       state.rooms.insert(0, room);
       add(UpdateRoomListEvent(state.rooms));
-    } else if (event == WebsocketEvent.newRoomItem) {
+    } else if (event == WebsocketEvents.newRoomItem) {
       final roomItem = RoomItem.fromJson(data);
       final rooms = List.of(state.rooms);
       final room = rooms.firstWhere((room) => room.id == roomItem.roomId);

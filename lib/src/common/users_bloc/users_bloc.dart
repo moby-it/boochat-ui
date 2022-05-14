@@ -26,11 +26,11 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
   }
 
   _handleQuerySocketEvent(String event, dynamic data) {
-    if (event == WebsocketEvent.allUsers) {
+    if (event == WebsocketEvents.allUsers) {
       final List<User> users =
           List.from(data).map((json) => User.fromJson(json)).toList();
       add(UpdateAllUsersEvent(users));
-    } else if (event == WebsocketEvent.activeUserList) {
+    } else if (event == WebsocketEvents.activeUserList) {
       final List<String> activeUserIds = List.from(data);
       add(UpdateActiveUsersEvent(activeUserIds));
     }
