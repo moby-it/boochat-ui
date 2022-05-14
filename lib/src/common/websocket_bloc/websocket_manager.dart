@@ -35,6 +35,10 @@ class WebsocketManager {
   Future<Socket> _connectTo(String uri, String token) async {
     if (!kIsWeb) {
       final registrationToken = await FirebaseMessaging.instance.getToken();
+      print("Registration token: $registrationToken");
+      FirebaseMessaging.instance.onTokenRefresh.listen((token) {
+        print("token refreshed: $token");
+      });
       return io(
           uri,
           OptionBuilder().setQuery({

@@ -35,24 +35,36 @@ class RoomSlot extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                CachedNetworkImage(
-                  imageUrl: Room.configureRoomImageUrl(user, allUsers, room),
-                  height: 50,
+                Container(
                   width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                        image: CachedNetworkImageProvider(
+                          Room.configureRoomImageUrl(user, allUsers, room),
+                        ),
+                      )),
                 ),
                 const SizedBox(
                   width: 10,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(Room.configureRoomName(user, allUsers, room),
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w700, color: Colors.white)),
-                    Text(room.items.isNotEmpty
-                        ? room.items.last.content
-                        : "Room Just Created!")
-                  ],
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(Room.configureRoomName(user, allUsers, room),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white)),
+                      Text(
+                        room.items.isNotEmpty
+                            ? room.items.last.content
+                            : "Room Just Created!",
+                        overflow: TextOverflow.ellipsis,
+                      )
+                    ],
+                  ),
                 )
               ],
             ),

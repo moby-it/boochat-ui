@@ -47,7 +47,7 @@ class ActiveRoom extends StatelessWidget {
                   final Room room = snapshot.data as Room;
                   final items = room.items.reversed.toList();
                   return Padding(
-                    padding: const EdgeInsets.fromLTRB(32, 0, 32, 24),
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
                     child: Column(
                       children: <Widget>[
                         Expanded(
