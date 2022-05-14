@@ -1,20 +1,28 @@
 {
   "project_info": {
-    "project_number": "1069407691503",
-    "project_id": "boochat-345922",
-    "storage_bucket": "boochat-345922.appspot.com"
+    "project_number": "393892859271",
+    "project_id": "boochat-beta",
+    "storage_bucket": "boochat-beta.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1069407691503:android:fb26ac8b817b42c589b11a",
+        "mobilesdk_app_id": "1:393892859271:android:7ee4dfb010356f9b43d722",
         "android_client_info": {
           "package_name": "com.moby_it.boochat_ui"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1069407691503-49139s1un1iv43i4aohorkub95kikhis.apps.googleusercontent.com",
+          "client_id": "393892859271-h2n3mve188u16i7oeq9jo3mmti8lhii7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.moby_it.boochat_ui",
+            "certificate_hash": "4905d0ff887cc1d8e31be599c08848b09437e189"
+          }
+        },
+        {
+          "client_id": "393892859271-oh22l586jd9o710l6hehsi980rqf86l9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.moby_it.boochat_ui",
@@ -22,28 +30,20 @@
           }
         },
         {
-          "client_id": "1069407691503-f42i3qln7d5jdsei9ubm5b1ltmvn837m.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.moby_it.boochat_ui",
-            "certificate_hash": "bc77ac96702e2c8b675bf6f01905aa29d56dcffd"
-          }
-        },
-        {
-          "client_id": "1069407691503-dvp4legghvnr64io35245i0ncb2b2epe.apps.googleusercontent.com",
+          "client_id": "393892859271-jhogmc2vistffph91uk0fuek1k8c5mgm.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA_sUpqnfhdpuSBmV7dZ-uJLi4GsRqm9HA"
+          "current_key": "AIzaSyBSTtCxuw4kPwMlGAw8bQ6OarOaHXkMd5k"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1069407691503-dvp4legghvnr64io35245i0ncb2b2epe.apps.googleusercontent.com",
+              "client_id": "393892859271-jhogmc2vistffph91uk0fuek1k8c5mgm.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
