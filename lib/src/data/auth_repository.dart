@@ -7,9 +7,8 @@ import 'package:http/http.dart' as http;
 import 'data.dart';
 
 class AuthRepository {
-  final _googleSignIn = GoogleSignIn(scopes: [
-    'profile',
-  ], clientId: dotenv.env['CLIENT_ID']);
+  final _googleSignIn = GoogleSignIn(
+      scopes: ['profile', 'email'], clientId: dotenv.env['CLIENT_ID']);
 
   final _commandUri = dotenv.env['COMMAND_URI'];
 
@@ -39,6 +38,7 @@ class AuthRepository {
       return User(
           id: account.id,
           imageUrl: account.photoUrl,
+          email: account.email,
           name: account.displayName);
     } catch (error) {
       return null;

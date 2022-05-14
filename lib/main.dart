@@ -13,6 +13,7 @@ import 'firebase_options.dart';
 Future main() async {
   await dotenv.load(fileName: getEnvFilename());
   await Firebase.initializeApp(
+    name: "boochat-beta",
     options: DefaultFirebaseOptions.currentPlatform,
   );
   // Pass all uncaught errors from the framework to Crashlytics.
