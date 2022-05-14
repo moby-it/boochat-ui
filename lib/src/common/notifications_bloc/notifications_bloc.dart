@@ -26,11 +26,11 @@ class NotificationsBloc extends Bloc<NotificationEvent, NotificationsState> {
           } else {
             roomItem = models.Announcement.fromJson(data);
           }
-          // if (roomItem is models.Message) {
-          //   if (roomItem.sender.id == _authBloc.state.user.id) {
-          //     return;
-          //   }
-          // }
+          if (roomItem is models.Message) {
+            if (roomItem.sender.id == _authBloc.state.user.id) {
+              return;
+            }
+          }
           final notification = models.Notification(
               content: roomItem.content,
               title: "New Message",
