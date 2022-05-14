@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
@@ -16,10 +18,10 @@ class WebsocketManager {
   get isConnected => _status == WebsocketStatus.connected;
   StreamController<bool> socketsConnected$ = StreamController<bool>.broadcast();
   WebsocketManager();
-  void connect(String token) {
+  Future<void> connect(String token) async {
     _status = WebsocketStatus.connecting;
-    commandSocket = _connectTo("${dotenv.env['COMMAND_URI']}", token);
-    querySocket = _connectTo("${dotenv.env['QUERY_URI']}", token);
+    commandSocket = await _connectTo("${dotenv.env['COMMAND_URI']}", token);
+    querySocket = await _connectTo("${dotenv.env['QUERY_URI']}", token);
     querySocket.onConnect((data) {
       _querySocketConnected = true;
       _checkIfSocketsReady();
@@ -30,10 +32,23 @@ class WebsocketManager {
     });
   }
 
-  Socket _connectTo(String uri, String token) => io(
-      uri,
-      OptionBuilder()
-          .setQuery({'token': token}).setTransports(['websocket']).build());
+  Future<Socket> _connectTo(String uri, String token) async {
+    if (!kIsWeb) {
+      final registrationToken = await FirebaseMessaging.instance.getToken();
+      return io(
+          uri,
+          OptionBuilder().setQuery({
+            'token': token,
+            'registrationToken': registrationToken
+          }).setTransports(['websocket']).build());
+    } else {
+      return io(
+          uri,
+          OptionBuilder().setQuery({
+            'token': token,
+          }).setTransports(['websocket']).build());
+    }
+  }
 
   _checkIfSocketsReady() {
     if (_commandSocketConnected && _querySocketConnected) {

@@ -54,7 +54,7 @@ class NotificationsBloc extends Bloc<NotificationEvent, NotificationsState> {
   Future<bool> initializeNotificationSettings() async {
     try {
       const AndroidInitializationSettings initializationSettingsAndroid =
-          AndroidInitializationSettings("app_icon");
+          AndroidInitializationSettings("ic_notification");
       const initializationSettings =
           InitializationSettings(android: initializationSettingsAndroid);
       await _flutterLocalNotificationsPlugin.initialize(initializationSettings,
