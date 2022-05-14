@@ -27,6 +27,7 @@ class _MessageInputState extends State<MessageInput> {
                   controller.clear();
                 },
                 decoration: InputDecoration(
+                  hoverColor: Theme.of(context).scaffoldBackgroundColor,
                   border: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(10)),
