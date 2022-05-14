@@ -4,7 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 
-import '../../data/data.dart';
+import 'data.dart';
 
 class AuthRepository {
   final _googleSignIn = GoogleSignIn(scopes: [

@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDPCb47AW8Du1jG3vEgpe3YbeeN93fK6bE',
-    appId: '1:1069407691503:web:21eaa829442a614189b11a',
-    messagingSenderId: '1069407691503',
-    projectId: 'boochat-345922',
-    authDomain: 'boochat-345922.firebaseapp.com',
-    storageBucket: 'boochat-345922.appspot.com',
-    measurementId: 'G-S836S66J2Y',
+    apiKey: 'AIzaSyBGq7lUOvfYXbTLIlqfLLjfjY9Jizk_oR0',
+    appId: '1:393892859271:web:418336905384be6843d722',
+    messagingSenderId: '393892859271',
+    projectId: 'boochat-beta',
+    authDomain: 'boochat-beta.firebaseapp.com',
+    storageBucket: 'boochat-beta.appspot.com',
+    measurementId: 'G-BB94RVW5WE',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA_sUpqnfhdpuSBmV7dZ-uJLi4GsRqm9HA',
-    appId: '1:1069407691503:android:fb26ac8b817b42c589b11a',
-    messagingSenderId: '1069407691503',
-    projectId: 'boochat-345922',
-    storageBucket: 'boochat-345922.appspot.com',
+    apiKey: 'AIzaSyBSTtCxuw4kPwMlGAw8bQ6OarOaHXkMd5k',
+    appId: '1:393892859271:android:7ee4dfb010356f9b43d722',
+    messagingSenderId: '393892859271',
+    projectId: 'boochat-beta',
+    storageBucket: 'boochat-beta.appspot.com',
   );
 }
