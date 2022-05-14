@@ -1,5 +1,6 @@
 import 'dart:convert' show json;
 
+import 'package:boochat_ui/src/common/auth_bloc/auth_state.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
@@ -20,10 +21,10 @@ class AuthRepository {
     final response =
         await http.post(Uri.parse('$commandUri/auth'), body: user.toJson());
     if (response.statusCode == 201) {
-      final authResponse = AuthResponse.fromJson(json.decode(response.body));
+      final authResponse = AuthResponse.success(json.decode(response.body));
       return authResponse;
     } else {
-      throw Exception('failed to login');
+      return AuthResponse.failed();
     }
   }
 
@@ -49,7 +50,13 @@ class AuthRepository {
 class AuthResponse {
   late String token;
   late User user;
-  AuthResponse.fromJson(Map<String, dynamic> json)
+  late bool hasSucceded;
+  AuthResponse.success(Map<String, dynamic> json)
       : token = json['token'],
-        user = User.fromJson(json['user']);
+        user = User.fromJson(json['user']),
+        hasSucceded = true;
+  AuthResponse.failed()
+      : token = '',
+        user = const User.empty(),
+        hasSucceded = false;
 }

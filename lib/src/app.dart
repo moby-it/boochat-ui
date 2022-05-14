@@ -56,25 +56,34 @@ class App extends StatelessWidget {
               ],
               child: MultiBlocListener(
                 listeners: [
-                  BlocListener<AuthBloc, AuthState>(
-                      listener: (context, state) async {
+                  BlocListener<AuthBloc, AuthState>(listener: (context, state) {
                     if (state.status == AuthStatus.authenticated) {
-                      await websocketManager.connect(state.token);
+                      websocketManager.connect(state.token);
                     }
                   })
                 ],
-                child: StreamBuilder(
-                    stream: websocketManager.socketsConnected$,
-                    builder: (context, AsyncSnapshot<bool> snapshot) {
-                      if (snapshot.hasData) {
-                        return BlocBuilder<UsersBloc, UsersState>(
-                            builder: (context, state) => state.allUsers.isEmpty
-                                ? const Text("fetching users")
-                                : Container(child: navigator));
-                      } else {
-                        return const Text("connecting...");
-                      }
-                    }),
+                child: BlocBuilder<AuthBloc, AuthState>(
+                  builder: (context, state) {
+                    final status = state.status;
+                    if (status != AuthStatus.authenticated) {
+                      return Text(status.name);
+                    } else {
+                      return StreamBuilder(
+                          stream: websocketManager.socketsConnected$,
+                          builder: (context, AsyncSnapshot<bool> snapshot) {
+                            if (snapshot.hasData) {
+                              return BlocBuilder<UsersBloc, UsersState>(
+                                  builder: (context, state) =>
+                                      state.allUsers.isEmpty
+                                          ? const Text("fetching users")
+                                          : Container(child: navigator));
+                            } else {
+                              return const Text("connecting...");
+                            }
+                          });
+                    }
+                  },
+                ),
               ),
             ),
           )));

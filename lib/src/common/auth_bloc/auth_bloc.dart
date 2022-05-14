@@ -12,7 +12,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   void _onLogin(Login event, Emitter<AuthState> emit) async {
     final response = await _authRepository.login();
-    emit(AuthState.authenticated(response.user, response.token));
+    if (response.hasSucceded) {
+      emit(AuthState.authenticated(response.user, response.token));
+    } else {
+      emit(const AuthState.unauthenicated());
+    }
   }
 
   @override

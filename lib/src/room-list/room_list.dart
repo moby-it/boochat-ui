@@ -18,7 +18,7 @@ class RoomListWrapper extends StatelessWidget {
         if (state.hasData) {
           return RoomList(rooms: state.rooms);
         } else {
-          return const Text('rooms loading');
+          return const Text('No rooms');
         }
       }),
     );
