@@ -23,8 +23,10 @@ class _MessageInputState extends State<MessageInput> {
                 controller: controller,
                 textInputAction: TextInputAction.go,
                 onFieldSubmitted: (String value) {
-                  context.read<ActiveRoomBloc>().add(SendMessageEvent(value));
-                  controller.clear();
+                  if (value.isNotEmpty) {
+                    context.read<ActiveRoomBloc>().add(SendMessageEvent(value));
+                    controller.clear();
+                  }
                 },
                 decoration: InputDecoration(
                   hoverColor: Theme.of(context).scaffoldBackgroundColor,

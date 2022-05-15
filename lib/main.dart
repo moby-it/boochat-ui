@@ -3,12 +3,14 @@ import 'dart:io';
 import 'package:boochat_ui/src/app.dart';
 import 'package:boochat_ui/src/common/common.dart';
 import 'package:boochat_ui/src/data/room_repository.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:url_strategy/url_strategy.dart';
+
 import 'firebase_options.dart';
 
 Future main() async {
@@ -20,6 +22,9 @@ Future main() async {
   // Pass all uncaught errors from the framework to Crashlytics.
   if (kReleaseMode) {
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  }
+  if (!kIsWeb) {
+    await setAndroidNotificationChannel();
   }
   setPathUrlStrategy();
   runApp(App(
@@ -36,4 +41,18 @@ String getEnvFilename() {
     if (Platform.isAndroid) return "android.env";
   }
   return ".env";
+}
+
+Future<void> setAndroidNotificationChannel() async {
+  final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  const channel = AndroidNotificationChannel(
+      'fcm_notification_channel', // id
+      'Cloud Messaging Notification Channel', // title
+      description: 'Getting background messages from Firebase.', // description
+      playSound: true,
+      sound: RawResourceAndroidNotificationSound("notification"));
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
 }
