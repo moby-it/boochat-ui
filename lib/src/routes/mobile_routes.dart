@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-import '../active-room/active_room.dart';
-import '../room-list/room_list.dart';
+import '../active_room/active_room.dart';
+import '../room_list/room_list.dart';
 
 Map<String, WidgetBuilder> mobileRoutes() {
   return Map.from({

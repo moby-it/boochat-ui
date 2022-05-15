@@ -1,5 +1,5 @@
-import 'package:boochat_ui/src/active-room/active_room.dart';
-import 'package:boochat_ui/src/room-list/room_list.dart';
+import 'package:boochat_ui/src/active_room/active_room.dart';
+import 'package:boochat_ui/src/room_list/room_list.dart';
 import 'package:boochat_ui/src/web_screens/web_sidebar.dart';
 import 'package:flutter/material.dart';
 

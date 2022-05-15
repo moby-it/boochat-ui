@@ -1,5 +1,5 @@
-import 'package:boochat_ui/src/active-room/bloc/active_room_events.dart';
-import 'package:boochat_ui/src/active-room/bloc/active_room_state.dart';
+import 'package:boochat_ui/src/active_room/bloc/active_room_events.dart';
+import 'package:boochat_ui/src/active_room/bloc/active_room_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/data.dart';

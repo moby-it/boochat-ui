@@ -1,5 +1,5 @@
-import 'package:boochat_ui/src/room-list/bloc/room_list_events.dart';
-import 'package:boochat_ui/src/room-list/bloc/room_list_state.dart';
+import 'package:boochat_ui/src/room_list/bloc/room_list_events.dart';
+import 'package:boochat_ui/src/room_list/bloc/room_list_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/data.dart';
 
