@@ -1,11 +1,10 @@
 import 'dart:convert' show json;
 
-import 'package:boochat_ui/src/common/auth_bloc/auth_state.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 
-import 'data.dart';
+import 'user.dart';
 
 class AuthRepository {
   final _googleSignIn = GoogleSignIn(
