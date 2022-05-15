@@ -8,6 +8,12 @@ abstract class ActiveRoomEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class FetchingActiveRoomEvent extends ActiveRoomEvent {
+  const FetchingActiveRoomEvent();
+  @override
+  List<Object?> get props => [];
+}
+
 class SelectActiveRoomEvent extends ActiveRoomEvent {
   final Room room;
   const SelectActiveRoomEvent(this.room);

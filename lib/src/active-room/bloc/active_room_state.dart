@@ -12,3 +12,7 @@ class ActiveRoomSelectedState extends ActiveRoomState {
   final Room room;
   const ActiveRoomSelectedState(this.room);
 }
+
+class FetchingActiveRoomState extends ActiveRoomState {
+  const FetchingActiveRoomState();
+}

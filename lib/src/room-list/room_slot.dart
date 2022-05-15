@@ -1,6 +1,7 @@
 import 'package:boochat_ui/src/active-room/active_room.dart';
 import 'package:boochat_ui/src/active-room/bloc/active_room_bloc.dart';
 import 'package:boochat_ui/src/active-room/bloc/active_room_events.dart';
+import 'package:boochat_ui/src/active-room/bloc/active_room_state.dart';
 import 'package:boochat_ui/src/common/common.dart';
 import 'package:boochat_ui/src/data/room.dart';
 import 'package:boochat_ui/src/data/room_repository.dart';
@@ -25,6 +26,7 @@ class RoomSlot extends StatelessWidget {
           if (!kIsWeb) {
             Navigator.pushNamed(context, ActiveRoom.routeName);
           }
+          context.read<ActiveRoomBloc>().add(const FetchingActiveRoomEvent());
           final populatedRoom =
               await context.read<RoomRepository>().fetchRoom(room.id, token);
           activeRoomBloc.add(SelectActiveRoomEvent(populatedRoom));

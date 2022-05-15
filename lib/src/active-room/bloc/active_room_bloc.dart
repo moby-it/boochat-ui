@@ -27,6 +27,8 @@ class ActiveRoomBloc extends Bloc<ActiveRoomEvent, ActiveRoomState> {
         'content': event.content,
         'roomId': (state as ActiveRoomSelectedState).room.id
       });
+    } else if (event is FetchingActiveRoomEvent) {
+      emit(const FetchingActiveRoomState());
     }
   }
 

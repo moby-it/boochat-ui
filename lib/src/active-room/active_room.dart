@@ -26,6 +26,8 @@ class ActiveRoom extends StatelessWidget {
       builder: (context, state) {
         if (state is NoActiveRoomSelectedState) {
           return const Text("no active noom selected");
+        } else if (state is FetchingActiveRoomState) {
+          return const Text("fetching room details...");
         } else {
           final room = (state as ActiveRoomSelectedState).room;
           final items = room.items.reversed.toList();
