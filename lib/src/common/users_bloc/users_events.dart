@@ -1,4 +1,4 @@
-import 'package:boochat_ui/src/data/user.dart';
+import 'package:boochat_ui/src/data/data.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class UsersEvent extends Equatable {

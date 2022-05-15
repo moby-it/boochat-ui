@@ -18,7 +18,7 @@ Future main() async {
     // name: "boochat-beta",
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // Pass all uncaught errors from the framework to Crashlytics.
+  // Pass all uncaught errors from the framework to Crashlytics and initialize firebase channel.
   if (!kIsWeb) {
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
     await setAndroidNotificationChannel();

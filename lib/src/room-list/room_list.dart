@@ -1,4 +1,3 @@
-import 'package:boochat_ui/src/data/room.dart';
 import 'package:boochat_ui/src/room-list/bloc/room_list_bloc.dart';
 import 'package:boochat_ui/src/room-list/bloc/room_list_state.dart';
 import 'package:boochat_ui/src/room-list/room_slot.dart';

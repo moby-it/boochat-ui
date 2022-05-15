@@ -1,4 +1,4 @@
-import 'package:boochat_ui/src/data/room.dart';
+import 'package:boochat_ui/src/data/data.dart';
 
 class RoomListState {
   final List<Room> rooms;

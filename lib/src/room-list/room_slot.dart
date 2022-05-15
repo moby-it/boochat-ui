@@ -1,10 +1,8 @@
 import 'package:boochat_ui/src/active-room/active_room.dart';
 import 'package:boochat_ui/src/active-room/bloc/active_room_bloc.dart';
 import 'package:boochat_ui/src/active-room/bloc/active_room_events.dart';
-import 'package:boochat_ui/src/active-room/bloc/active_room_state.dart';
 import 'package:boochat_ui/src/common/common.dart';
-import 'package:boochat_ui/src/data/room.dart';
-import 'package:boochat_ui/src/data/room_repository.dart';
+import 'package:boochat_ui/src/data/data.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

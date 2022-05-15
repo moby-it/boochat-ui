@@ -1,4 +1,4 @@
-import 'package:boochat_ui/src/data/user.dart';
+import 'package:boochat_ui/src/data/data.dart';
 
 class UsersState {
   final List<User> allUsers;
