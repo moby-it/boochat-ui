@@ -1,3 +1,4 @@
+import 'package:boochat_ui/src/create_room/create_room.dart';
 import 'package:boochat_ui/src/room_list/bloc/room_list_bloc.dart';
 import 'package:boochat_ui/src/room_list/bloc/room_list_state.dart';
 import 'package:boochat_ui/src/room_list/room_slot.dart';
@@ -25,7 +26,9 @@ class RoomListWrapper extends StatelessWidget {
                         color: Theme.of(context).scaffoldBackgroundColor,
                         shape: BoxShape.circle),
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () async {
+                        Navigator.pushNamed(context, CreateRoom.routeName);
+                      },
                       child: const Icon(Icons.create),
                     ),
                   ),
