@@ -1,13 +1,11 @@
 import 'package:boochat_ui/src/active_room/bloc/active_room_bloc.dart';
 import 'package:boochat_ui/src/room_list/bloc/room_list_bloc.dart';
-import 'package:boochat_ui/src/routes/mobile_routes.dart';
-import 'package:flutter/foundation.dart';
+import 'package:boochat_ui/src/routes/route_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'common/common.dart';
 import 'data/data.dart';
-import 'routes/web_routes.dart';
 import 'theme.dart';
 
 class App extends StatelessWidget {
@@ -28,7 +26,7 @@ class App extends StatelessWidget {
         // theme: BoochatTheme.darkTheme,
         title: 'Boochat UI',
         initialRoute: '/',
-        routes: kIsWeb ? webRoutes() : mobileRoutes(),
+        onGenerateRoute: RouteGenerator.generateRoute,
         builder: (context, navigator) {
           return Scaffold(
               body: SafeArea(
