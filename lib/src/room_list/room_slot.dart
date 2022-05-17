@@ -1,4 +1,3 @@
-import 'package:boochat_ui/src/active_room/active_room.dart';
 import 'package:boochat_ui/src/common/common.dart';
 import 'package:boochat_ui/src/data/data.dart';
 import 'package:boochat_ui/src/routes/route_names.dart';

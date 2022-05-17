@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../data/data.dart';
+import '../layout_widgets/bottom_navigation.dart';
 
 class RoomListWrapper extends StatelessWidget {
   const RoomListWrapper({Key? key}) : super(key: key);
@@ -43,6 +44,7 @@ class RoomListWrapper extends StatelessWidget {
           return const Text('No rooms');
         }
       }),
+      bottomNavigationBar: !kIsWeb ? const BottomNavigation() : null,
     );
   }
 }

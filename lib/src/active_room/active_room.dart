@@ -1,4 +1,5 @@
 import 'package:boochat_ui/src/active_room/bloc/active_room_events.dart';
+import 'package:boochat_ui/src/layout_widgets/bottom_navigation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,9 +37,9 @@ class ActiveRoom extends StatelessWidget {
         return BlocBuilder<ActiveRoomBloc, ActiveRoomState>(
           builder: (context, state) {
             if (state is NoActiveRoomSelectedState) {
-              return const Text("no active noom selected");
+              return const Scaffold(body: Text("no active noom selected"));
             } else if (state is FetchingActiveRoomState) {
-              return const Text("fetching room details...");
+              return const Scaffold(body: Text("fetching room details..."));
             } else {
               final room = (state as ActiveRoomSelectedState).room;
               final items = room.items.reversed.toList();

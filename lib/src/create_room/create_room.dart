@@ -1,3 +1,4 @@
+import 'package:boochat_ui/src/layout_widgets/bottom_navigation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,9 @@ class _CreateRoomState extends State<CreateRoom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: !kIsWeb ? AppBar(title: const Text("Create room")) : null,
-        body: const Text("not yet implemented"));
+      appBar: !kIsWeb ? AppBar(title: const Text("Create room")) : null,
+      body: const Text("not yet implemented"),
+      bottomNavigationBar: !kIsWeb ? const BottomNavigation() : null,
+    );
   }
 }
