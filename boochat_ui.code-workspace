@@ -51,6 +51,12 @@
 				"deviceId": "rkwgu4byvc4hbaqk"
 			},
 			{
+				"name": "Emulator Phone",
+				"request": "launch",
+				"type": "dart",
+				"deviceId": "emulator-5554"
+			},
+			{
 				"name": "Linux",
 				"request": "launch",
 				"type": "dart",
