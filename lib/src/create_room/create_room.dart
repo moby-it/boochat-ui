@@ -1,6 +1,8 @@
+import 'package:boochat_ui/src/common/route_provider.dart';
 import 'package:boochat_ui/src/layout_widgets/bottom_navigation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CreateRoom extends StatefulWidget {
   const CreateRoom({Key? key}) : super(key: key);

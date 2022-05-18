@@ -1,7 +1,9 @@
+import 'package:boochat_ui/src/common/route_provider.dart';
 import 'package:boochat_ui/src/create_room/create_room.dart';
 import 'package:boochat_ui/src/room_list/bloc/room_list_bloc.dart';
 import 'package:boochat_ui/src/room_list/bloc/room_list_state.dart';
 import 'package:boochat_ui/src/room_list/room_slot.dart';
+import 'package:boochat_ui/src/routes/route_names.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,6 +30,9 @@ class RoomListWrapper extends StatelessWidget {
                         shape: BoxShape.circle),
                     child: GestureDetector(
                       onTap: () async {
+                        context
+                            .read<RouteState>()
+                            .setActiveRoute(RouteNames.createRoom, 0);
                         Navigator.pushNamed(context, CreateRoom.routeName);
                       },
                       child: const Icon(Icons.create),

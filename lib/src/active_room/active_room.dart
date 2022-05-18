@@ -1,4 +1,5 @@
 import 'package:boochat_ui/src/active_room/bloc/active_room_events.dart';
+import 'package:boochat_ui/src/common/route_provider.dart';
 import 'package:boochat_ui/src/layout_widgets/bottom_navigation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -51,24 +52,30 @@ class ActiveRoom extends StatelessWidget {
                         title:
                             Text(Room.configureRoomName(user, allUsers, room)),
                       ),
-                body: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-                  child: Column(
-                    children: <Widget>[
-                      Expanded(
-                        child: ListView.separated(
-                            reverse: true,
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                            itemCount: items.length,
-                            itemBuilder: (context, index) =>
-                                RoomItemBubble(roomItem: items[index])),
-                      ),
-                      const SizedBox(height: 20),
-                      const MessageInput()
-                    ],
+                body: WillPopScope(
+                  onWillPop: () async {
+                    context.read<RouteState>().pop();
+                    return true;
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                    child: Column(
+                      children: <Widget>[
+                        Expanded(
+                          child: ListView.separated(
+                              reverse: true,
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                              itemCount: items.length,
+                              itemBuilder: (context, index) =>
+                                  RoomItemBubble(roomItem: items[index])),
+                        ),
+                        const SizedBox(height: 20),
+                        const MessageInput()
+                      ],
+                    ),
                   ),
                 ),
               );
