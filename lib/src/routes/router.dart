@@ -2,6 +2,7 @@ import 'package:boochat_ui/src/active_room/active_room.dart';
 import 'package:boochat_ui/src/create_room/create_room.dart';
 import 'package:boochat_ui/src/routes/route_names.dart';
 import 'package:flutter/material.dart';
+import 'package:quiver/core.dart';
 
 class WebRoutePath {
   String? selectedRoomId;
@@ -13,6 +14,16 @@ class WebRoutePath {
   WebRoutePath.createRoom()
       : isCreateRoomPage = true,
         selectedRoomId = null;
+  @override
+  bool operator ==(Object other) =>
+      other is WebRoutePath &&
+      other.selectedRoomId == selectedRoomId &&
+      other.isCreateRoomPage == isCreateRoomPage;
+  @override
+  int get hashCode => hash2(
+        selectedRoomId,
+        isCreateRoomPage,
+      );
 }
 
 class WebRouteInformationParser extends RouteInformationParser<WebRoutePath> {
@@ -20,7 +31,7 @@ class WebRouteInformationParser extends RouteInformationParser<WebRoutePath> {
   Future<WebRoutePath> parseRouteInformation(
       RouteInformation routeInformation) async {
     final uri = Uri.parse(routeInformation.location!);
-    if (uri.path.length >= 2) {
+    if (uri.pathSegments.length >= 2) {
       var roomId = uri.pathSegments[1];
       return WebRoutePath.activeRoom(roomId);
     } else {
@@ -116,4 +127,20 @@ class NoAnimatePageRouteBuilder extends PageRouteBuilder {
             transitionDuration: Duration.zero,
             reverseTransitionDuration: Duration.zero,
             settings: settings);
+}
+
+class RouteState extends ChangeNotifier {
+  final WebRouteInformationParser _parser;
+  WebRoutePath _path;
+  RouteState(this._parser) : _path = WebRoutePath.activeRoom(null);
+  set path(WebRoutePath path) {
+    if (_path == path) return;
+    _path = path;
+    notifyListeners();
+  }
+
+  Future<void> go(String route) async {
+    path =
+        await _parser.parseRouteInformation(RouteInformation(location: route));
+  }
 }

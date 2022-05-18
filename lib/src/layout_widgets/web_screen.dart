@@ -1,7 +1,6 @@
 import 'package:boochat_ui/src/meetups/meetups_wrapper.dart';
 import 'package:boochat_ui/src/room_list/room_list.dart';
-import 'package:boochat_ui/src/routes/route_generator.dart';
-import 'package:boochat_ui/src/routes/router/router.dart';
+import 'package:boochat_ui/src/routes/router.dart';
 import 'package:boochat_ui/src/theme.dart';
 import 'package:flutter/material.dart';
 

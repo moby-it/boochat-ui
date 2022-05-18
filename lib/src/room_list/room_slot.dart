@@ -1,7 +1,7 @@
 import 'package:boochat_ui/src/common/common.dart';
 import 'package:boochat_ui/src/data/data.dart';
 import 'package:boochat_ui/src/routes/route_names.dart';
-import 'package:boochat_ui/src/routes/router/router.dart';
+import 'package:boochat_ui/src/routes/router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,8 +16,11 @@ class RoomSlot extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(12),
       child: InkWell(
-        onTap: () =>
-            context.read<WebRouterDelegete>().handleRoomTapped(room.id),
+        onTap: () async {
+          final parser = WebRouteInformationParser();
+          await parser.parseRouteInformation(
+              RouteInformation(location: '/room/${room.id}'));
+        },
         customBorder:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: GestureDetector(
