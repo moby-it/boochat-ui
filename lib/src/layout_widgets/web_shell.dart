@@ -11,42 +11,23 @@ class WebShell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: BoochatTheme.darkTheme,
-        onGenerateRoute: (settings) => MaterialPageRoute(
-              builder: (context) {
-                return WebHomePage();
-              },
-              settings: settings,
-            ),
-        home: WebHomePage());
-  }
-}
-
-class WebHomePage extends StatelessWidget {
-  final _navigatorKey = GlobalKey(debugLabel: "web navigator");
-  WebHomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            const SizedBox(
-                width: 110, height: double.infinity, child: WebSidebar()),
-            const Expanded(flex: 2, child: RoomListWrapper()),
-            Expanded(
-                flex: 3,
-                child: Navigator(
-                  key: _navigatorKey,
-                  onGenerateRoute: RouteGenerator.generateWebRoute,
-                )),
-            const Expanded(flex: 3, child: MeetupListWrapper())
-            // ActiveRoom()
-          ],
+      theme: BoochatTheme.darkTheme,
+      onGenerateRoute: RouteGenerator.generateWebRoute,
+      builder: (context, navigator) => SafeArea(
+        child: Scaffold(
+          body: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              const SizedBox(
+                  width: 110, height: double.infinity, child: WebSidebar()),
+              const Expanded(flex: 2, child: RoomListWrapper()),
+              Expanded(flex: 3, child: Container(child: navigator)),
+              const Expanded(flex: 3, child: MeetupListWrapper())
+              // ActiveRoom()
+            ],
+          ),
         ),
       ),
     );
