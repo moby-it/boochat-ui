@@ -1,4 +1,4 @@
-import 'package:boochat_ui/src/layout_widgets/web_shell.dart';
+import 'package:boochat_ui/src/layout_widgets/web_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +9,6 @@ class BoochatApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return kIsWeb ? const WebShell() : const MobileShell();
+    return kIsWeb ? const WebScreen() : const MobileShell();
   }
 }

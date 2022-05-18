@@ -1,6 +1,5 @@
 import 'package:boochat_ui/src/active_room/bloc/active_room_events.dart';
 import 'package:boochat_ui/src/common/route_provider.dart';
-import 'package:boochat_ui/src/layout_widgets/bottom_navigation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +13,7 @@ import '../common/common.dart';
 import '../data/data.dart';
 
 class ActiveRoom extends StatelessWidget {
-  final String roomId;
+  final String? roomId;
   ActiveRoom({required this.roomId, Key? key}) : super(key: key);
   final queryUri = dotenv.env["QUERY_URI"];
 
@@ -29,8 +28,9 @@ class ActiveRoom extends StatelessWidget {
       throw Exception("cannot fetch room with no query uri");
     }
     activeRoomBloc.add(const FetchingActiveRoomEvent());
+    if (roomId == null) return const Text("Please select a room");
     return FutureBuilder(
-      future: roomRepository.fetchRoom(roomId, token),
+      future: roomRepository.fetchRoom(roomId!, token),
       builder: (context, AsyncSnapshot<Room> snapshot) {
         if (snapshot.hasData && !snapshot.hasError) {
           activeRoomBloc.add(SelectActiveRoomEvent(snapshot.data!));

@@ -1,18 +1,29 @@
 import 'package:boochat_ui/src/meetups/meetups_wrapper.dart';
 import 'package:boochat_ui/src/room_list/room_list.dart';
 import 'package:boochat_ui/src/routes/route_generator.dart';
+import 'package:boochat_ui/src/routes/router/router.dart';
 import 'package:boochat_ui/src/theme.dart';
 import 'package:flutter/material.dart';
 
 import './web_sidebar.dart';
 
-class WebShell extends StatelessWidget {
-  const WebShell({Key? key}) : super(key: key);
+class WebScreen extends StatefulWidget {
+  const WebScreen({Key? key}) : super(key: key);
+
+  @override
+  State<WebScreen> createState() => _WebScreenState();
+}
+
+class _WebScreenState extends State<WebScreen> {
+  final WebRouterDelegete _routerDelegate = WebRouterDelegete();
+  final WebRouteInformationParser _routeInformationParser =
+      WebRouteInformationParser();
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       theme: BoochatTheme.darkTheme,
-      onGenerateRoute: RouteGenerator.generateWebRoute,
+      routerDelegate: _routerDelegate,
+      routeInformationParser: _routeInformationParser,
       builder: (context, navigator) => SafeArea(
         child: Scaffold(
           body: Row(
