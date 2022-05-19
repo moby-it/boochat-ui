@@ -18,7 +18,9 @@ jobs:
         with:
           channel: 'stable'
       - name: Install packages
-        run: flutter pub get
+        run: |
+          flutter pub get
+          flutter build web --release
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -29,7 +31,5 @@ jobs:
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "." # App source code path
-          app_build_command: flutter build web --release
-          app_artifact_location: "build/web"
-          output_location: "build/web"
+          app_artifact_location: "build/web" 
           ###### End of Repository/Build Configurations ######
