@@ -1,4 +1,5 @@
 import 'package:boochat_ui/src/active_room/active_room.dart';
+import 'package:boochat_ui/src/common/common.dart';
 import 'package:boochat_ui/src/create_room/create_room.dart';
 import 'package:boochat_ui/src/layout_widgets/web_shell.dart';
 import 'package:boochat_ui/src/meetups/meetups_wrapper.dart';
@@ -10,15 +11,21 @@ import 'package:go_router/go_router.dart';
 import '../layout_widgets/error_screen.dart';
 
 final webRouter = GoRouter(
-    navigatorBuilder: ((context, state, child) => WebApp(
-            child: Scaffold(
-          body: child,
-        ))),
+    navigatorBuilder: ((context, state, child) {
+      setPageTitle("Boochat");
+
+      return WebShell(
+          child: Scaffold(
+        body: child,
+      ));
+    }),
     routes: [
       GoRoute(
           path: '/',
           name: 'home',
-          builder: (context, state) => const Text("No active Room selected"),
+          builder: (context, state) {
+            return const Text("No active Room selected");
+          },
           routes: [
             GoRoute(
                 path: 'room/:id',
@@ -26,18 +33,21 @@ final webRouter = GoRouter(
                 pageBuilder: (context, state) {
                   var roomId = state.params['id'];
                   if (roomId == null) {
-                    return const NoTransitionPage(
-                        child: Text("no room seledted"));
+                    throw Exception("Invalid Route: no room selected");
                   } else {
                     return NoTransitionPage(child: ActiveRoom(roomId: roomId));
                   }
+                }),
+            GoRoute(
+                path: 'create-room',
+                name: RouteNames.createRoom,
+                pageBuilder: (context, state) {
+                  return const NoTransitionPage(child: CreateRoom());
                 })
           ])
     ],
     errorBuilder: (context, state) => const ErrorScreen());
 final mobileRouter = GoRouter(
-    debugLogDiagnostics: true,
-    initialLocation: '/',
     navigatorBuilder: (context, state, widget) {
       return SafeArea(child: widget);
     },

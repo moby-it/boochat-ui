@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import './web_sidebar.dart';
 import '../routes/router.dart';
 
-class WebApp extends StatelessWidget {
+class WebShell extends StatelessWidget {
   final Widget child;
-  const WebApp({required this.child, Key? key}) : super(key: key);
+  const WebShell({required this.child, Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -30,8 +30,8 @@ class WebApp extends StatelessWidget {
   }
 }
 
-class WebShell extends StatelessWidget {
-  const WebShell({Key? key}) : super(key: key);
+class WebApp extends StatelessWidget {
+  const WebApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(

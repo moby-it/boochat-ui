@@ -9,6 +9,6 @@ class BoochatApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return kIsWeb ? const WebShell() : const MobileShell();
+    return kIsWeb ? const WebApp() : const MobileApp();
   }
 }
