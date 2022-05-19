@@ -31,9 +31,11 @@ class WebRouteInformationParser extends RouteInformationParser<WebRoutePath> {
   Future<WebRoutePath> parseRouteInformation(
       RouteInformation routeInformation) async {
     final uri = Uri.parse(routeInformation.location!);
-    if (uri.pathSegments.length >= 2) {
+    if (uri.path.contains(RouteNames.room) && uri.pathSegments.length >= 2) {
       var roomId = uri.pathSegments[1];
       return WebRoutePath.activeRoom(roomId);
+    } else if (uri.path == RouteNames.createRoom) {
+      return WebRoutePath.createRoom();
     } else {
       return WebRoutePath.initial();
     }
@@ -46,8 +48,9 @@ class WebRouteInformationParser extends RouteInformationParser<WebRoutePath> {
           location: "/${RouteNames.room}/${configuration.selectedRoomId}");
     } else if (configuration.isCreateRoomPage) {
       return const RouteInformation(location: RouteNames.createRoom);
+    } else {
+      return const RouteInformation(location: '/');
     }
-    return null;
   }
 }
 
@@ -55,6 +58,10 @@ class WebRouterDelegete extends RouterDelegate<WebRoutePath>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<WebRoutePath> {
   String? roomId;
   bool isCreateRoom = false;
+  final RouteState state;
+  WebRouterDelegete(this.state) {
+    state.addListener(notifyListeners);
+  }
   @override
   Widget build(BuildContext context) {
     return Navigator(
@@ -73,6 +80,15 @@ class WebRouterDelegete extends RouterDelegate<WebRoutePath>
   }
 
   @override
+  WebRoutePath get currentConfiguration {
+    if (isCreateRoom) {
+      return WebRoutePath.createRoom();
+    } else {
+      return WebRoutePath.activeRoom(roomId);
+    }
+  }
+
+  @override
   GlobalKey<NavigatorState>? navigatorKey = GlobalKey<NavigatorState>();
 
   @override
@@ -84,16 +100,11 @@ class WebRouterDelegete extends RouterDelegate<WebRoutePath>
     }
   }
 
-  handleRoomTapped(String roomId) {
-    this.roomId = roomId;
-    isCreateRoom = false;
-    notifyListeners();
-  }
-
-  handleCreateRoomTapped() {
-    isCreateRoom = true;
-    roomId = null;
-    notifyListeners();
+  @override
+  void dispose() {
+    state.removeListener(notifyListeners);
+    state.dispose();
+    super.dispose();
   }
 }
 
@@ -143,4 +154,15 @@ class RouteState extends ChangeNotifier {
     path =
         await _parser.parseRouteInformation(RouteInformation(location: route));
   }
+}
+
+class RouteStateScope extends InheritedNotifier<RouteState> {
+  const RouteStateScope({
+    required super.notifier,
+    required super.child,
+    super.key,
+  });
+
+  static RouteState of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<RouteStateScope>()!.notifier!;
 }

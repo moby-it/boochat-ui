@@ -17,9 +17,7 @@ class RoomSlot extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       child: InkWell(
         onTap: () async {
-          final parser = WebRouteInformationParser();
-          await parser.parseRouteInformation(
-              RouteInformation(location: '/room/${room.id}'));
+          await RouteStateScope.of(context).go("${RouteNames.room}/${room.id}");
         },
         customBorder:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
