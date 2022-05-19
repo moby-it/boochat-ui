@@ -7,6 +7,7 @@ import 'package:boochat_ui/src/routes/route_names.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../data/data.dart';
 import '../layout_widgets/bottom_navigation.dart';
@@ -33,7 +34,7 @@ class RoomListWrapper extends StatelessWidget {
                         context
                             .read<RouteState>()
                             .setActiveRoute(RouteNames.createRoom, 0);
-                        Navigator.pushNamed(context, CreateRoom.routeName);
+                        context.pushNamed(CreateRoom.routeName);
                       },
                       child: const Icon(Icons.create),
                     ),

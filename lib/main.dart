@@ -9,7 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:url_strategy/url_strategy.dart';
+import 'package:go_router/go_router.dart';
 
 import 'firebase_options.dart';
 
@@ -24,7 +24,7 @@ Future main() async {
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
     await setAndroidNotificationChannel();
   }
-  setPathUrlStrategy();
+  GoRouter.setUrlPathStrategy(UrlPathStrategy.path);
   runApp(AppInitializer(
     authRepository: AuthRepository(),
     websocketManager: WebsocketManager(),

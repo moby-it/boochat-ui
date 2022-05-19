@@ -1,6 +1,5 @@
-import 'package:boochat_ui/src/routes/route_generator.dart';
+import 'package:boochat_ui/src/routes/router.dart';
 import 'package:boochat_ui/src/theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MobileShell extends StatelessWidget {
@@ -8,11 +7,10 @@ class MobileShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       theme: BoochatTheme.darkTheme,
-      onGenerateRoute: RouteGenerator.generateMobileRoute,
-      builder: (context, navigator) =>
-          SafeArea(child: Scaffold(body: Container(child: navigator))),
+      routeInformationParser: mobileRouter.routeInformationParser,
+      routerDelegate: mobileRouter.routerDelegate,
     );
   }
 }

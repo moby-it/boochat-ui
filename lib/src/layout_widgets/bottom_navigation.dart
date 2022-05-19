@@ -1,6 +1,7 @@
 import 'package:boochat_ui/src/common/route_provider.dart';
 import 'package:boochat_ui/src/routes/route_names.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class BottomNavigation extends StatelessWidget {
@@ -25,10 +26,10 @@ class BottomNavigation extends StatelessWidget {
         if (index != context.read<RouteState>().activeRouteIndex) {
           if (index == 0) {
             routeState.setActiveRoute(RouteNames.roomList, index);
-            Navigator.pushNamed(context, RouteNames.roomList);
+            context.pushNamed(RouteNames.roomList);
           } else if (index == 1) {
             routeState.setActiveRoute(RouteNames.meetupsList, index);
-            Navigator.pushNamed(context, RouteNames.meetupsList);
+            context.pushNamed(RouteNames.meetupsList);
           }
         }
       },

@@ -4,6 +4,7 @@ import 'package:boochat_ui/src/routes/route_names.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class RoomSlot extends StatelessWidget {
   const RoomSlot({required this.room, Key? key}) : super(key: key);
@@ -16,8 +17,7 @@ class RoomSlot extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       child: InkWell(
         onTap: () {
-          Navigator.pushNamed(context, "${RouteNames.room}?id=${room.id}",
-              arguments: room.id);
+          context.pushNamed(RouteNames.room, params: {'id': room.id});
         },
         customBorder:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
