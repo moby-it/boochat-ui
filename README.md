@@ -1,16 +1,20 @@
-# boochat_ui
+# Project description
 
-A new Flutter project.
+Boochat is a chat and meetups application developed as a hobby for my friends. 
 
-## Getting Started
+This project is the Front End part of the application, developed with Flutter
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Roadmap
+- [x] Create multi platform app environment with [Flutter](https://flutter.dev)
+- [ ] Create Messaging functionalities for flutter web
+  - [x] Exchange messages
+  - [x] Recieve notifications when online
+  - [ ] Ability to Create Rooms
+  - [ ] Finalize designs for web
+- [ ] Create Messaging functionalities for Android
+  - [x] Exchange messages
+  - [x] Recieve notifications 
+  - [ ] Bulk notifications so that we don't mobile bar.
+  - [ ] Ability to Create Rooms
+- [ ] Create Meetup functionalities for flutter web
+- [ ] Create Meetup functionalities for Android
