@@ -45,7 +45,7 @@ class SentMessageBubble extends StatelessWidget {
           children: [
             Text(
               DateFormat('hh:mm').format(message.dateSent),
-              style: Theme.of(context).textTheme.caption,
+              style: Theme.of(context).textTheme.labelSmall,
             ),
             const SizedBox(width: 15),
             Flexible(
@@ -58,6 +58,7 @@ class SentMessageBubble extends StatelessWidget {
                         horizontal: 20, vertical: 14),
                     child: Text(
                       message.content,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     )),
               ),
             ),

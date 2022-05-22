@@ -29,14 +29,16 @@ class _MessageInputState extends State<MessageInput> {
                   }
                 },
                 decoration: InputDecoration(
-                  hoverColor: Theme.of(context).scaffoldBackgroundColor,
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(10)),
-                  filled: true,
-                  fillColor: Theme.of(context).scaffoldBackgroundColor,
-                  hintText: 'Type your message',
-                )),
+                    hoverColor: Theme.of(context).scaffoldBackgroundColor,
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(10)),
+                    filled: true,
+                    fillColor: Theme.of(context).scaffoldBackgroundColor,
+                    hintText: 'Type your message',
+                    hintStyle: Theme.of(context).textTheme.labelMedium?.merge(
+                        const TextStyle(
+                            color: Color.fromRGBO(149, 174, 203, 1))))),
           ),
         ],
       ),

@@ -48,14 +48,13 @@ class RoomSlot extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(Room.configureRoomName(user, allUsers, room),
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w700,
-                              color: Colors.white)),
+                          style: Theme.of(context).textTheme.titleMedium),
                       Text(
                         room.items.isNotEmpty
                             ? room.items.last.content
                             : "Room Just Created!",
                         overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.labelSmall,
                       )
                     ],
                   ),

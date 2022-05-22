@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-const primaryColor = Color.fromRGBO(24, 39, 57, 1);
-const hoverColor = Color.fromRGBO(24, 39, 57, 1);
-const scaffoldBackgroundColor = Color.fromRGBO(12, 20, 45, 1);
-const backgroundColor = Color.fromRGBO(47, 64, 86, 1);
+const primaryColor = Color.fromRGBO(123, 147, 175, 1);
+const scaffoldBackgroundColor = Color.fromRGBO(0, 19, 34, 1);
+const backgroundColor = Color.fromRGBO(25, 50, 74, 1);
 
 class BoochatTheme {
   static ThemeData get darkTheme {
     return ThemeData.dark().copyWith(
         primaryColor: primaryColor,
         scaffoldBackgroundColor: scaffoldBackgroundColor,
-        hoverColor: hoverColor,
         backgroundColor: backgroundColor,
         inputDecorationTheme: const InputDecorationTheme(
           border: InputBorder.none,
@@ -18,8 +17,19 @@ class BoochatTheme {
         appBarTheme: ThemeData.dark()
             .appBarTheme
             .copyWith(backgroundColor: backgroundColor),
-        textTheme: Typography.material2014().white.copyWith(
-            caption:
-                const TextStyle(color: Color.fromRGBO(240, 240, 240, 0.5))));
+        textTheme: GoogleFonts.manropeTextTheme(const TextTheme(
+            bodyMedium: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.normal,
+                color: Colors.white),
+            titleLarge: TextStyle(
+                fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
+            titleMedium: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+            titleSmall: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            labelMedium: TextStyle(
+                fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
+            labelSmall: TextStyle(
+                fontSize: 12, color: Color.fromRGBO(207, 228, 255, 1)))));
   }
 }
