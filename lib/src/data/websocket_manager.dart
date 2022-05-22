@@ -38,7 +38,7 @@ class WebsocketManager {
     if (!kIsWeb) {
       final registrationToken = await FirebaseMessaging.instance.getToken();
       FirebaseMessaging.instance.onTokenRefresh.listen((token) {
-        print("token refreshed: $token");
+        debugPrint("token refreshed: $token");
       });
       return io(
           uri,
