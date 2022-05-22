@@ -6,7 +6,7 @@ class WebSidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
+      decoration: BoxDecoration(color: Theme.of(context).cardColor),
       child: Padding(
         padding: const EdgeInsets.only(bottom: 30),
         child: Column(

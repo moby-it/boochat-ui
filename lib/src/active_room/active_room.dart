@@ -43,27 +43,53 @@ class ActiveRoom extends StatelessWidget {
               final room = (state as ActiveRoomSelectedState).room;
               final items = room.items.reversed.toList();
               return Scaffold(
-                backgroundColor: Theme.of(context).hoverColor,
                 appBar: kIsWeb
                     ? null
                     : AppBar(
                         title:
                             Text(Room.configureRoomName(user, allUsers, room)),
                       ),
-                body: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                body: Container(
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).backgroundColor,
+                      borderRadius: BorderRadius.circular(10)),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
+                      if (kIsWeb)
+                        Container(
+                          color: Theme.of(context).cardColor,
+                          height: 60,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Container(
+                              padding: const EdgeInsets.only(left: 24),
+                              child: Text(
+                                  Room.configureRoomName(user, allUsers, room),
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
+                                  textAlign: TextAlign.left),
+                            ),
+                          ),
+                        ),
                       Expanded(
-                        child: ListView.separated(
-                            reverse: true,
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                            itemCount: items.length,
-                            itemBuilder: (context, index) =>
-                                RoomItemBubble(roomItem: items[index])),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Theme.of(context).backgroundColor,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: ListView.separated(
+                              reverse: true,
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                              itemCount: items.length,
+                              itemBuilder: (context, index) => Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(32, 0, 32, 8),
+                                  child:
+                                      RoomItemBubble(roomItem: items[index]))),
+                        ),
                       ),
                       const SizedBox(height: 20),
                       const MessageInput()

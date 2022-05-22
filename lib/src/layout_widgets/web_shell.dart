@@ -11,21 +11,45 @@ class WebShell extends StatelessWidget {
   const WebShell({required this.child, Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        const SizedBox(
-            width: 110, height: double.infinity, child: WebSidebar()),
-        const Expanded(flex: 2, child: RoomListWrapper()),
-        Expanded(
-          flex: 3,
-          child: child,
-        ),
-        const Expanded(flex: 3, child: MeetupListWrapper())
-        // ActiveRoom()
-      ],
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          SizedBox(
+              width: 128,
+              height: MediaQuery.of(context).size.height,
+              child: const WebSidebar()),
+          Container(
+            width: 1002,
+            height: 905,
+            padding: const EdgeInsets.fromLTRB(24, 43, 24, 12),
+            decoration: BoxDecoration(
+                color: Theme.of(context).cardColor,
+                borderRadius: BorderRadius.circular(10)),
+            child: Row(children: [
+              const Flexible(flex: 1, child: RoomListWrapper()),
+              Flexible(
+                flex: 2,
+                child: child,
+              ),
+            ]),
+          ),
+          const SizedBox(
+            width: 32,
+          ),
+
+          Container(
+            width: 630,
+            height: 905,
+            child: const MeetupListWrapper(),
+            color: Theme.of(context).backgroundColor,
+          )
+          // ActiveRoom()
+        ],
+      ),
     );
   }
 }

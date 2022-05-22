@@ -3,7 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 const primaryColor = Color.fromRGBO(123, 147, 175, 1);
 const scaffoldBackgroundColor = Color.fromRGBO(0, 19, 34, 1);
-const backgroundColor = Color.fromRGBO(25, 50, 74, 1);
+const cardColor = Color.fromRGBO(25, 50, 74, 1);
+const backgroundColor = Color.fromRGBO(0, 29, 52, 1);
 
 class BoochatTheme {
   static ThemeData get darkTheme {
@@ -11,12 +12,12 @@ class BoochatTheme {
         primaryColor: primaryColor,
         scaffoldBackgroundColor: scaffoldBackgroundColor,
         backgroundColor: backgroundColor,
+        cardColor: cardColor,
         inputDecorationTheme: const InputDecorationTheme(
           border: InputBorder.none,
         ),
-        appBarTheme: ThemeData.dark()
-            .appBarTheme
-            .copyWith(backgroundColor: backgroundColor),
+        appBarTheme:
+            ThemeData.dark().appBarTheme.copyWith(backgroundColor: cardColor),
         textTheme: GoogleFonts.manropeTextTheme(const TextTheme(
             bodyMedium: TextStyle(
                 fontSize: 16,

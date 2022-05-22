@@ -14,33 +14,42 @@ class _MessageInputState extends State<MessageInput> {
   final controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: TextFormField(
-                controller: controller,
-                textInputAction: TextInputAction.go,
-                onFieldSubmitted: (String value) {
-                  if (value.isNotEmpty) {
-                    context.read<ActiveRoomBloc>().add(SendMessageEvent(value));
-                    controller.clear();
-                  }
-                },
-                decoration: InputDecoration(
-                    hoverColor: Theme.of(context).scaffoldBackgroundColor,
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(10)),
-                    filled: true,
-                    fillColor: Theme.of(context).scaffoldBackgroundColor,
-                    hintText: 'Type your message',
-                    hintStyle: Theme.of(context).textTheme.labelMedium?.merge(
-                        const TextStyle(
-                            color: Color.fromRGBO(149, 174, 203, 1))))),
-          ),
-        ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+      child: Form(
+        key: _formKey,
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: TextFormField(
+                  controller: controller,
+                  textInputAction: TextInputAction.go,
+                  onFieldSubmitted: (String value) {
+                    if (value.isNotEmpty) {
+                      context
+                          .read<ActiveRoomBloc>()
+                          .add(SendMessageEvent(value));
+                      controller.clear();
+                    }
+                  },
+                  decoration: InputDecoration(
+                      hoverColor: Theme.of(context).cardColor,
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(10)),
+                      filled: true,
+                      fillColor: Theme.of(context).cardColor,
+                      hintText: 'Type your message',
+                      hintStyle: Theme.of(context).textTheme.labelMedium?.merge(
+                          const TextStyle(
+                              color: Color.fromRGBO(149, 174, 203, 1))),
+                      suffixIcon: const Icon(
+                        Icons.send_outlined,
+                        size: 18,
+                      ))),
+            ),
+          ],
+        ),
       ),
     );
   }

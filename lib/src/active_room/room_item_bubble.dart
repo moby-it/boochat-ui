@@ -51,15 +51,16 @@ class SentMessageBubble extends StatelessWidget {
             Flexible(
               child: Container(
                 decoration: BoxDecoration(
-                    color: Theme.of(context).backgroundColor,
+                    color: Theme.of(context).cardColor,
                     borderRadius: BorderRadius.circular(10)),
                 child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 14),
-                    child: Text(
-                      message.content,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    )),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                  child: Text(
+                    message.content,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
               ),
             ),
           ]),

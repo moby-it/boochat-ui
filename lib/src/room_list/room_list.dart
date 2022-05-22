@@ -14,6 +14,7 @@ class RoomListWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).cardColor,
       appBar: !kIsWeb
           ? AppBar(
               title: const Text("Rooms"),
@@ -39,7 +40,21 @@ class RoomListWrapper extends StatelessWidget {
           : null,
       body: BlocBuilder<RoomListBloc, RoomListState>(builder: (context, state) {
         if (state.hasData) {
-          return RoomList(rooms: state.rooms);
+          return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 80,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      "Rooms",
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
+                ),
+                Expanded(child: RoomList(rooms: state.rooms))
+              ]);
         } else {
           return const Text('No rooms');
         }
