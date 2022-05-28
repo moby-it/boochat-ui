@@ -36,24 +36,24 @@ class SentMessageBubble extends StatelessWidget {
   const SentMessageBubble({required this.message, Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final currentUser = context.read<AuthBloc>().state.user;
     return FractionallySizedBox(
       widthFactor: 0.7,
       alignment: Alignment.centerRight,
       child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               DateFormat('hh:mm').format(message.dateSent),
               style: Theme.of(context).textTheme.labelSmall,
             ),
-            const SizedBox(width: 15),
+            const SizedBox(width: 12),
             Flexible(
               child: Container(
                 decoration: BoxDecoration(
                     color: Theme.of(context).cardColor,
-                    borderRadius: BorderRadius.circular(10)),
+                    borderRadius: BorderRadius.circular(5)),
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
@@ -63,6 +63,17 @@ class SentMessageBubble extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
+            const SizedBox(width: 12),
+            Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  image: DecorationImage(
+                    image: CachedNetworkImageProvider(
+                        currentUser.imageUrl as String),
+                  )),
             ),
           ]),
     );
@@ -78,14 +89,10 @@ class ReceivedMessageBubble extends StatelessWidget {
     final users = context.read<UsersBloc>().state.allUsers;
     final messageSender =
         users.firstWhere((user) => user.id == message.sender.id);
-
-    if (messageSender.imageUrl == null) {
-      throw Exception("did not find user image");
-    }
     return FractionallySizedBox(
-      widthFactor: 0.9,
+      widthFactor: 0.7,
       alignment: Alignment.centerLeft,
-      child: Row(children: [
+      child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Container(
           width: 50,
           height: 50,
@@ -96,23 +103,27 @@ class ReceivedMessageBubble extends StatelessWidget {
                     messageSender.imageUrl as String),
               )),
         ),
-        const SizedBox(width: 10),
+        const SizedBox(width: 12),
         Flexible(
           child: Container(
             decoration: BoxDecoration(
-                color: Theme.of(context).backgroundColor,
-                borderRadius: BorderRadius.circular(10)),
+                color: Theme.of(context).cardColor,
+                borderRadius: BorderRadius.circular(5)),
             child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-                child: Text(message.content)),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+              child: Text(
+                message.content,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ),
           ),
         ),
-        const SizedBox(width: 15),
+        const SizedBox(width: 12),
         Text(
           DateFormat('hh:mm').format(message.dateSent),
-          style: Theme.of(context).textTheme.caption,
+          style: Theme.of(context).textTheme.labelSmall,
         ),
+        const SizedBox(width: 12),
       ]),
     );
   }

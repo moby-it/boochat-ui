@@ -52,8 +52,8 @@ class ActiveRoom extends StatelessWidget {
                       ),
                 body: Container(
                   decoration: BoxDecoration(
-                      color: Theme.of(context).backgroundColor,
-                      borderRadius: BorderRadius.circular(10)),
+                    color: Theme.of(context).backgroundColor,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
