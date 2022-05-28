@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class SearchRoom extends StatefulWidget {
   const SearchRoom({Key? key}) : super(key: key);
@@ -14,13 +12,19 @@ class _SearchRoomState extends State<SearchRoom> {
   final controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 43,
-      child: TextFormField(
-        key: _formKey,
-        controller: controller,
-        decoration: const InputDecoration(
-            prefixIcon: Icon(Icons.search), hintText: "Search..."),
+    return Form(
+      key: _formKey,
+      child: SizedBox(
+        height: 43,
+        child: TextFormField(
+          controller: controller,
+          onFieldSubmitted: (String value) {
+            debugPrint(value);
+          },
+          textInputAction: TextInputAction.go,
+          decoration: const InputDecoration(
+              prefixIcon: Icon(Icons.search), hintText: "Search..."),
+        ),
       ),
     );
   }

@@ -44,4 +44,11 @@ class Room {
     final otherUser = allUsers.firstWhere((user) => user.id == otherUserId);
     return otherUser.name ?? room.name;
   }
+
+  String getOtherUserId(String currentUserId) =>
+      participants.firstWhere((user) => user.id != currentUserId).id;
+  bool lastMessageIsSent(String currentUserId) {
+    final lastItem = items.last;
+    return lastItem is Message && lastItem.sender.id == currentUserId;
+  }
 }

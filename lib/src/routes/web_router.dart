@@ -1,3 +1,4 @@
+import 'package:boochat_ui/src/active_room/empty_room.dart';
 import 'package:boochat_ui/src/routes/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -21,7 +22,7 @@ final webRouter = GoRouter(
           path: '/',
           name: 'home',
           builder: (context, state) {
-            return const Text("No active Room selected");
+            return const EmptyRoom();
           },
           routes: [
             GoRoute(

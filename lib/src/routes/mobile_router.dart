@@ -6,7 +6,7 @@ import '../active_room/active_room.dart';
 import '../create_room/create_room.dart';
 import '../layout_widgets/error_screen.dart';
 import '../meetups/meetups_wrapper.dart';
-import '../room_list/room_list.dart';
+import '../room_list/room_list_wrapper.dart';
 import 'route_names.dart';
 
 class MobileScaffold extends StatelessWidget {
@@ -37,8 +37,8 @@ class MobileScaffold extends StatelessWidget {
 final mobileRouter = GoRouter(
     navigatorBuilder: (context, state, widget) {
       return MobileScaffold(
-          child: widget,
-          withBottomNavBar: !state.location.contains(RouteNames.room));
+          withBottomNavBar: !state.location.contains(RouteNames.room),
+          child: widget);
     },
     routes: [
       GoRoute(

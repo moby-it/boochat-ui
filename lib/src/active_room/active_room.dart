@@ -1,6 +1,7 @@
 import 'package:boochat_ui/src/active_room/bloc/active_room_bloc.dart';
 import 'package:boochat_ui/src/active_room/bloc/active_room_events.dart';
 import 'package:boochat_ui/src/active_room/bloc/active_room_state.dart';
+import 'package:boochat_ui/src/active_room/empty_room.dart';
 import 'package:boochat_ui/src/active_room/message_input.dart';
 import 'package:boochat_ui/src/active_room/room_item_bubble.dart';
 import 'package:flutter/foundation.dart';
@@ -36,7 +37,7 @@ class ActiveRoom extends StatelessWidget {
         return BlocBuilder<ActiveRoomBloc, ActiveRoomState>(
           builder: (context, state) {
             if (state is NoActiveRoomSelectedState) {
-              return const Scaffold(body: Text("no active noom selected"));
+              return const Center(child: EmptyRoom());
             } else if (state is FetchingActiveRoomState) {
               return const Scaffold(body: Text("fetching room details..."));
             } else {

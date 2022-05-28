@@ -18,9 +18,12 @@ class BoochatTheme {
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
           fillColor: const Color.fromRGBO(48, 73, 98, 1),
+          focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.circular(5)),
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide.none,
-              borderRadius: BorderRadius.circular(10)),
+              borderRadius: BorderRadius.circular(5)),
           hintStyle: labelMedium,
         ),
         appBarTheme:
