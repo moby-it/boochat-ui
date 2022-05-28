@@ -54,17 +54,20 @@ class RoomListWrapper extends StatelessWidget {
                     ),
                   ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const SearchRoom(),
-                    Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: const [
-                          Icon(Icons.add_to_photos_outlined),
-                          Text("Create Room")
-                        ])
-                  ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const SearchRoom(),
+                      Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: const [
+                            Icon(Icons.add_to_photos_outlined),
+                            Text("Create Room")
+                          ])
+                    ],
+                  ),
                 ),
                 Expanded(child: RoomList(rooms: state.rooms))
               ]);

@@ -13,6 +13,8 @@ class WebShell extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Theme.of(context).scaffoldBackgroundColor,
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -22,31 +24,34 @@ class WebShell extends StatelessWidget {
               width: 128,
               height: MediaQuery.of(context).size.height,
               child: const WebSidebar()),
-          Container(
-            width: 1002,
-            height: 905,
-            padding: const EdgeInsets.fromLTRB(24, 43, 24, 12),
-            decoration: BoxDecoration(
-                color: Theme.of(context).cardColor,
-                borderRadius: BorderRadius.circular(10)),
-            child: Row(children: [
-              const Flexible(flex: 1, child: RoomListWrapper()),
-              Flexible(
-                flex: 2,
-                child: child,
-              ),
-            ]),
-          ),
-          const SizedBox(
-            width: 32,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+            child: Row(
+              children: [
+                Container(
+                  width: 1002,
+                  padding: const EdgeInsets.fromLTRB(24, 43, 24, 12),
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Row(children: [
+                    const SizedBox(width: 304, child: RoomListWrapper()),
+                    SizedBox(width: 638, child: child)
+                  ]),
+                ),
+                const SizedBox(
+                  width: 32,
+                ),
+                Container(
+                  width: 630,
+                  height: 905,
+                  child: const MeetupListWrapper(),
+                  color: Theme.of(context).backgroundColor,
+                )
+              ],
+            ),
           ),
 
-          Container(
-            width: 630,
-            height: 905,
-            child: const MeetupListWrapper(),
-            color: Theme.of(context).backgroundColor,
-          )
           // ActiveRoom()
         ],
       ),
