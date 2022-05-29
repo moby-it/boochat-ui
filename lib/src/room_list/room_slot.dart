@@ -1,3 +1,5 @@
+import 'package:boochat_ui/src/active_room/bloc/active_room_bloc.dart';
+import 'package:boochat_ui/src/active_room/bloc/active_room_state.dart';
 import 'package:boochat_ui/src/common/common.dart';
 import 'package:boochat_ui/src/data/data.dart';
 import 'package:boochat_ui/src/room_list/online_dot.dart';
@@ -16,7 +18,12 @@ class RoomSlot extends StatelessWidget {
     final allUsers = context.read<UsersBloc>().state.allUsers;
     return InkWell(
       onTap: () {
-        context.pushNamed(RouteNames.room, params: {'id': room.id});
+        final activeRoomState = context.read<ActiveRoomBloc>().state;
+        bool shouldNavigate = !(activeRoomState is ActiveRoomSelectedState &&
+            activeRoomState.room.id == room.id);
+        if (shouldNavigate) {
+          context.pushNamed(RouteNames.room, params: {'id': room.id});
+        }
       },
       customBorder:
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
