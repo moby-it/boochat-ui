@@ -7,7 +7,10 @@ import 'package:intl/intl.dart';
 import '../data/data.dart';
 
 class RoomItemBubble extends StatelessWidget {
-  const RoomItemBubble({required this.roomItem, Key? key}) : super(key: key);
+  const RoomItemBubble(
+      {required this.roomItem, this.showUserImage = true, Key? key})
+      : super(key: key);
+  final bool showUserImage;
   final RoomItem roomItem;
   @override
   Widget build(BuildContext context) {
@@ -15,9 +18,15 @@ class RoomItemBubble extends StatelessWidget {
     if (roomItem is Message) {
       final message = roomItem as Message;
       if (_messageIsSent(user, message)) {
-        return SentMessageBubble(message: message);
+        return SentMessageBubble(
+          message: message,
+          showUserImage: showUserImage,
+        );
       } else {
-        return ReceivedMessageBubble(message: message);
+        return ReceivedMessageBubble(
+          message: message,
+          showUserImage: showUserImage,
+        );
       }
     } else {
       return AnnouncementText(
@@ -33,7 +42,10 @@ class RoomItemBubble extends StatelessWidget {
 
 class SentMessageBubble extends StatelessWidget {
   final Message message;
-  const SentMessageBubble({required this.message, Key? key}) : super(key: key);
+  final bool showUserImage;
+  const SentMessageBubble(
+      {required this.message, required this.showUserImage, Key? key})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     final currentUser = context.read<AuthBloc>().state.user;
@@ -65,16 +77,22 @@ class SentMessageBubble extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 12),
-            Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                    image: CachedNetworkImageProvider(
-                        currentUser.imageUrl as String),
-                  )),
-            ),
+            showUserImage
+                ? Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                          image: CachedNetworkImageProvider(
+                              currentUser.imageUrl as String,
+                              cacheKey: currentUser.imageUrl),
+                        )),
+                  )
+                : const SizedBox(
+                    width: 50,
+                    height: 50,
+                  ),
           ]),
     );
   }
@@ -82,7 +100,10 @@ class SentMessageBubble extends StatelessWidget {
 
 class ReceivedMessageBubble extends StatelessWidget {
   final Message message;
-  const ReceivedMessageBubble({required this.message, Key? key})
+  final bool showUserImage;
+
+  const ReceivedMessageBubble(
+      {required this.message, required this.showUserImage, Key? key})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -93,16 +114,22 @@ class ReceivedMessageBubble extends StatelessWidget {
       widthFactor: 0.7,
       alignment: Alignment.centerLeft,
       child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Container(
-          width: 50,
-          height: 50,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
-                image: CachedNetworkImageProvider(
-                    messageSender.imageUrl as String),
-              )),
-        ),
+        showUserImage
+            ? Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                      image: CachedNetworkImageProvider(
+                          messageSender.imageUrl as String,
+                          cacheKey: messageSender.imageUrl),
+                    )),
+              )
+            : const SizedBox(
+                width: 50,
+                height: 50,
+              ),
         const SizedBox(width: 12),
         Flexible(
           child: Container(

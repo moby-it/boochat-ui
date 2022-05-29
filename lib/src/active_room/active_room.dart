@@ -85,11 +85,25 @@ class ActiveRoom extends StatelessWidget {
                                     height: 8,
                                   ),
                               itemCount: items.length,
-                              itemBuilder: (context, index) => Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(32, 0, 32, 8),
-                                  child:
-                                      RoomItemBubble(roomItem: items[index]))),
+                              itemBuilder: (context, index) {
+                                final roomItem = items[index];
+                                bool showUserImage = true;
+                                if (index + 1 < items.length &&
+                                    roomItem is Message) {
+                                  final nextItem = items[index + 1];
+                                  if (nextItem is Message &&
+                                      nextItem.sender == roomItem.sender) {
+                                    showUserImage = false;
+                                  }
+                                }
+                                return Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(32, 0, 32, 8),
+                                    child: RoomItemBubble(
+                                      roomItem: items[index],
+                                      showUserImage: showUserImage,
+                                    ));
+                              }),
                         ),
                       ),
                       const SizedBox(height: 20),
