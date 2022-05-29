@@ -78,33 +78,34 @@ class ActiveRoom extends StatelessWidget {
                           decoration: BoxDecoration(
                               color: Theme.of(context).backgroundColor,
                               borderRadius: BorderRadius.circular(10)),
-                          child: ListView.separated(
-                              reverse: true,
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                              itemCount: items.length,
-                              itemBuilder: (context, index) {
-                                final roomItem = items[index];
-                                // Previous item is index + 1 due to the array being reversed
-                                bool showUserImage = true;
-                                if (roomItem is Message &&
-                                    index + 1 < items.length) {
-                                  final previousItem = items[index + 1];
-                                  if (previousItem is Message &&
-                                      previousItem.sender == roomItem.sender) {
-                                    showUserImage = false;
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 32),
+                            child: ListView.separated(
+                                reverse: true,
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                itemCount: items.length,
+                                itemBuilder: (context, index) {
+                                  final roomItem = items[index];
+                                  // Previous item is index + 1 due to the array being reversed
+                                  bool showUserImage = true;
+                                  if (roomItem is Message &&
+                                      index + 1 < items.length) {
+                                    final previousItem = items[index + 1];
+                                    if (previousItem is Message &&
+                                        previousItem.sender ==
+                                            roomItem.sender) {
+                                      showUserImage = false;
+                                    }
                                   }
-                                }
-                                return Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(32, 0, 32, 8),
-                                    child: RoomItemBubble(
-                                      roomItem: items[index],
-                                      showUserImage: showUserImage,
-                                    ));
-                              }),
+                                  return RoomItemBubble(
+                                    roomItem: items[index],
+                                    showUserImage: showUserImage,
+                                  );
+                                }),
+                          ),
                         ),
                       ),
                       const SizedBox(height: 20),

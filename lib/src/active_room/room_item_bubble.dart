@@ -15,23 +15,32 @@ class RoomItemBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = context.read<AuthBloc>().state.user;
+    late final Widget bubble;
     if (roomItem is Message) {
       final message = roomItem as Message;
       if (_messageIsSent(user, message)) {
-        return SentMessageBubble(
+        bubble = SentMessageBubble(
           message: message,
           showUserImage: showUserImage,
         );
       } else {
-        return ReceivedMessageBubble(
+        bubble = ReceivedMessageBubble(
           message: message,
           showUserImage: showUserImage,
         );
       }
     } else {
-      return AnnouncementText(
+      bubble = AnnouncementText(
         content: roomItem.content,
       );
+    }
+    if (showUserImage) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 24),
+        child: bubble,
+      );
+    } else {
+      return bubble;
     }
   }
 
