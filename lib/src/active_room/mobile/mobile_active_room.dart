@@ -2,10 +2,8 @@ import 'package:boochat_ui/src/active_room/bloc/active_room_bloc.dart';
 import 'package:boochat_ui/src/active_room/bloc/active_room_events.dart';
 import 'package:boochat_ui/src/active_room/bloc/active_room_state.dart';
 import 'package:boochat_ui/src/active_room/date_seperator.dart';
-import 'package:boochat_ui/src/active_room/empty_room.dart';
 import 'package:boochat_ui/src/active_room/message_input.dart';
 import 'package:boochat_ui/src/active_room/room_item_bubble.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -37,7 +35,8 @@ class MobileActiveRoom extends StatelessWidget {
         }
         return BlocBuilder<ActiveRoomBloc, ActiveRoomState>(
           builder: (context, state) {
-            if (state is FetchingActiveRoomState) {
+            if (state is FetchingActiveRoomState ||
+                state is NoActiveRoomSelectedState) {
               return const Scaffold(body: Text("fetching room details..."));
             } else {
               final room = (state as ActiveRoomSelectedState).room;

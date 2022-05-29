@@ -5,4 +5,5 @@ abstract class WebsocketEvents {
   static const allUsers = 'ALL_USERS';
   static const activeUserList = 'ACTIVE_USER_LIST';
   static const sendMessage = 'SEND_MESSAGE';
+  static const createRoom = 'CREATE_ROOM';
 }

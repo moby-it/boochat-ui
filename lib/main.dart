@@ -20,7 +20,7 @@ Future main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   // Pass all uncaught errors from the framework to Crashlytics and initialize firebase channel.
-  if (!kIsWeb) {
+  if (!kIsWeb && !kDebugMode) {
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
     await setAndroidNotificationChannel();
   }

@@ -39,7 +39,7 @@ class MobileRoomList extends StatelessWidget {
         if (state.hasData) {
           return Padding(
             padding: const EdgeInsets.only(right: 8),
-            child: Expanded(child: RoomList(rooms: state.rooms)),
+            child: RoomList(rooms: state.rooms),
           );
         } else {
           return const Text('No rooms');
