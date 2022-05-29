@@ -38,6 +38,9 @@ class WebShell extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10)),
                     child: Row(children: [
                       const SizedBox(width: 304, child: RoomListWrapper()),
+                      const SizedBox(
+                        width: 12,
+                      ),
                       SizedBox(width: 638, child: child)
                     ]),
                   ),

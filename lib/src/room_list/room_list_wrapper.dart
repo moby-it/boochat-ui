@@ -40,22 +40,22 @@ class RoomListWrapper extends StatelessWidget {
           : null,
       body: BlocBuilder<RoomListBloc, RoomListState>(builder: (context, state) {
         if (state.hasData) {
-          return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 60,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
-                      "Rooms",
-                      style: Theme.of(context).textTheme.titleLarge,
+          return Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        "Rooms",
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: GestureDetector(
+                  GestureDetector(
                     onTap: () {
                       debugPrint("create room");
                     },
@@ -83,9 +83,9 @@ class RoomListWrapper extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
-                Expanded(child: RoomList(rooms: state.rooms))
-              ]);
+                  Expanded(child: RoomList(rooms: state.rooms))
+                ]),
+          );
         } else {
           return const Text('No rooms');
         }

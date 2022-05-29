@@ -82,7 +82,7 @@ class ActiveRoom extends StatelessWidget {
                               reverse: true,
                               separatorBuilder: (context, index) =>
                                   const SizedBox(
-                                    height: 20,
+                                    height: 8,
                                   ),
                               itemCount: items.length,
                               itemBuilder: (context, index) => Padding(

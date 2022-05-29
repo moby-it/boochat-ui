@@ -12,10 +12,10 @@ class _SearchRoomState extends State<SearchRoom> {
   final controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: SizedBox(
-        height: 43,
+    return SizedBox(
+      height: 43,
+      child: Form(
+        key: _formKey,
         child: TextFormField(
           controller: controller,
           onFieldSubmitted: (String value) {
@@ -23,7 +23,9 @@ class _SearchRoomState extends State<SearchRoom> {
           },
           textInputAction: TextInputAction.go,
           decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.search), hintText: "Search..."),
+              contentPadding: EdgeInsets.only(bottom: 43 / 2),
+              prefixIcon: Icon(Icons.search),
+              hintText: "Search..."),
         ),
       ),
     );
