@@ -1,6 +1,7 @@
 import 'package:boochat_ui/src/active_room/bloc/active_room_bloc.dart';
 import 'package:boochat_ui/src/active_room/bloc/active_room_events.dart';
 import 'package:boochat_ui/src/active_room/bloc/active_room_state.dart';
+import 'package:boochat_ui/src/active_room/date_seperator.dart';
 import 'package:boochat_ui/src/active_room/empty_room.dart';
 import 'package:boochat_ui/src/active_room/message_input.dart';
 import 'package:boochat_ui/src/active_room/room_item_bubble.dart';
@@ -91,6 +92,7 @@ class ActiveRoom extends StatelessWidget {
                                   final roomItem = items[index];
                                   // Previous item is index + 1 due to the array being reversed
                                   bool showUserImage = true;
+                                  bool showDateSeperator = false;
                                   if (roomItem is Message &&
                                       index + 1 < items.length) {
                                     final previousItem = items[index + 1];
@@ -99,11 +101,30 @@ class ActiveRoom extends StatelessWidget {
                                             roomItem.sender) {
                                       showUserImage = false;
                                     }
+                                    if (previousItem.dateSent.day !=
+                                        roomItem.dateSent.day) {
+                                      showDateSeperator = true;
+                                      showUserImage = true;
+                                    }
                                   }
-                                  return RoomItemBubble(
-                                    roomItem: items[index],
-                                    showUserImage: showUserImage,
-                                  );
+                                  if (showDateSeperator) {
+                                    return Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        DateSeperator(date: roomItem.dateSent),
+                                        RoomItemBubble(
+                                          roomItem: items[index],
+                                          showUserImage: showUserImage,
+                                        )
+                                      ],
+                                    );
+                                  } else {
+                                    return RoomItemBubble(
+                                      roomItem: items[index],
+                                      showUserImage: showUserImage,
+                                    );
+                                  }
                                 }),
                           ),
                         ),
