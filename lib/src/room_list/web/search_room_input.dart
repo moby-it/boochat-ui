@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SearchRoom extends StatefulWidget {
-  const SearchRoom({Key? key}) : super(key: key);
+class SearchRoomInput extends StatefulWidget {
+  const SearchRoomInput({Key? key}) : super(key: key);
 
   @override
-  State<SearchRoom> createState() => _SearchRoomState();
+  State<SearchRoomInput> createState() => _SearchRoomInputState();
 }
 
-class _SearchRoomState extends State<SearchRoom> {
+class _SearchRoomInputState extends State<SearchRoomInput> {
   final _formKey = GlobalKey<FormState>();
   final controller = TextEditingController();
   @override

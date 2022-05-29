@@ -131,8 +131,9 @@ class ReceivedMessageBubble extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
                       image: CachedNetworkImageProvider(
-                          messageSender.imageUrl as String,
-                          cacheKey: messageSender.imageUrl),
+                        messageSender.imageUrl as String,
+                        cacheKey: messageSender.imageUrl,
+                      ),
                     )),
               )
             : const SizedBox(

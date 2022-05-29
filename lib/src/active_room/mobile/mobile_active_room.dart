@@ -10,12 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import '../common/common.dart';
-import '../data/data.dart';
+import '../../common/common.dart';
+import '../../data/data.dart';
 
-class ActiveRoom extends StatelessWidget {
+class MobileActiveRoom extends StatelessWidget {
   final String roomId;
-  ActiveRoom({required this.roomId, Key? key}) : super(key: key);
+  MobileActiveRoom({required this.roomId, Key? key}) : super(key: key);
   final queryUri = dotenv.env["QUERY_URI"];
 
   @override
@@ -37,20 +37,15 @@ class ActiveRoom extends StatelessWidget {
         }
         return BlocBuilder<ActiveRoomBloc, ActiveRoomState>(
           builder: (context, state) {
-            if (state is NoActiveRoomSelectedState) {
-              return const Center(child: EmptyRoom());
-            } else if (state is FetchingActiveRoomState) {
+            if (state is FetchingActiveRoomState) {
               return const Scaffold(body: Text("fetching room details..."));
             } else {
               final room = (state as ActiveRoomSelectedState).room;
               final items = room.items.reversed.toList();
               return Scaffold(
-                appBar: kIsWeb
-                    ? null
-                    : AppBar(
-                        title:
-                            Text(Room.configureRoomName(user, allUsers, room)),
-                      ),
+                appBar: AppBar(
+                  title: Text(Room.configureRoomName(user, allUsers, room)),
+                ),
                 body: Container(
                   decoration: BoxDecoration(
                     color: Theme.of(context).backgroundColor,
@@ -58,29 +53,13 @@ class ActiveRoom extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      if (kIsWeb)
-                        Container(
-                          color: Theme.of(context).cardColor,
-                          height: 60,
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Container(
-                              padding: const EdgeInsets.only(left: 24),
-                              child: Text(
-                                  Room.configureRoomName(user, allUsers, room),
-                                  style:
-                                      Theme.of(context).textTheme.titleMedium,
-                                  textAlign: TextAlign.left),
-                            ),
-                          ),
-                        ),
                       Expanded(
                         child: Container(
                           decoration: BoxDecoration(
                               color: Theme.of(context).backgroundColor,
                               borderRadius: BorderRadius.circular(10)),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 32),
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
                             child: ListView.separated(
                                 reverse: true,
                                 separatorBuilder: (context, index) =>
@@ -110,7 +89,7 @@ class ActiveRoom extends StatelessWidget {
                                   if (showDateSeperator) {
                                     return Column(
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                          CrossAxisAlignment.stretch,
                                       children: <Widget>[
                                         DateSeperator(date: roomItem.dateSent),
                                         RoomItemBubble(

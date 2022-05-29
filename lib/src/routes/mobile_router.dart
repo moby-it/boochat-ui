@@ -1,12 +1,15 @@
+import 'package:boochat_ui/src/active_room/bloc/active_room_bloc.dart';
+import 'package:boochat_ui/src/active_room/bloc/active_room_events.dart';
+import 'package:boochat_ui/src/active_room/mobile/mobile_active_room.dart';
 import 'package:boochat_ui/src/layout_widgets/bottom_navigation.dart';
+import 'package:boochat_ui/src/room_list/mobile/mobile_room_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../active_room/active_room.dart';
 import '../create_room/create_room.dart';
 import '../layout_widgets/error_screen.dart';
 import '../meetups/meetups_wrapper.dart';
-import '../room_list/room_list_wrapper.dart';
 import 'route_names.dart';
 
 class MobileScaffold extends StatelessWidget {
@@ -44,14 +47,17 @@ final mobileRouter = GoRouter(
       GoRoute(
           path: '/',
           name: RouteNames.roomList,
-          builder: (context, state) => RoomListWrapper(key: state.pageKey)),
+          builder: (context, state) {
+            context.read<ActiveRoomBloc>().add(const ClearActiveRoomEvent());
+            return MobileRoomList(key: state.pageKey);
+          }),
       GoRoute(
           path: '/room/:id',
           name: RouteNames.room,
           builder: (context, state) {
             var roomId = state.params['id'];
             if (roomId == null) throw Exception("navigated to room with no id");
-            return ActiveRoom(key: state.pageKey, roomId: roomId);
+            return MobileActiveRoom(key: state.pageKey, roomId: roomId);
           }),
       GoRoute(
           path: '/create-room',

@@ -1,9 +1,9 @@
 import 'package:boochat_ui/src/meetups/meetups_wrapper.dart';
+import 'package:boochat_ui/src/room_list/web/web_room_list.dart';
 import 'package:boochat_ui/src/theme.dart';
 import 'package:flutter/material.dart';
 
 import './web_sidebar.dart';
-import '../room_list/room_list_wrapper.dart';
 import '../routes/router.dart';
 
 class WebShell extends StatelessWidget {
@@ -37,7 +37,7 @@ class WebShell extends StatelessWidget {
                         color: Theme.of(context).cardColor,
                         borderRadius: BorderRadius.circular(10)),
                     child: Row(children: [
-                      const SizedBox(width: 304, child: RoomListWrapper()),
+                      const SizedBox(width: 304, child: WebRoomList()),
                       const SizedBox(
                         width: 12,
                       ),
