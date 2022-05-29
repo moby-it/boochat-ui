@@ -65,13 +65,12 @@ class RoomSlot extends StatelessWidget {
                   children: <Widget>[
                     Text(Room.configureRoomName(user, allUsers, room),
                         style: Theme.of(context).textTheme.titleMedium),
-                    Text(
-                      room.items.isNotEmpty
-                          ? room.items.last.content
-                          : "Room Just Created!",
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.labelSmall,
-                    ),
+                    if (room.items.isNotEmpty)
+                      Text(
+                        room.items.last.content,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.labelSmall,
+                      ),
                   ],
                 ),
               ),

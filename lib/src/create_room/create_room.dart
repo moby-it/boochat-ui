@@ -10,8 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
 import 'package:go_router/go_router.dart';
 
-import '../routes/route_names.dart';
-
 class CreateRoom extends StatefulWidget {
   const CreateRoom({Key? key}) : super(key: key);
   static const routeName = '/create-room';
@@ -29,7 +27,8 @@ class _CreateRoomState extends State<CreateRoom> {
     return Scaffold(
       appBar: !kIsWeb ? AppBar(title: const Text("Create room")) : null,
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: kIsWeb ? 58 : 29),
+        padding: const EdgeInsets.symmetric(
+            vertical: kIsWeb ? 58 : 29, horizontal: 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -91,11 +90,12 @@ class _CreateRoomState extends State<CreateRoom> {
                         'name':
                             "${currentUser.name}${selectedUsers.map((user) => ", ${user.name}")}",
                         'imageUrl': 'empty_room.png',
-                        'participants': [
-                          currentUser.name,
-                          ...selectedUsers.map((e) => e.name)
+                        'participantIds': [
+                          currentUser.id,
+                          ...selectedUsers.map((e) => e.id)
                         ]
                       });
+                      context.pop();
                     },
                     child: Text("CREATE ROOM",
                         style: Theme.of(context)

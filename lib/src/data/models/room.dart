@@ -48,6 +48,9 @@ class Room {
   String getOtherUserId(String currentUserId) =>
       participants.firstWhere((user) => user.id != currentUserId).id;
   bool lastMessageIsSent(String currentUserId) {
+    if (items.isEmpty) {
+      return false;
+    }
     final lastItem = items.last;
     return lastItem is Message && lastItem.sender.id == currentUserId;
   }
