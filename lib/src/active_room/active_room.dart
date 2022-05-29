@@ -93,8 +93,7 @@ class ActiveRoom extends StatelessWidget {
                                     index + 1 < items.length) {
                                   final previousItem = items[index + 1];
                                   if (previousItem is Message &&
-                                      previousItem.sender ==
-                                          previousItem.sender) {
+                                      previousItem.sender == roomItem.sender) {
                                     showUserImage = false;
                                   }
                                 }
