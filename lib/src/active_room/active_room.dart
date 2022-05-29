@@ -87,12 +87,14 @@ class ActiveRoom extends StatelessWidget {
                               itemCount: items.length,
                               itemBuilder: (context, index) {
                                 final roomItem = items[index];
+                                // Previous item is index + 1 due to the array being reversed
                                 bool showUserImage = true;
-                                if (index + 1 < items.length &&
-                                    roomItem is Message) {
-                                  final nextItem = items[index + 1];
-                                  if (nextItem is Message &&
-                                      nextItem.sender == roomItem.sender) {
+                                if (roomItem is Message &&
+                                    index + 1 < items.length) {
+                                  final previousItem = items[index + 1];
+                                  if (previousItem is Message &&
+                                      previousItem.sender ==
+                                          previousItem.sender) {
                                     showUserImage = false;
                                   }
                                 }
