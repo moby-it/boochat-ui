@@ -3,9 +3,8 @@ import 'package:boochat_ui/src/room_list/bloc/room_list_bloc.dart';
 import 'package:boochat_ui/src/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../common/common.dart';
-import '../data/data.dart';
+import '../../data/data.dart';
+import '../core.dart';
 
 class AppInitializer extends StatelessWidget {
   final AuthRepository authRepository;

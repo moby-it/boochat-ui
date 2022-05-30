@@ -1,4 +1,4 @@
-import 'package:boochat_ui/src/common/common.dart';
+import 'package:boochat_ui/src/core/core.dart';
 import 'package:boochat_ui/src/data/data.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

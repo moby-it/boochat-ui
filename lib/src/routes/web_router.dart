@@ -4,10 +4,8 @@ import 'package:boochat_ui/src/routes/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../common/common.dart';
+import '../core/core.dart';
 import '../create_room/create_room.dart';
-import '../layout_widgets/error_screen.dart';
-import '../layout_widgets/web_shell.dart';
 
 final webRouter = GoRouter(
     navigatorBuilder: ((context, state, child) {

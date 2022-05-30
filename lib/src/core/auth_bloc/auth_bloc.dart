@@ -1,5 +1,7 @@
-import 'package:boochat_ui/src/common/common.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../data/data.dart';
+import '../core.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _authRepository;

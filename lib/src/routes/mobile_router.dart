@@ -1,14 +1,13 @@
 import 'package:boochat_ui/src/active_room/bloc/active_room_bloc.dart';
 import 'package:boochat_ui/src/active_room/bloc/active_room_events.dart';
 import 'package:boochat_ui/src/active_room/mobile/mobile_active_room.dart';
-import 'package:boochat_ui/src/layout_widgets/bottom_navigation.dart';
 import 'package:boochat_ui/src/room_list/mobile/mobile_room_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../core/core.dart';
 import '../create_room/create_room.dart';
-import '../layout_widgets/error_screen.dart';
 import '../meetups/meetups_wrapper.dart';
 import 'route_names.dart';
 

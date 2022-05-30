@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:boochat_ui/src/app.dart';
+import 'package:boochat_ui/src/core/core.dart';
 import 'package:boochat_ui/src/data/data.dart';
-import 'package:boochat_ui/src/layout_widgets/app_initializer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';

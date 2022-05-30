@@ -3,8 +3,8 @@ import 'package:boochat_ui/src/room_list/web/web_room_list.dart';
 import 'package:boochat_ui/src/theme.dart';
 import 'package:flutter/material.dart';
 
+import '../../routes/router.dart';
 import './web_sidebar.dart';
-import '../routes/router.dart';
 
 class WebShell extends StatelessWidget {
   final Widget child;

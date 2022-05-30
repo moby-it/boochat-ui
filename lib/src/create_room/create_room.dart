@@ -1,14 +1,11 @@
-import 'package:boochat_ui/src/common/common.dart';
-import 'package:boochat_ui/src/create_room/user_card.dart';
-import 'package:boochat_ui/src/data/models/models.dart';
-import 'package:boochat_ui/src/data/websocket_events.dart';
 import 'package:boochat_ui/src/theme.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_chips_input/flutter_chips_input.dart';
 import 'package:go_router/go_router.dart';
+
+import '../core/core.dart';
+import '../data/data.dart';
 
 class CreateRoom extends StatefulWidget {
   const CreateRoom({Key? key}) : super(key: key);
@@ -36,51 +33,7 @@ class _CreateRoomState extends State<CreateRoom> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            ChipsInput<User>(
-                chipBuilder: (context, state, user) => InputChip(
-                      backgroundColor: Theme.of(context).cardColor,
-                      label: SizedBox(
-                        height: 32,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            CachedNetworkImage(
-                                width: 24,
-                                height: 24,
-                                imageUrl: user.imageUrl!),
-                            const SizedBox(width: 8),
-                            Flexible(
-                              flex: 0,
-                              fit: FlexFit.tight,
-                              child: Text(
-                                user.name!,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      onDeleted: () {
-                        state.deleteChip(user);
-                      },
-                    ),
-                suggestionBuilder: (context, state, user) => GestureDetector(
-                    onTap: () => state.selectSuggestion(user),
-                    child: UserCard(user: user)),
-                findSuggestions: (String query) {
-                  if (query.isEmpty) {
-                    return otherUsers;
-                  }
-                  return otherUsers
-                      .where((user) => user.name!
-                          .toLowerCase()
-                          .contains(query.toLowerCase()))
-                      .toList();
-                },
-                initialSuggestions: otherUsers,
-                onChanged: (data) {
-                  selectedUsers = data;
-                }),
+            const Text("Autcomplte chips stuff"),
             const SizedBox(height: 56),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,

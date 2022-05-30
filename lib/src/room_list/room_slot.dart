@@ -1,6 +1,6 @@
 import 'package:boochat_ui/src/active_room/bloc/active_room_bloc.dart';
 import 'package:boochat_ui/src/active_room/bloc/active_room_state.dart';
-import 'package:boochat_ui/src/common/common.dart';
+import 'package:boochat_ui/src/core/core.dart';
 import 'package:boochat_ui/src/data/data.dart';
 import 'package:boochat_ui/src/room_list/online_dot.dart';
 import 'package:boochat_ui/src/routes/route_names.dart';

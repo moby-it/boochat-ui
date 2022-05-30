@@ -209,13 +209,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.3.0"
-  flutter_chips_input:
-    dependency: "direct main"
-    description:
-      name: flutter_chips_input
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   flutter_dotenv:
     dependency: "direct main"
     description:
@@ -547,7 +540,7 @@ packages:
     source: hosted
     version: "3.1.0"
   rxdart:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: rxdart
       url: "https://pub.dartlang.org"
