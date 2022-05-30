@@ -37,16 +37,23 @@ class _CreateRoomState extends State<CreateRoom> {
                 chipBuilder: (context, state, user) => InputChip(
                       backgroundColor: Theme.of(context).cardColor,
                       label: SizedBox(
-                        width: 133,
                         height: 32,
                         child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             CachedNetworkImage(
                                 width: 24,
                                 height: 24,
                                 imageUrl: user.imageUrl!),
                             const SizedBox(width: 8),
-                            Text(user.name!)
+                            Flexible(
+                              flex: 0,
+                              fit: FlexFit.tight,
+                              child: Text(
+                                user.name!,
+                              ),
+                            )
                           ],
                         ),
                       ),
