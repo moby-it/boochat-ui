@@ -1,3 +1,5 @@
+import 'package:boochat_ui/src/create_room/user_card.dart';
+import 'package:boochat_ui/src/create_room/user_chip.dart';
 import 'package:boochat_ui/src/theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,23 +19,94 @@ class CreateRoom extends StatefulWidget {
 
 class _CreateRoomState extends State<CreateRoom> {
   List<User> selectedUsers = [];
-
+  final controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final allUsers = context.read<UsersBloc>().state.allUsers;
     final currentUser = context.read<AuthBloc>().state.user;
-    final otherUsers =
-        allUsers.where((user) => user.id != currentUser.id).toList();
+    final availableUsers = allUsers
+        .where((user) => user != currentUser && !selectedUsers.contains(user))
+        .toList();
     return Scaffold(
       appBar: !kIsWeb ? AppBar(title: const Text("Create room")) : null,
       body: Padding(
         padding: const EdgeInsets.symmetric(
             vertical: kIsWeb ? 58 : 29, horizontal: 16),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            const Text("Autcomplte chips stuff"),
+            if (selectedUsers.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Wrap(
+                  children: selectedUsers
+                      .map((user) => Row(
+                            children: [
+                              UserChip(
+                                user: user,
+                                deleteHandler: () {
+                                  setState(() {
+                                    selectedUsers.remove(user);
+                                  });
+                                },
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                            ],
+                          ))
+                      .toList(),
+                ),
+              ),
+            LayoutBuilder(
+              builder: (context, constraints) => RawAutocomplete<User>(
+                  textEditingController: controller,
+                  focusNode: FocusNode(),
+                  fieldViewBuilder: (context, textEditingController, focusNode,
+                          onFieldSubmitted) =>
+                      TextFormField(
+                          controller: textEditingController,
+                          focusNode: focusNode,
+                          onFieldSubmitted: (value) {
+                            onFieldSubmitted();
+                          }),
+                  optionsBuilder: (textEditingValue) {
+                    if (textEditingValue.text.isEmpty) {
+                      return availableUsers;
+                    } else {
+                      return availableUsers.where((user) => user.name!
+                          .toLowerCase()
+                          .contains(textEditingValue.text));
+                    }
+                  },
+                  onSelected: (user) {
+                    setState(() {
+                      selectedUsers.add(user);
+                      controller.clear();
+                    });
+                  },
+                  optionsViewBuilder: (context, onSelected, users) => Container(
+                        alignment: Alignment.topLeft,
+                        child: Material(
+                          child: SizedBox(
+                            width: constraints.biggest.width,
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                padding: const EdgeInsets.only(top: 0),
+                                itemCount: users.length,
+                                itemBuilder: (context, index) =>
+                                    GestureDetector(
+                                        onTap: () => setState(() {
+                                              selectedUsers
+                                                  .add(users.elementAt(index));
+                                              controller.clear();
+                                            }),
+                                        child: UserCard(
+                                            user: users.elementAt(index)))),
+                          ),
+                        ),
+                      )),
+            ),
             const SizedBox(height: 56),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -54,7 +127,8 @@ class _CreateRoomState extends State<CreateRoom> {
                           .emit(WebsocketEvents.createRoom, {
                         'name':
                             "${currentUser.name}${selectedUsers.map((user) => user.name).reduce((value, element) => ", $element")}",
-                        'imageUrl': 'empty_room.png',
+                        'imageUrl':
+                            'https://cdn-icons-png.flaticon.com/512/1453/1453729.png',
                         'participantIds': [
                           currentUser.id,
                           ...selectedUsers.map((e) => e.id)
@@ -76,7 +150,7 @@ class _CreateRoomState extends State<CreateRoom> {
                       style: TextStyle(color: Color.fromRGBO(176, 201, 231, 1)),
                     ),
                     onPressed: () {
-                      selectedUsers = [];
+                      selectedUsers.clear();
                       context.pop();
                     }),
               ],
