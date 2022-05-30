@@ -19,9 +19,9 @@ class RoomListBloc extends Bloc<RoomListEvent, RoomListState> {
 
   _handleQuerySocketEvent(String event, dynamic data) {
     if (event == WebsocketEvents.roomList) {
-      // final List<Room> rooms =
-      //     List.from(data).map((json) => Room.fromJson(json)).toList();
-      // add(UpdateRoomListEvent(rooms));
+      final List<Room> rooms =
+          List.from(data).map((json) => Room.fromJson(json)).toList();
+      add(UpdateRoomListEvent(rooms));
     } else if (event == WebsocketEvents.roomCreated) {
       final room = Room.fromJson(data);
       state.rooms.insert(0, room);

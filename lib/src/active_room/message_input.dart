@@ -33,20 +33,29 @@ class _MessageInputState extends State<MessageInput> {
                     }
                   },
                   decoration: InputDecoration(
-                      hoverColor: Theme.of(context).cardColor,
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(10)),
-                      filled: true,
-                      fillColor: Theme.of(context).cardColor,
-                      hintText: 'Type your message',
-                      hintStyle: Theme.of(context).textTheme.labelMedium?.merge(
-                          const TextStyle(
-                              color: Color.fromRGBO(149, 174, 203, 1))),
-                      suffixIcon: const Icon(
+                    hoverColor: Theme.of(context).cardColor,
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(10)),
+                    filled: true,
+                    fillColor: Theme.of(context).cardColor,
+                    hintText: 'Type your message',
+                    hintStyle: Theme.of(context).textTheme.labelMedium?.merge(
+                        const TextStyle(
+                            color: Color.fromRGBO(149, 174, 203, 1))),
+                    suffix: GestureDetector(
+                      onTap: () {
+                        context
+                            .read<ActiveRoomBloc>()
+                            .add(SendMessageEvent(controller.text));
+                        controller.clear();
+                      },
+                      child: const Icon(
                         Icons.send_outlined,
                         size: 18,
-                      ))),
+                      ),
+                    ),
+                  )),
             ),
           ],
         ),

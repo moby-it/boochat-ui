@@ -24,6 +24,9 @@ class _CreateRoomState extends State<CreateRoom> {
   @override
   Widget build(BuildContext context) {
     final allUsers = context.read<UsersBloc>().state.allUsers;
+    final currentUser = context.read<AuthBloc>().state.user;
+    final otherUsers =
+        allUsers.where((user) => user.id != currentUser.id).toList();
     return Scaffold(
       appBar: !kIsWeb ? AppBar(title: const Text("Create room")) : null,
       body: Padding(
@@ -61,18 +64,20 @@ class _CreateRoomState extends State<CreateRoom> {
                         state.deleteChip(user);
                       },
                     ),
-                suggestionBuilder: (context, state, user) =>
-                    UserCard(user: user),
+                suggestionBuilder: (context, state, user) => GestureDetector(
+                    onTap: () => state.selectSuggestion(user),
+                    child: UserCard(user: user)),
                 findSuggestions: (String query) {
                   if (query.isEmpty) {
-                    return List.empty();
+                    return otherUsers;
                   }
-                  return allUsers
+                  return otherUsers
                       .where((user) => user.name!
                           .toLowerCase()
                           .contains(query.toLowerCase()))
                       .toList();
                 },
+                initialSuggestions: otherUsers,
                 onChanged: (data) {
                   selectedUsers = data;
                 }),
@@ -95,7 +100,7 @@ class _CreateRoomState extends State<CreateRoom> {
                       webSocketManager.commandSocket
                           .emit(WebsocketEvents.createRoom, {
                         'name':
-                            "${currentUser.name}${selectedUsers.map((user) => ", ${user.name}")}",
+                            "${currentUser.name}${selectedUsers.map((user) => user.name).reduce((value, element) => ", $element")}",
                         'imageUrl': 'empty_room.png',
                         'participantIds': [
                           currentUser.id,
