@@ -24,9 +24,8 @@ class _CreateRoomState extends State<CreateRoom> {
   Widget build(BuildContext context) {
     final allUsers = context.read<UsersBloc>().state.allUsers;
     final currentUser = context.read<AuthBloc>().state.user;
-    final availableUsers = allUsers
-        .where((user) => user != currentUser && !selectedUsers.contains(user))
-        .toList();
+    final availableUsers =
+        allUsers.where((user) => user != currentUser).toList();
     return Scaffold(
       appBar: !kIsWeb ? AppBar(title: const Text("Create room")) : null,
       body: Padding(
