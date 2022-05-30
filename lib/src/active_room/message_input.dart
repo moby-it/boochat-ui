@@ -45,13 +45,16 @@ class _MessageInputState extends State<MessageInput> {
                             color: Color.fromRGBO(149, 174, 203, 1))),
                     suffix: GestureDetector(
                       onTap: () {
-                        context
-                            .read<ActiveRoomBloc>()
-                            .add(SendMessageEvent(controller.text));
-                        controller.clear();
+                        if (controller.text.isNotEmpty) {
+                          context
+                              .read<ActiveRoomBloc>()
+                              .add(SendMessageEvent(controller.text));
+                          controller.clear();
+                        }
                       },
                       child: const Icon(
                         Icons.send_outlined,
+                        color: Color.fromRGBO(176, 201, 231, 1),
                         size: 18,
                       ),
                     ),
