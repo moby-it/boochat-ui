@@ -39,7 +39,9 @@ class Room {
   }
 
   static String configureRoomName(User user, List<User> allUsers, Room room) {
-    if (room.participants.length > 2) return room.name;
+    if (room.participants.length > 2) {
+      return room.name.replaceAll(user.name!, "Me");
+    }
     final otherUserId = room.participants.firstWhere((u) => u.id != user.id).id;
     final otherUser = allUsers.firstWhere((user) => user.id == otherUserId);
     return otherUser.name ?? room.name;
