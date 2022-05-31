@@ -13,6 +13,12 @@ class _MessageInputState extends State<MessageInput> {
   final _formKey = GlobalKey<FormState>();
   final controller = TextEditingController();
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
@@ -23,6 +29,7 @@ class _MessageInputState extends State<MessageInput> {
             Expanded(
               child: TextFormField(
                   controller: controller,
+                  style: Theme.of(context).textTheme.bodyMedium,
                   textInputAction: TextInputAction.go,
                   onFieldSubmitted: (String value) {
                     if (value.isNotEmpty) {
