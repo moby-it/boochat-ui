@@ -1,7 +1,9 @@
+import 'package:equatable/equatable.dart';
+
 import 'room_item.dart';
 import 'user.dart';
 
-class Room {
+class Room extends Equatable {
   late final String id;
   late String name;
   late List<RoomItem> items;
@@ -56,4 +58,7 @@ class Room {
     final lastItem = items.last;
     return lastItem is Message && lastItem.sender.id == currentUserId;
   }
+
+  @override
+  List<Object?> get props => [id];
 }

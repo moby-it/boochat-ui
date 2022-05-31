@@ -2,6 +2,8 @@ import 'package:boochat_ui/src/active_room/bloc/active_room_bloc.dart';
 import 'package:boochat_ui/src/active_room/bloc/active_room_state.dart';
 import 'package:boochat_ui/src/core/core.dart';
 import 'package:boochat_ui/src/data/data.dart';
+import 'package:boochat_ui/src/room_list/bloc/room_list_bloc.dart';
+import 'package:boochat_ui/src/room_list/bloc/room_list_events.dart';
 import 'package:boochat_ui/src/room_list/online_dot.dart';
 import 'package:boochat_ui/src/routes/route_names.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -22,6 +24,10 @@ class RoomSlot extends StatelessWidget {
         bool shouldNavigate = !(activeRoomState is ActiveRoomSelectedState &&
             activeRoomState.room.id == room.id);
         if (shouldNavigate) {
+          final rooms = context.read<RoomListBloc>().state.rooms;
+          rooms.firstWhere((element) => element == room).hasUnreadMessage =
+              false;
+          context.read<RoomListBloc>().add(UpdateRoomListEvent(rooms));
           context.pushNamed(RouteNames.room, params: {'id': room.id});
         }
       },
@@ -69,7 +75,16 @@ class RoomSlot extends StatelessWidget {
                       Text(
                         room.items.last.content,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.labelSmall,
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelMedium!
+                            .copyWith(
+                                color: room.hasUnreadMessage
+                                    ? Colors.white
+                                    : const Color.fromRGBO(176, 201, 231, 1),
+                                fontWeight: room.hasUnreadMessage
+                                    ? FontWeight.w800
+                                    : FontWeight.normal),
                       ),
                   ],
                 ),

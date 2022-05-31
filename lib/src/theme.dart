@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -34,7 +35,9 @@ class BoochatTheme {
                 fontWeight: FontWeight.normal,
                 color: Colors.white),
             titleLarge: TextStyle(
-                fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
+                fontSize: kIsWeb ? 32 : 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.white),
             titleMedium: TextStyle(
                 fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
             titleSmall: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),

@@ -63,6 +63,7 @@ class _CreateRoomState extends State<CreateRoom> {
                                   deleteHandler: () {
                                     setState(() {
                                       selectedUsers.remove(user);
+                                      availableUsers.add(user);
                                     });
                                   },
                                 ),
@@ -143,7 +144,7 @@ class _CreateRoomState extends State<CreateRoom> {
                       webSocketManager.commandSocket
                           .emit(WebsocketEvents.createRoom, {
                         'name':
-                            "${currentUser.name}${selectedUsers.map((user) => user.name).reduce((value, element) => ", ${element!.split(" ").first}")}",
+                            "${currentUser.name}${selectedUsers.map((user) => user.name).reduce((value, element) => ", $element")}",
                         'imageUrl':
                             'https://cdn-icons-png.flaticon.com/512/1453/1453729.png',
                         'participantIds': [

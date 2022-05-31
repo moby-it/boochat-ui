@@ -1,6 +1,7 @@
 import 'package:boochat_ui/src/room_list/bloc/room_list_events.dart';
 import 'package:boochat_ui/src/room_list/bloc/room_list_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../data/data.dart';
 
 class RoomListBloc extends Bloc<RoomListEvent, RoomListState> {
@@ -27,7 +28,12 @@ class RoomListBloc extends Bloc<RoomListEvent, RoomListState> {
       state.rooms.insert(0, room);
       add(UpdateRoomListEvent(state.rooms));
     } else if (event == WebsocketEvents.newRoomItem) {
-      final roomItem = RoomItem.fromJson(data);
+      late final RoomItem roomItem;
+      if (data['sender'] != null) {
+        roomItem = Message.fromJson(data);
+      } else {
+        roomItem = Announcement.fromJson(data);
+      }
       final rooms = List.of(state.rooms);
       final room = rooms.firstWhere((room) => room.id == roomItem.roomId);
       room.hasUnreadMessage = true;
