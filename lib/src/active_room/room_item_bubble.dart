@@ -1,10 +1,13 @@
 import 'package:boochat_ui/src/core/core.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../data/data.dart';
+
+const double userImageSize = kIsWeb ? 50 : 30;
 
 class RoomItemBubble extends StatelessWidget {
   const RoomItemBubble(
@@ -88,8 +91,8 @@ class SentMessageBubble extends StatelessWidget {
             const SizedBox(width: 12),
             showUserImage
                 ? Container(
-                    width: 50,
-                    height: 50,
+                    width: userImageSize,
+                    height: userImageSize,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
@@ -99,8 +102,8 @@ class SentMessageBubble extends StatelessWidget {
                         )),
                   )
                 : const SizedBox(
-                    width: 50,
-                    height: 50,
+                    width: userImageSize,
+                    height: userImageSize,
                   ),
           ]),
     );
@@ -125,8 +128,8 @@ class ReceivedMessageBubble extends StatelessWidget {
       child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
         showUserImage
             ? Container(
-                width: 50,
-                height: 50,
+                width: userImageSize,
+                height: userImageSize,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
@@ -137,8 +140,8 @@ class ReceivedMessageBubble extends StatelessWidget {
                     )),
               )
             : const SizedBox(
-                width: 50,
-                height: 50,
+                width: userImageSize,
+                height: userImageSize,
               ),
         const SizedBox(width: 12),
         Flexible(
