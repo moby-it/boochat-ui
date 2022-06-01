@@ -50,7 +50,7 @@ class _MessageInputState extends State<MessageInput> {
                     hintStyle: Theme.of(context).textTheme.labelMedium?.merge(
                         const TextStyle(
                             color: Color.fromRGBO(149, 174, 203, 1))),
-                    suffix: GestureDetector(
+                    suffixIcon: GestureDetector(
                       onTap: () {
                         if (controller.text.isNotEmpty) {
                           context
