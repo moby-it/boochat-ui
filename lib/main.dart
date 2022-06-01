@@ -45,7 +45,7 @@ String getEnvFilename() {
 Future<void> setAndroidNotificationChannel() async {
   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
   const channel = AndroidNotificationChannel(
-      'fcm_notification_channel', // id
+      'fcm_notification_channel', // id has to be registered at main/androidManifest.xml for receiving FCM messages
       'Cloud Messaging Notification Channel', // title
       description: 'Getting background messages from Firebase.', // description
       playSound: true,
