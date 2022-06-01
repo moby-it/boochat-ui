@@ -27,7 +27,6 @@ class WebActiveRoom extends StatelessWidget {
     if (queryUri == null) {
       throw Exception("cannot fetch room with no query uri");
     }
-    activeRoomBloc.add(const FetchingActiveRoomEvent());
     return FutureBuilder(
       future: roomRepository.fetchRoom(roomId, token),
       builder: (context, AsyncSnapshot<Room> snapshot) {

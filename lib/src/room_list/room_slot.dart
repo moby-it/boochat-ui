@@ -4,6 +4,7 @@ import 'package:boochat_ui/src/core/core.dart';
 import 'package:boochat_ui/src/data/data.dart';
 import 'package:boochat_ui/src/room_list/bloc/room_list_bloc.dart';
 import 'package:boochat_ui/src/room_list/bloc/room_list_events.dart';
+import 'package:boochat_ui/src/room_list/last_room_item.dart';
 import 'package:boochat_ui/src/room_list/online_dot.dart';
 import 'package:boochat_ui/src/routes/route_names.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -72,20 +73,10 @@ class RoomSlot extends StatelessWidget {
                     Text(Room.configureRoomName(user, allUsers, room),
                         style: Theme.of(context).textTheme.titleMedium),
                     if (room.items.isNotEmpty)
-                      Text(
-                        room.items.last.content,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelMedium!
-                            .copyWith(
-                                color: room.hasUnreadMessage
-                                    ? Colors.white
-                                    : const Color.fromRGBO(176, 201, 231, 1),
-                                fontWeight: room.hasUnreadMessage
-                                    ? FontWeight.w800
-                                    : FontWeight.normal),
-                      ),
+                      LastRoomItem(
+                        hasUnreadMessage: room.hasUnreadMessage,
+                        roomItem: room.items.last,
+                      )
                   ],
                 ),
               ),
