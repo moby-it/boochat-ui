@@ -36,7 +36,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
    }
 android {
     compileSdkVersion flutter.compileSdkVersion
-    ndkPath "/home/gespa/Android/Sdk/ndk/24.0.8215888"
+    ndkPath "C:/Users/gespa/AppData/Local/Android/Sdk/ndk/24.0.8215888"
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

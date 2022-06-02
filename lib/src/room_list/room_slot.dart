@@ -8,6 +8,7 @@ import 'package:boochat_ui/src/room_list/last_room_item.dart';
 import 'package:boochat_ui/src/room_list/online_dot.dart';
 import 'package:boochat_ui/src/routes/route_names.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -29,7 +30,9 @@ class RoomSlot extends StatelessWidget {
           rooms.firstWhere((element) => element == room).hasUnreadMessage =
               false;
           context.read<RoomListBloc>().add(UpdateRoomListEvent(rooms));
-          context.goNamed(RouteNames.room, params: {'id': room.id});
+          kIsWeb
+              ? context.goNamed(RouteNames.room, params: {'id': room.id})
+              : context.pushNamed(RouteNames.room, params: {'id': room.id});
         }
       },
       customBorder:
