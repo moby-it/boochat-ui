@@ -29,7 +29,7 @@ class RoomSlot extends StatelessWidget {
           rooms.firstWhere((element) => element == room).hasUnreadMessage =
               false;
           context.read<RoomListBloc>().add(UpdateRoomListEvent(rooms));
-          context.pushNamed(RouteNames.room, params: {'id': room.id});
+          context.goNamed(RouteNames.room, params: {'id': room.id});
         }
       },
       customBorder:

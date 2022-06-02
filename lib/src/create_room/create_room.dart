@@ -144,7 +144,7 @@ class _CreateRoomState extends State<CreateRoom> {
                       webSocketManager.commandSocket
                           .emit(WebsocketEvents.createRoom, {
                         'name':
-                            "${currentUser.name}${selectedUsers.map((user) => user.name).reduce((value, element) => ", $element")}",
+                            "${currentUser.name}${selectedUsers.map((user) => user.name).reduce((value, element) => value = "${value ?? ""}, $element")}",
                         'imageUrl':
                             'https://cdn-icons-png.flaticon.com/512/1453/1453729.png',
                         'participantIds': [
