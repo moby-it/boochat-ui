@@ -71,7 +71,7 @@ android {
            keyAlias 'androiddebugkey'
            keyPassword 'android'
            storePassword 'android'
-           storeFile file('$HOME/.android/debug.keystore')
+           storeFile file('C:/Users/gespa/.android/debug.keystore')
        }
    }
     buildTypes {
