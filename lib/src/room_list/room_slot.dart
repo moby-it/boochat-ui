@@ -1,6 +1,7 @@
 import 'package:boochat_ui/src/active_room/bloc/active_room_bloc.dart';
 import 'package:boochat_ui/src/active_room/bloc/active_room_state.dart';
 import 'package:boochat_ui/src/core/core.dart';
+import 'package:boochat_ui/src/core/widgets/hover.dart';
 import 'package:boochat_ui/src/data/data.dart';
 import 'package:boochat_ui/src/room_list/bloc/room_list_bloc.dart';
 import 'package:boochat_ui/src/room_list/bloc/room_list_events.dart';
@@ -13,48 +14,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class RoomSlot extends StatefulWidget {
+class RoomSlot extends StatelessWidget {
   const RoomSlot({required this.room, Key? key}) : super(key: key);
   final Room room;
-
-  @override
-  State<RoomSlot> createState() => _RoomSlotState();
-}
-
-class _RoomSlotState extends State<RoomSlot> {
-  var color = Colors.transparent;
   @override
   Widget build(BuildContext context) {
     final user = context.read<AuthBloc>().state.user;
     final allUsers = context.read<UsersBloc>().state.allUsers;
-    return InkWell(
-      onHover: (hovered) => setState(() {
-        hovered
-            ? color = Theme.of(context).hoverColor
-            : color = Colors.transparent;
-      }),
-      hoverColor: Colors.transparent,
-      mouseCursor: SystemMouseCursors.click,
-      onTap: () {
-        final activeRoomState = context.read<ActiveRoomBloc>().state;
-        bool shouldNavigate = !(activeRoomState is ActiveRoomSelectedState &&
-            activeRoomState.room.id == widget.room.id);
-        if (shouldNavigate) {
-          final rooms = context.read<RoomListBloc>().state.rooms;
-          rooms
-              .firstWhere((element) => element == widget.room)
-              .hasUnreadMessage = false;
-          context.read<RoomListBloc>().add(UpdateRoomListEvent(rooms));
-          kIsWeb
-              ? context.goNamed(RouteNames.room, params: {'id': widget.room.id})
-              : context
-                  .pushNamed(RouteNames.room, params: {'id': widget.room.id});
-        }
-      },
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10), color: color),
+    return Hover(
+      color: Theme.of(context).hoverColor,
+      child: InkWell(
+        hoverColor: Colors.transparent,
+        mouseCursor: SystemMouseCursors.click,
+        onTap: () {
+          final activeRoomState = context.read<ActiveRoomBloc>().state;
+          bool shouldNavigate = !(activeRoomState is ActiveRoomSelectedState &&
+              activeRoomState.room.id == room.id);
+          if (shouldNavigate) {
+            final rooms = context.read<RoomListBloc>().state.rooms;
+            rooms.firstWhere((element) => element == room).hasUnreadMessage =
+                false;
+            context.read<RoomListBloc>().add(UpdateRoomListEvent(rooms));
+            kIsWeb
+                ? context.goNamed(RouteNames.room, params: {'id': room.id})
+                : context.pushNamed(RouteNames.room, params: {'id': room.id});
+          }
+        },
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 19),
           child: Row(
@@ -71,13 +56,12 @@ class _RoomSlotState extends State<RoomSlot> {
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
                             image: CachedNetworkImageProvider(
-                              Room.configureRoomImageUrl(
-                                  user, allUsers, widget.room),
+                              Room.configureRoomImageUrl(user, allUsers, room),
                             ),
                           )),
                     ),
-                    if (widget.room.participants.length == 2 &&
-                        state.userIsOnline(widget.room.getOtherUserId(user.id)))
+                    if (room.participants.length == 2 &&
+                        state.userIsOnline(room.getOtherUserId(user.id)))
                       const Positioned(top: -6, right: -6, child: OnlineDot())
                   ],
                 ),
@@ -89,17 +73,17 @@ class _RoomSlotState extends State<RoomSlot> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(Room.configureRoomName(user, allUsers, widget.room),
+                    Text(Room.configureRoomName(user, allUsers, room),
                         style: Theme.of(context).textTheme.titleMedium),
-                    if (widget.room.items.isNotEmpty)
+                    if (room.items.isNotEmpty)
                       LastRoomItem(
-                        hasUnreadMessage: widget.room.hasUnreadMessage,
-                        roomItem: widget.room.items.last,
+                        hasUnreadMessage: room.hasUnreadMessage,
+                        roomItem: room.items.last,
                       )
                   ],
                 ),
               ),
-              if (widget.room.lastMessageIsSent(user.id))
+              if (room.lastMessageIsSent(user.id))
                 const Icon(
                   Icons.reply_sharp,
                   color: Color.fromRGBO(176, 201, 231, 1),
