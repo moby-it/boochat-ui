@@ -13,33 +13,48 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class RoomSlot extends StatelessWidget {
+class RoomSlot extends StatefulWidget {
   const RoomSlot({required this.room, Key? key}) : super(key: key);
   final Room room;
+
+  @override
+  State<RoomSlot> createState() => _RoomSlotState();
+}
+
+class _RoomSlotState extends State<RoomSlot> {
+  var color = Colors.transparent;
   @override
   Widget build(BuildContext context) {
     final user = context.read<AuthBloc>().state.user;
     final allUsers = context.read<UsersBloc>().state.allUsers;
     return InkWell(
+      onHover: (hovered) => setState(() {
+        hovered
+            ? color = Theme.of(context).hoverColor
+            : color = Colors.transparent;
+      }),
+      hoverColor: Colors.transparent,
+      mouseCursor: SystemMouseCursors.click,
       onTap: () {
         final activeRoomState = context.read<ActiveRoomBloc>().state;
         bool shouldNavigate = !(activeRoomState is ActiveRoomSelectedState &&
-            activeRoomState.room.id == room.id);
+            activeRoomState.room.id == widget.room.id);
         if (shouldNavigate) {
           final rooms = context.read<RoomListBloc>().state.rooms;
-          rooms.firstWhere((element) => element == room).hasUnreadMessage =
-              false;
+          rooms
+              .firstWhere((element) => element == widget.room)
+              .hasUnreadMessage = false;
           context.read<RoomListBloc>().add(UpdateRoomListEvent(rooms));
           kIsWeb
-              ? context.goNamed(RouteNames.room, params: {'id': room.id})
-              : context.pushNamed(RouteNames.room, params: {'id': room.id});
+              ? context.goNamed(RouteNames.room, params: {'id': widget.room.id})
+              : context
+                  .pushNamed(RouteNames.room, params: {'id': widget.room.id});
         }
       },
-      customBorder:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: GestureDetector(
-          child: MouseRegion(
-        cursor: SystemMouseCursors.click,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10), color: color),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 19),
           child: Row(
@@ -56,12 +71,13 @@ class RoomSlot extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
                             image: CachedNetworkImageProvider(
-                              Room.configureRoomImageUrl(user, allUsers, room),
+                              Room.configureRoomImageUrl(
+                                  user, allUsers, widget.room),
                             ),
                           )),
                     ),
-                    if (room.participants.length == 2 &&
-                        state.userIsOnline(room.getOtherUserId(user.id)))
+                    if (widget.room.participants.length == 2 &&
+                        state.userIsOnline(widget.room.getOtherUserId(user.id)))
                       const Positioned(top: -6, right: -6, child: OnlineDot())
                   ],
                 ),
@@ -73,17 +89,17 @@ class RoomSlot extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(Room.configureRoomName(user, allUsers, room),
+                    Text(Room.configureRoomName(user, allUsers, widget.room),
                         style: Theme.of(context).textTheme.titleMedium),
-                    if (room.items.isNotEmpty)
+                    if (widget.room.items.isNotEmpty)
                       LastRoomItem(
-                        hasUnreadMessage: room.hasUnreadMessage,
-                        roomItem: room.items.last,
+                        hasUnreadMessage: widget.room.hasUnreadMessage,
+                        roomItem: widget.room.items.last,
                       )
                   ],
                 ),
               ),
-              if (room.lastMessageIsSent(user.id))
+              if (widget.room.lastMessageIsSent(user.id))
                 const Icon(
                   Icons.reply_sharp,
                   color: Color.fromRGBO(176, 201, 231, 1),
@@ -91,7 +107,7 @@ class RoomSlot extends StatelessWidget {
             ],
           ),
         ),
-      )),
+      ),
     );
   }
 }
