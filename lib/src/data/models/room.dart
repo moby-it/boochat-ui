@@ -1,9 +1,7 @@
-import 'package:equatable/equatable.dart';
-
 import 'room_item.dart';
 import 'user.dart';
 
-class Room extends Equatable {
+class Room {
   late final String id;
   late String name;
   late List<RoomItem> items;
@@ -42,11 +40,18 @@ class Room extends Equatable {
 
   static String configureRoomName(User user, List<User> allUsers, Room room) {
     if (room.participants.length > 2) {
-      return room.name.replaceAll(user.name!, "Me");
+      var name = room.name.replaceAll("${user.name!}, ", "");
+      name = name
+          .split(", ")
+          .map((username) => username.split(" ").first)
+          .join(", ");
+      return name;
+    } else {
+      final otherUserId =
+          room.participants.firstWhere((u) => u.id != user.id).id;
+      final otherUser = allUsers.firstWhere((user) => user.id == otherUserId);
+      return otherUser.name!.split(" ").first;
     }
-    final otherUserId = room.participants.firstWhere((u) => u.id != user.id).id;
-    final otherUser = allUsers.firstWhere((user) => user.id == otherUserId);
-    return otherUser.name ?? room.name;
   }
 
   String getOtherUserId(String currentUserId) =>
@@ -58,7 +63,4 @@ class Room extends Equatable {
     final lastItem = items.last;
     return lastItem is Message && lastItem.sender.id == currentUserId;
   }
-
-  @override
-  List<Object?> get props => [id];
 }

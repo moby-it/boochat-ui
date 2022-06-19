@@ -8,21 +8,21 @@ class WebSidebar extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(color: Theme.of(context).cardColor),
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 30),
+        padding: const EdgeInsets.only(bottom: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.end,
           children: const <Widget>[
             Icon(
               Icons.person_rounded,
-              size: 48,
+              size: 32,
             ),
             SizedBox(
-              height: 30,
+              height: 24,
             ),
             Icon(
               Icons.settings,
-              size: 48,
+              size: 32,
             )
           ],
         ),

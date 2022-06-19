@@ -19,15 +19,14 @@ class WebShell extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             SizedBox(
-                width: 128,
+                width: 80,
                 height: MediaQuery.of(context).size.height,
                 child: const WebSidebar()),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 64, vertical: 32),
+              padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 24),
               child: Row(
                 children: [
                   Container(

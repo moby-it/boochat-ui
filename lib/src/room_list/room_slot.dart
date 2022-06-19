@@ -41,7 +41,7 @@ class RoomSlot extends StatelessWidget {
           }
         },
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 19),
+          padding: const EdgeInsets.fromLTRB(12, 12, 12, 14),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -74,7 +74,10 @@ class RoomSlot extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(Room.configureRoomName(user, allUsers, room),
-                        style: Theme.of(context).textTheme.titleMedium),
+                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                              color: Colors.white,
+                              overflow: TextOverflow.ellipsis,
+                            )),
                     if (room.items.isNotEmpty)
                       LastRoomItem(
                         hasUnreadMessage: room.hasUnreadMessage,

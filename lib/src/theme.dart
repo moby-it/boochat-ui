@@ -7,7 +7,7 @@ const scaffoldBackgroundColor = Color.fromRGBO(0, 19, 34, 1);
 const cardColor = Color.fromRGBO(25, 50, 74, 1);
 const backgroundColor = Color.fromRGBO(0, 29, 52, 1);
 const labelMedium =
-    TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white);
+    TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white);
 
 class BoochatTheme {
   static ThemeData get darkTheme {
@@ -31,19 +31,18 @@ class BoochatTheme {
             ThemeData.dark().appBarTheme.copyWith(backgroundColor: cardColor),
         textTheme: GoogleFonts.manropeTextTheme(const TextTheme(
             bodyMedium: TextStyle(
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.normal,
                 color: Colors.white),
             titleLarge: TextStyle(
-                fontSize: kIsWeb ? 32 : 24,
+                fontSize: kIsWeb ? 28 : 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.white),
             titleMedium: TextStyle(
-                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-            titleSmall: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            labelMedium: TextStyle(
-                fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
+                fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+            titleSmall: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            labelMedium: labelMedium,
             labelSmall: TextStyle(
-                fontSize: 12, color: Color.fromRGBO(207, 228, 255, 1)))));
+                fontSize: 10, color: Color.fromRGBO(207, 228, 255, 1)))));
   }
 }
