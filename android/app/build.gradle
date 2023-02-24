@@ -22,12 +22,21 @@ if (flutterVersionName == null) {
 }
 
 apply plugin: 'com.android.application'
+// START: FlutterFire Configuration
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+// END: FlutterFire Configuration
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
+   def keystoreProperties = new Properties()
+   def keystorePropertiesFile = rootProject.file('key.properties')
+   if (keystorePropertiesFile.exists()) {
+       keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+   }
 android {
     compileSdkVersion flutter.compileSdkVersion
-
+    ndkPath "C:/Users/gespa/AppData/Local/Android/Sdk/ndk/24.0.8215888"
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -42,20 +51,36 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.boochat_ui"
-        minSdkVersion flutter.minSdkVersion
+        applicationId "com.moby_it.boochat_ui"
+        minSdkVersion 19
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-    }
+        multiDexEnabled true
 
+    }
+    
+   signingConfigs {
+       release {
+           keyAlias keystoreProperties['keyAlias']
+           keyPassword keystoreProperties['keyPassword']
+           storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+           storePassword keystoreProperties['storePassword']
+       }
+       debug {
+           keyAlias 'androiddebugkey'
+           keyPassword 'android'
+           storePassword 'android'
+           storeFile file('C:/Users/gespa/.android/debug.keystore')
+       }
+   }
     buildTypes {
-        release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
-        }
+       release {
+           signingConfig signingConfigs.release
+       }
+       debug {
+           signingConfig signingConfigs.debug
+       }
     }
 }
 
@@ -66,3 +91,4 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
+android.buildTypes.release.ndk.debugSymbolLevel = 'FULL'

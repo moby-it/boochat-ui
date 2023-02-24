@@ -1,0 +1,5 @@
+.gradle
+.idea
+.dart-tool
+.packages
+build

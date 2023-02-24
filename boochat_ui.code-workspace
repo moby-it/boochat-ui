@@ -22,13 +22,50 @@
 			"titleBar.activeBackground": "#191970",
 			"titleBar.activeForeground": "#e7e7e7",
 			"titleBar.inactiveBackground": "#19197099",
-			"titleBar.inactiveForeground": "#e7e7e799"
+			"titleBar.inactiveForeground": "#e7e7e799",
+			"commandCenter.border": "#e7e7e799"
 		},
 		"peacock.color": "#191970"
 	},
 	"extensions": {
 		"recommendations": [
-			"Dart-Code.flutter"
+			"dart-code.flutter",
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Web",
+				"request": "launch",
+				"type": "dart",
+				"deviceId": "chrome",
+				"args": [
+					"--web-port",
+					"4200"
+				]
+			},
+			{
+				"name": "My Redmi",
+				"request": "launch",
+				"type": "dart",
+				"deviceId": "rkwgu4byvc4hbaqk"
+			},
+			{
+				"name": "Emulator Phone",
+				"request": "launch",
+				"type": "dart",
+				"deviceId": "emulator-5554",
+				"args": [
+					"--enable-software-rendering"
+				]
+			},
+			{
+				"name": "Linux",
+				"request": "launch",
+				"type": "dart",
+				"deviceId": "linux-x64"
+			}
 		]
 	}
 }

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "393892859271",
+    "project_id": "boochat-beta",
+    "storage_bucket": "boochat-beta.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:393892859271:android:7ee4dfb010356f9b43d722",
+        "android_client_info": {
+          "package_name": "com.moby_it.boochat_ui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "393892859271-h2n3mve188u16i7oeq9jo3mmti8lhii7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.moby_it.boochat_ui",
+            "certificate_hash": "4905d0ff887cc1d8e31be599c08848b09437e189"
+          }
+        },
+        {
+          "client_id": "393892859271-oh22l586jd9o710l6hehsi980rqf86l9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.moby_it.boochat_ui",
+            "certificate_hash": "0aa7f8f217568817f37b1b6a89105306261ce8b0"
+          }
+        },
+        {
+          "client_id": "393892859271-jhogmc2vistffph91uk0fuek1k8c5mgm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSTtCxuw4kPwMlGAw8bQ6OarOaHXkMd5k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "393892859271-jhogmc2vistffph91uk0fuek1k8c5mgm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
