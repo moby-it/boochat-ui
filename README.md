@@ -13,6 +13,11 @@ This project is the Front End part of the application, developed with Flutter.
 
  For the project to work you need to set up Google Sign In following [google_sign_in](https://pub.dev/packages/google_sign_in). Make sure to paste your google client id in the .env file.
 
+# Attributions
+
+Empty State Illustration made by [TanahAirStudio](https://www.figma.com/@tanahairstudio
+).
+
 # Roadmap
 
 - [x] Create multi platform app environment with [Flutter](https://flutter.dev)
